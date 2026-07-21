@@ -1,0 +1,23 @@
+<page route="/base/company" title="Company" model="base.company_profile">
+  <view type="form" model="base.company_profile">
+    <group title="Identity">
+      <field name="legal_name" label="Legal name" fieldType="char" required="true" />
+      <field name="trade_name" label="Trade name" fieldType="char" />
+      <field name="vat" label="Tax ID" fieldType="char" />
+      <field name="currency" label="Currency" fieldType="many2one" />
+    </group>
+    <group title="Contact">
+      <field name="email" label="Email" fieldType="char" />
+      <field name="phone" label="Phone" fieldType="char" />
+      <field name="website" label="Website" fieldType="char" />
+    </group>
+    <group title="Address">
+      <field name="street" label="Street" fieldType="char" />
+      <field name="city" label="City" fieldType="char" />
+      <field name="country_code" label="Country" fieldType="char" />
+    </group>
+    <buttonbox>
+      <button name="save" label="Save" />
+    </buttonbox>
+  </view>
+</page>

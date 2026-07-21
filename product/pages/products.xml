@@ -1,0 +1,14 @@
+<page route="/base/products" title="Products" model="base.product">
+  <include src="base_components/components/header.xml" title="Products" />
+  <view type="list" model="base.product">
+    <search placeholder="Search products…" />
+    <columns>
+      <column field="name" label="Name" sortable="true" />
+      <column field="code" label="Code" />
+      <column field="product_type" label="Type" fieldType="badge" />
+      <column field="list_price" label="Price" fieldType="currency" />
+      <column field="uom" label="UoM" fieldType="many2one" />
+    </columns>
+    <empty title="No products" description="Create goods or services shared by ERP and CRM." actionLabel="Create" />
+  </view>
+</page>

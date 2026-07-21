@@ -1,0 +1,7 @@
+[[permission]]
+key = "base.access"
+label = "Access base apps"
+
+[[permission]]
+key = "base.settings"
+label = "Configure base settings"

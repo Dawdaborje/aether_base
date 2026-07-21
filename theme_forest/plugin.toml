@@ -1,0 +1,26 @@
+[plugin]
+name = "theme_forest"
+label = "Forest"
+version = "0.1.0"
+description = "Muted evergreen enterprise theme — calm operational green."
+authors = [{ name = "Aether", email = "hello@aether.local" }]
+categories = [{ name = "theme", label = "Themes" }]
+dependencies = ["base_components"]
+capabilities = []
+is_builtin = true
+
+[theme]
+name = "forest"
+label = "Forest"
+is_system = true
+tokens_file = "./theme.json"
+
+[plugin.api]
+version = "0.1"
+
+[plugin.meta]
+kind = "theme"
+workspace = "base"
+
+[communication]
+channels = []

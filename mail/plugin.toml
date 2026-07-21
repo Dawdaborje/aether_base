@@ -1,0 +1,70 @@
+[plugin]
+name = "mail"
+label = "Mail & Activities"
+version = "0.1.0"
+description = "Chatter, messages, and activities on any business record."
+authors = [{ name = "Aether", email = "hello@aether.local" }]
+dependencies = ["base_components", "security_templates"]
+capabilities = ["db::query", "db::mutate", "events::emit", "events::subscribe", "email::send"]
+is_builtin = true
+
+[plugin.api]
+version = "0.1"
+
+[plugin.meta]
+kind = "addon"
+workspace = "base"
+
+[communication]
+channels = ["events", "email"]
+
+[[models]]
+name = "mail_message"
+table = "base_mail_message"
+file = "./models/mail.surql"
+
+[[models]]
+name = "mail_activity"
+table = "base_mail_activity"
+file = "./models/mail.surql"
+
+[[pages]]
+route = "/base/activities"
+title = "Activities"
+file = "./pages/activities.xml"
+model = "base.mail_activity"
+
+[[menus]]
+name = "activities"
+label = "Activities"
+icon = "bell"
+url = "/base/activities"
+order = 20
+parent = "base_root"
+
+[[hooks]]
+name = "on_install"
+phase = "install"
+handler = "hooks.on_install"
+
+[[hooks]]
+name = "on_message_post"
+phase = "request"
+handler = "hooks.on_message_post"
+
+[[events]]
+name = "mail.message_posted"
+direction = "emit"
+
+[[events]]
+name = "partner.created"
+direction = "listen"
+handler = "hooks.on_partner_created"
+
+[[permissions]]
+key = "mail.read"
+label = "Read messages"
+
+[[permissions]]
+key = "mail.write"
+label = "Post messages"

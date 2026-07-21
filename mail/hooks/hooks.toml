@@ -1,0 +1,13 @@
+[[hook]]
+name = "on_install"
+phase = "install"
+
+[[hook]]
+name = "on_message_post"
+phase = "request"
+emits = ["mail.message_posted"]
+
+[[hook]]
+name = "on_partner_created"
+phase = "event"
+listens = ["partner.created"]

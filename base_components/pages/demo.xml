@@ -1,0 +1,17 @@
+<!-- Example page composing shared base components. -->
+<page route="/base/demo" title="Base demo" model="base.demo">
+  <include src="components/header.xml" title="Base demo" />
+  <notebook>
+    <page title="List">
+      <include src="components/table.xml" model="base.demo" />
+    </page>
+    <page title="Form">
+      <include src="components/form_sheet.xml" model="base.demo" group_title="Details" />
+    </page>
+  </notebook>
+  <include src="components/confirm_dialog.xml"
+    name="demo_confirm"
+    title="Continue?"
+    description="This is a shared confirm dialog from base_components."
+  />
+</page>

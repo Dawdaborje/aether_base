@@ -1,0 +1,4 @@
+[[hook]]
+name = "on_install"
+phase = "install"
+# Future: upsert permissions + groups into org RBAC tables

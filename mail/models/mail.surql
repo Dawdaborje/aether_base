@@ -1,0 +1,21 @@
+DEFINE TABLE IF NOT EXISTS base_mail_message;
+DEFINE FIELD IF NOT EXISTS model ON TABLE base_mail_message TYPE string;
+DEFINE FIELD IF NOT EXISTS res_id ON TABLE base_mail_message TYPE string;
+DEFINE FIELD IF NOT EXISTS body ON TABLE base_mail_message TYPE string;
+DEFINE FIELD IF NOT EXISTS author_user_id ON TABLE base_mail_message TYPE option<string | NONE>;
+DEFINE FIELD IF NOT EXISTS message_type ON TABLE base_mail_message TYPE string DEFAULT "comment";
+DEFINE FIELD IF NOT EXISTS date_created ON TABLE base_mail_message TYPE datetime DEFAULT time::now();
+DEFINE INDEX IF NOT EXISTS base_mail_message_doc ON TABLE base_mail_message COLUMNS model, res_id;
+
+DEFINE TABLE IF NOT EXISTS base_mail_activity;
+DEFINE FIELD IF NOT EXISTS model ON TABLE base_mail_activity TYPE string;
+DEFINE FIELD IF NOT EXISTS res_id ON TABLE base_mail_activity TYPE string;
+DEFINE FIELD IF NOT EXISTS summary ON TABLE base_mail_activity TYPE string;
+DEFINE FIELD IF NOT EXISTS note ON TABLE base_mail_activity TYPE option<string | NONE>;
+DEFINE FIELD IF NOT EXISTS activity_type ON TABLE base_mail_activity TYPE string DEFAULT "todo";
+DEFINE FIELD IF NOT EXISTS user_id ON TABLE base_mail_activity TYPE option<string | NONE>;
+DEFINE FIELD IF NOT EXISTS deadline ON TABLE base_mail_activity TYPE option<datetime | NONE>;
+DEFINE FIELD IF NOT EXISTS done ON TABLE base_mail_activity TYPE bool DEFAULT false;
+DEFINE FIELD IF NOT EXISTS date_created ON TABLE base_mail_activity TYPE datetime DEFAULT time::now();
+DEFINE FIELD IF NOT EXISTS date_updated ON TABLE base_mail_activity TYPE datetime VALUE time::now();
+DEFINE INDEX IF NOT EXISTS base_mail_activity_doc ON TABLE base_mail_activity COLUMNS model, res_id;

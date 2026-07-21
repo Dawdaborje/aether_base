@@ -1,0 +1,7 @@
+[[permission]]
+key = "company.read"
+label = "Read company profile"
+
+[[permission]]
+key = "company.write"
+label = "Edit company profile"

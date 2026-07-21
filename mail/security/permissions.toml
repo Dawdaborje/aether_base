@@ -1,0 +1,7 @@
+[[permission]]
+key = "mail.read"
+label = "Read messages"
+
+[[permission]]
+key = "mail.write"
+label = "Post messages"

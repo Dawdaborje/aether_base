@@ -1,0 +1,1 @@
+-- Seed categories (unit, weight, volume, time) applied on install by hook later.

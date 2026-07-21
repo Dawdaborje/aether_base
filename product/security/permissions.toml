@@ -1,0 +1,7 @@
+[[permission]]
+key = "product.read"
+label = "Read products"
+
+[[permission]]
+key = "product.write"
+label = "Write products"

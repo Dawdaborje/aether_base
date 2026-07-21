@@ -1,0 +1,16 @@
+<!-- Shared list table shell. Columns and row actions are filled by the consumer page. -->
+<view type="list" model="{{model}}">
+  <search placeholder="Search…" />
+  <columns>
+    <!-- consumer inserts <column …/> children -->
+  </columns>
+  <actions>
+    <action name="open" label="Open" />
+  </actions>
+  <empty
+    title="No records"
+    description="There is nothing to show yet."
+    actionLabel="Create"
+  />
+  <pager />
+</view>

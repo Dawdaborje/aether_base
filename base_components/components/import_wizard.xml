@@ -1,0 +1,11 @@
+<modal name="import_wizard" title="Import records">
+  <group title="File">
+    <field name="file" label="CSV file" fieldType="binary" />
+    <field name="has_header" label="First row is header" fieldType="boolean" />
+  </group>
+  <actions>
+    <button name="preview" label="Preview" variant="outline" />
+    <button name="import" label="Import" />
+    <button name="close" label="Cancel" variant="outline" />
+  </actions>
+</modal>

@@ -1,0 +1,16 @@
+<!-- Embed on any form page: <include src="mail/components/chatter.xml" /> -->
+<group title="Chatter">
+  <view type="list" model="base.mail_message">
+    <columns>
+      <column field="date_created" label="When" fieldType="datetime" />
+      <column field="author_user_id" label="Author" />
+      <column field="body" label="Message" fieldType="text" />
+    </columns>
+    <empty title="No messages" description="Start a conversation on this record." />
+  </view>
+  <buttonbox>
+    <button name="log_note" label="Log note" variant="outline" />
+    <button name="send_message" label="Send message" />
+    <button name="schedule_activity" label="Activity" variant="secondary" />
+  </buttonbox>
+</group>

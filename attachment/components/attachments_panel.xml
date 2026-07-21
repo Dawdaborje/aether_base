@@ -1,0 +1,13 @@
+<group title="Attachments">
+  <view type="list" model="base.attachment">
+    <columns>
+      <column field="name" label="File" />
+      <column field="mimetype" label="Type" />
+      <column field="date_created" label="Uploaded" fieldType="datetime" />
+    </columns>
+    <empty title="No files" description="Upload documents linked to this record." actionLabel="Upload" />
+  </view>
+  <buttonbox>
+    <button name="upload" label="Upload" />
+  </buttonbox>
+</group>

@@ -1,0 +1,9 @@
+<modal name="{{name}}" title="{{title}}">
+  <group title="Details">
+    <!-- consumer fields -->
+  </group>
+  <actions>
+    <button name="confirm" label="Save" />
+    <button name="close" label="Cancel" variant="outline" />
+  </actions>
+</modal>

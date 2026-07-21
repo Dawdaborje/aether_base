@@ -1,0 +1,1 @@
+-- Seed GMD, USD, EUR, etc. on install via hook.

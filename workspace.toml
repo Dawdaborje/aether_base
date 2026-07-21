@@ -1,10 +1,85 @@
 [workspace]
 name = "base"
-label = "Base Aether Plugin"
-version = "0.0.1"
-description = "This is a short description of the plugin workspace."
-long_description = "This is a long description of the plugin workspace."
-authors = [{name = "Your Name", email = "your.email@example.com"}]
-website = "https://your.website.com"
-categories = []
+label = "Aether Base"
+version = "0.2.0"
+description = "Business/UI foundation for Aether plugins — shared XML, themes, and core business addons."
+long_description = """
+Always-installed foundation workspace. Kernel facets own identity, tenancy, and RBAC;
+this workspace owns shared page XML, themes, and business primitives (partner, sequence,
+uom, currency, mail, product, …) that ERP/CRM/HRMS/LMS depend on.
+
+Plugin API contract: see docs/PLUGIN_API.md (v0.1, evolving).
+"""
+authors = [{ name = "Aether", email = "hello@aether.local" }]
+website = "https://github.com/Dawdaborje"
+categories = ["base", "themes", "ui"]
+group_label = "Base"
+group_icon = "./assets/base.svg"
 dependencies = []
+
+# --- UI foundation ---
+[[addons]]
+name = "base_components"
+path = "./base_components"
+
+[[addons]]
+name = "security_templates"
+path = "./security_templates"
+
+# --- Business primitives ---
+[[addons]]
+name = "sequence"
+path = "./sequence"
+
+[[addons]]
+name = "uom"
+path = "./uom"
+
+[[addons]]
+name = "currency"
+path = "./currency"
+
+[[addons]]
+name = "partner"
+path = "./partner"
+
+[[addons]]
+name = "mail"
+path = "./mail"
+
+[[addons]]
+name = "attachment"
+path = "./attachment"
+
+[[addons]]
+name = "product"
+path = "./product"
+
+[[addons]]
+name = "company"
+path = "./company"
+
+# --- Themes ---
+[[addons]]
+name = "theme_enterprise"
+path = "./theme_enterprise"
+
+[[addons]]
+name = "theme_nordic"
+path = "./theme_nordic"
+
+[[addons]]
+name = "theme_graphite"
+path = "./theme_graphite"
+
+[[addons]]
+name = "theme_ocean"
+path = "./theme_ocean"
+
+[[addons]]
+name = "theme_forest"
+path = "./theme_forest"
+
+[[addons]]
+name = "theme_midnight"
+path = "./theme_midnight"

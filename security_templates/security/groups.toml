@@ -1,0 +1,15 @@
+# Seeded into org `groups` / `permissions` on install (via hook later).
+
+[[group]]
+name = "base_user"
+label = "Base User"
+description = "Read access to base contacts and products"
+
+[[group]]
+name = "base_manager"
+label = "Base Manager"
+description = "Full access to base foundation apps"
+
+[[permission]]
+key = "base.access"
+label = "Access base apps"

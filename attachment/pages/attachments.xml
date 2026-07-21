@@ -1,0 +1,12 @@
+<page route="/base/attachments" title="Attachments" model="base.attachment">
+  <include src="base_components/components/header.xml" title="Attachments" />
+  <view type="list" model="base.attachment">
+    <search placeholder="Search files…" />
+    <columns>
+      <column field="name" label="Name" sortable="true" />
+      <column field="model" label="Model" />
+      <column field="res_id" label="Record" />
+      <column field="mimetype" label="Type" />
+    </columns>
+  </view>
+</page>

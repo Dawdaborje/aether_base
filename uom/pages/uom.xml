@@ -1,0 +1,13 @@
+<page route="/base/uom" title="Units of Measure" model="base.uom">
+  <include src="base_components/components/header.xml" title="Units of Measure" />
+  <view type="list" model="base.uom">
+    <search placeholder="Search units…" />
+    <columns>
+      <column field="name" label="Unit" sortable="true" />
+      <column field="category" label="Category" fieldType="many2one" />
+      <column field="factor" label="Factor" fieldType="float" />
+      <column field="is_reference" label="Reference" fieldType="boolean" />
+    </columns>
+    <empty title="No units" description="Define units for inventory and products." actionLabel="Create" />
+  </view>
+</page>

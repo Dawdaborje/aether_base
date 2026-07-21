@@ -1,0 +1,55 @@
+[plugin]
+name = "product"
+label = "Products"
+version = "0.1.0"
+description = "Minimal shared product/service master for ERP and CRM."
+authors = [{ name = "Aether", email = "hello@aether.local" }]
+dependencies = ["base_components", "uom", "currency", "security_templates"]
+capabilities = ["db::query", "db::mutate", "events::emit"]
+is_builtin = true
+
+[plugin.api]
+version = "0.1"
+
+[plugin.meta]
+kind = "addon"
+workspace = "base"
+
+[communication]
+channels = ["events"]
+
+[[models]]
+name = "product"
+table = "base_product"
+file = "./models/product.surql"
+
+[[pages]]
+route = "/base/products"
+title = "Products"
+file = "./pages/products.xml"
+model = "base.product"
+
+[[menus]]
+name = "products"
+label = "Products"
+icon = "package"
+url = "/base/products"
+order = 30
+parent = "base_root"
+
+[[hooks]]
+name = "on_install"
+phase = "install"
+handler = "hooks.on_install"
+
+[[events]]
+name = "product.created"
+direction = "emit"
+
+[[permissions]]
+key = "product.read"
+label = "Read products"
+
+[[permissions]]
+key = "product.write"
+label = "Write products"

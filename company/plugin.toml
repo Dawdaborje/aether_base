@@ -1,0 +1,53 @@
+[plugin]
+name = "company"
+label = "Company Profile"
+version = "0.1.0"
+description = "Org-facing company profile for documents (legal name, address, logo)."
+long_description = "Does not replace kernel organizations — stores printable/business profile fields in the org DB."
+authors = [{ name = "Aether", email = "hello@aether.local" }]
+dependencies = ["base_components", "currency", "security_templates"]
+capabilities = ["db::query", "db::mutate", "storage::read", "storage::write"]
+is_builtin = true
+
+[plugin.api]
+version = "0.1"
+
+[plugin.meta]
+kind = "addon"
+workspace = "base"
+
+[communication]
+channels = ["events"]
+
+[[models]]
+name = "company_profile"
+table = "base_company_profile"
+file = "./models/company.surql"
+
+[[pages]]
+route = "/base/company"
+title = "Company"
+file = "./pages/company.xml"
+model = "base.company_profile"
+view = "form"
+
+[[menus]]
+name = "company"
+label = "Company"
+icon = "building"
+url = "/base/company"
+order = 90
+parent = "base_root"
+
+[[hooks]]
+name = "on_install"
+phase = "install"
+handler = "hooks.on_install"
+
+[[permissions]]
+key = "company.read"
+label = "Read company profile"
+
+[[permissions]]
+key = "company.write"
+label = "Edit company profile"

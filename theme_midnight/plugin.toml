@@ -1,0 +1,26 @@
+[plugin]
+name = "theme_midnight"
+label = "Midnight"
+version = "0.1.0"
+description = "Dark-first navy theme for night operations and control rooms."
+authors = [{ name = "Aether", email = "hello@aether.local" }]
+categories = [{ name = "theme", label = "Themes" }]
+dependencies = ["base_components"]
+capabilities = []
+is_builtin = true
+
+[theme]
+name = "midnight"
+label = "Midnight"
+is_system = true
+tokens_file = "./theme.json"
+
+[plugin.api]
+version = "0.1"
+
+[plugin.meta]
+kind = "theme"
+workspace = "base"
+
+[communication]
+channels = []
