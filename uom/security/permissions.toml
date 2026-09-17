@@ -1,7 +1,0 @@
-[[permission]]
-key = "uom.read"
-label = "Read UoM"
-
-[[permission]]
-key = "uom.write"
-label = "Manage UoM"

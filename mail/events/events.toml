@@ -1,7 +1,0 @@
-[[event]]
-name = "mail.message_posted"
-direction = "emit"
-
-[[event]]
-name = "partner.created"
-direction = "listen"

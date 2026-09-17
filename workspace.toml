@@ -17,47 +17,10 @@ group_label = "Base"
 group_icon = "./assets/base.svg"
 dependencies = []
 
-# --- UI foundation ---
-[[addons]]
-name = "base_components"
-path = "./base_components"
-
-[[addons]]
-name = "security_templates"
-path = "./security_templates"
-
-# --- Business primitives ---
-[[addons]]
-name = "sequence"
-path = "./sequence"
-
-[[addons]]
-name = "uom"
-path = "./uom"
 
 [[addons]]
 name = "currency"
 path = "./currency"
-
-[[addons]]
-name = "partner"
-path = "./partner"
-
-[[addons]]
-name = "mail"
-path = "./mail"
-
-[[addons]]
-name = "attachment"
-path = "./attachment"
-
-[[addons]]
-name = "product"
-path = "./product"
-
-[[addons]]
-name = "company"
-path = "./company"
 
 # --- Themes ---
 [[addons]]

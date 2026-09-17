@@ -1,7 +1,0 @@
-[[event]]
-name = "partner.created"
-direction = "emit"
-
-[[event]]
-name = "partner.updated"
-direction = "emit"

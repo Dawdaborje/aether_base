@@ -1,2 +1,0 @@
--- Applied to org DB when partner addon is installed.
--- Body mirrors models/partner.surql (loader may inline either).

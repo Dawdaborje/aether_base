@@ -1,7 +1,0 @@
-[[permission]]
-key = "sequence.read"
-label = "Read sequences"
-
-[[permission]]
-key = "sequence.write"
-label = "Manage sequences"

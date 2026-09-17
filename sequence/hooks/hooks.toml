@@ -1,8 +1,0 @@
-[[hook]]
-name = "on_install"
-phase = "install"
-
-[[hook]]
-name = "next_value"
-phase = "request"
-# Future: plugins::call("sequence", "next_value", { code: "invoice" })
