@@ -1,3 +1,0 @@
-[[event]]
-name = "currency.rate_updated"
-direction = "emit"

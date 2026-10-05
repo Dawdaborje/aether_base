@@ -1,7 +1,0 @@
-<!-- Shared page header / toolbar strip. Include from other plugins' pages. -->
-<header title="{{title}}">
-  <actions>
-    <button name="create" label="Create" variant="default" />
-    <button name="export" label="Export" variant="outline" />
-  </actions>
-</header>

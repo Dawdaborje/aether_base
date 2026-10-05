@@ -16,33 +16,3 @@ categories = ["base", "themes", "ui"]
 group_label = "Base"
 group_icon = "./assets/base.svg"
 dependencies = []
-
-
-[[addons]]
-name = "currency"
-path = "./currency"
-
-# --- Themes ---
-[[addons]]
-name = "theme_enterprise"
-path = "./theme_enterprise"
-
-[[addons]]
-name = "theme_nordic"
-path = "./theme_nordic"
-
-[[addons]]
-name = "theme_graphite"
-path = "./theme_graphite"
-
-[[addons]]
-name = "theme_ocean"
-path = "./theme_ocean"
-
-[[addons]]
-name = "theme_forest"
-path = "./theme_forest"
-
-[[addons]]
-name = "theme_midnight"
-path = "./theme_midnight"

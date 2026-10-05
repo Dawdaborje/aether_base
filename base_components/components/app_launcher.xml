@@ -1,4 +1,0 @@
-<!-- Desk apps grid — filled by kernel from installed plugin menus -->
-<view type="dashboard" model="base.apps">
-  <empty title="No apps installed" description="Install ERP, CRM, or other workspaces to see apps here." />
-</view>

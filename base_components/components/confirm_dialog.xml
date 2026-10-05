@@ -1,7 +1,0 @@
-<confirm
-  name="{{name}}"
-  title="{{title}}"
-  description="{{description}}"
-  confirmLabel="Confirm"
-  cancelLabel="Cancel"
-/>
