@@ -1,0 +1,36 @@
+[plugin]
+name = "country"
+label = "Countries"
+version = "0.1.0"
+description = "Countries (ISO 3166-1), their phone prefixes, usual currencies and regions."
+long_description = """
+The list of countries addresses, taxes and shipping refer to, with each country's usual currency (a link to
+the `currency` plugin). Run `aether --command country.seed --org <organization>` to create the 54 African
+countries and the main economies of the rest of the world. Written in Rhai.
+"""
+authors = [{ name = "Aether", email = "hello@aether.local" }]
+dependencies = ["currency"]
+capabilities = ["db::query", "db::mutate", "plugins::call"]
+access_models = [
+  { name = "country", permissions = ["read", "write"] },
+  { name = "country_region", permissions = ["read", "write"] },
+]
+is_builtin = true
+script = "main.rhai"
+
+[[command]]
+name = "seed"
+function = "seed_countries"
+help = "Create the African countries and the main economies (idempotent); needs the currencies: run currency.seed first"
+
+[app]
+icon = "globe"
+route = "/base/countries"
+description = "Countries and regions"
+
+[plugin.api]
+version = "0.1"
+
+[plugin.meta]
+kind = "addon"
+workspace = "base"

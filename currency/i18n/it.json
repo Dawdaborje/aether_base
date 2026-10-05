@@ -1,0 +1,20 @@
+{
+  "active": "Attivo",
+  "add_currency": "Aggiungi valuta",
+  "seed_hint.currency": "Aggiungine una sopra, oppure esegui: aether --command currency.seed --org <organization>",
+  "base": "Base",
+  "base_currency": "Valuta di base",
+  "code": "Codice",
+  "currencies": "Valute",
+  "currency": "Valuta",
+  "currency_added": "Valuta aggiunta",
+  "date": "Data",
+  "decimal_places": "Cifre decimali",
+  "name": "Nome",
+  "no_currencies_yet": "Nessuna valuta finora",
+  "rate": "Tasso",
+  "rates": "Tassi",
+  "save": "Salva",
+  "saved": "Salvato",
+  "symbol": "Simbolo"
+}

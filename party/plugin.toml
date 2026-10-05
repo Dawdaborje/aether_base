@@ -1,0 +1,50 @@
+[plugin]
+name = "party"
+label = "Parties"
+version = "0.1.0"
+description = "People and organizations you deal with: customers, suppliers, employees' contacts, banks."
+long_description = """
+One record for every person or organization the business has dealings with, with its addresses, bank accounts,
+contacts and tags. Other plugins (CRM, accounting, HR) link to a party instead of keeping their own copy of a name
+and an email. The equivalent of Odoo's res.partner, kept out of the kernel: the kernel knows login accounts, a party is
+business data. Written in Rhai.
+"""
+authors = [{ name = "Aether", email = "hello@aether.local" }]
+dependencies = ["currency", "country"]
+capabilities = ["db::query", "db::mutate", "db::transaction", "events::emit", "plugins::call"]
+access_models = [
+  { name = "party", permissions = ["read", "write"] },
+  { name = "party_address", permissions = ["read", "write"] },
+  { name = "party_bank_account", permissions = ["read", "write"] },
+  { name = "party_tag", permissions = ["read", "write"] },
+  { name = "party_tag_link", permissions = ["read", "write"] },
+]
+is_builtin = true
+script = "main.rhai"
+
+# Announced to the plugins that depend on this one and listen (docs/architecture/events.md).
+[[events]]
+name = "created"
+
+[[events]]
+name = "updated"
+
+[[events]]
+name = "archived"
+
+[[command]]
+name = "find_duplicates"
+function = "find_duplicates"
+help = "Group active parties that share a tax number, an email or a phone number"
+
+[app]
+icon = "contact"
+route = "/base/parties"
+description = "People and organizations"
+
+[plugin.api]
+version = "0.1"
+
+[plugin.meta]
+kind = "addon"
+workspace = "base"

@@ -1,0 +1,21 @@
+{
+  "active": "सक्रिय",
+  "add_country": "देश जोड़ें",
+  "code": "कोड",
+  "code_2_letters": "कोड (2 अक्षर)",
+  "code_3_letters": "कोड (3 अक्षर)",
+  "countries": "देश",
+  "country": "देश",
+  "country_added": "देश जोड़ दिया गया",
+  "currency": "मुद्रा",
+  "currency_code": "मुद्रा कोड",
+  "name": "नाम",
+  "no_countries_yet": "अभी कोई देश नहीं",
+  "phone": "फ़ोन",
+  "phone_prefix": "फ़ोन कोड",
+  "region": "क्षेत्र",
+  "regions": "क्षेत्र",
+  "seed_hint.country": "चलाएँ: aether --command country.seed --org <organization>",
+  "save": "सहेजें",
+  "saved": "सहेजा गया"
+}

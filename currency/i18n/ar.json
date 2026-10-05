@@ -1,0 +1,20 @@
+{
+  "active": "نشط",
+  "add_currency": "إضافة عملة",
+  "seed_hint.currency": "أضف واحدة أعلاه، أو نفّذ: aether --command currency.seed --org <organization>",
+  "base": "الأساس",
+  "base_currency": "العملة الأساسية",
+  "code": "الرمز",
+  "currencies": "العملات",
+  "currency": "العملة",
+  "currency_added": "تمت إضافة العملة",
+  "date": "التاريخ",
+  "decimal_places": "المنازل العشرية",
+  "name": "الاسم",
+  "no_currencies_yet": "لا توجد عملات بعد",
+  "rate": "السعر",
+  "rates": "الأسعار",
+  "save": "حفظ",
+  "saved": "تم الحفظ",
+  "symbol": "الرمز"
+}

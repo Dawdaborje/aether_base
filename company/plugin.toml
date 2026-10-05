@@ -1,0 +1,43 @@
+[plugin]
+name = "company"
+label = "Companies"
+version = "0.1.0"
+description = "The legal entities that keep the books: their party record, currency and fiscal year."
+long_description = """
+A company is the legal entity an organization's documents are issued by. Its name, tax number, addresses and
+bank accounts live in its party record (a link to the `party` plugin); the company adds what belongs to the entity
+rather than to any party: its currency, its fiscal year and which one is the default. Several companies in one
+organization are possible; scoping other plugins' data by company is a separate matter. Written in Rhai.
+"""
+authors = [{ name = "Aether", email = "hello@aether.local" }]
+dependencies = ["party", "currency"]
+capabilities = ["db::query", "db::mutate", "db::transaction", "plugins::call"]
+access_models = [{ name = "company", permissions = ["read", "write"] }]
+is_builtin = true
+script = "main.rhai"
+
+[[command]]
+name = "create"
+function = "create_company"
+help = "Create a company and its party record"
+args = [
+  { name = "name", help = "the legal name", required = true },
+  { name = "currency_code", help = "such as USD" },
+  { name = "tax_id", help = "tax or registration number" },
+  { name = "email" },
+  { name = "phone", help = "international form, +2348012345678" },
+  { name = "fiscal_year_start_month", type = "int", default = 1 },
+  { name = "fiscal_year_start_day", type = "int", default = 1 },
+]
+
+[app]
+icon = "building-2"
+route = "/base/companies"
+description = "Legal entities and fiscal years"
+
+[plugin.api]
+version = "0.1"
+
+[plugin.meta]
+kind = "addon"
+workspace = "base"

@@ -1,0 +1,7 @@
+<page route="/base/countries/{id}" title="%country%" model="country">
+  <view type="form" source="get_country" function="update_country" submit="%save%" success="%saved%">
+    <field name="name" label="%name%" required="true"/>
+    <field name="phone_prefix" label="%phone_prefix%"/>
+    <field name="active" label="%active%" fieldType="boolean"/>
+  </view>
+</page>

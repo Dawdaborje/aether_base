@@ -1,0 +1,9 @@
+<page route="/base/companies/{id}" title="%company%" model="company">
+  <view type="form" source="get_company" function="update_company" submit="%save%" success="%saved%">
+    <field name="name" label="%legal_name%" required="true"/>
+    <field name="currency_code" label="%currency_code%"/>
+    <field name="fiscal_year_start_month" label="%fiscal_year_starts_in_month%" fieldType="integer"/>
+    <field name="fiscal_year_start_day" label="%fiscal_year_starts_on_day%" fieldType="integer"/>
+    <field name="logo_url" label="%logo%"/>
+  </view>
+</page>

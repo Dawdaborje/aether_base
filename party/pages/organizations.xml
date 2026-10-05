@@ -1,0 +1,13 @@
+<page route="/base/parties/new-organization" title="%new_organization%" model="party">
+  <view type="form" function="create_organization" submit="%add_organization%" success="%organization_added%" redirect="/base/parties">
+    <field name="name" label="%legal_name%" required="true"/>
+    <field name="tax_id" label="%tax_or_registration_number%"/>
+    <field name="email" label="%email%"/>
+    <field name="phone" label="%phone%"/>
+    <field name="website" label="%website%"/>
+    <field name="currency_code" label="%currency_code%"/>
+    <field name="is_customer" label="%customer%" fieldType="boolean"/>
+    <field name="is_supplier" label="%supplier%" fieldType="boolean"/>
+    <field name="is_bank" label="%bank%" fieldType="boolean"/>
+  </view>
+</page>

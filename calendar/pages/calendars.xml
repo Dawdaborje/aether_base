@@ -1,0 +1,15 @@
+<page route="/base/calendars" title="Holiday calendars" model="holiday_calendar">
+  <view type="form" function="create_calendar" submit="Add calendar" success="Calendar added">
+    <field name="name" label="Name" required="true"/>
+    <field name="weekend" label="Weekly days off" fieldType="char"/>
+  </view>
+  <view type="list" model="holiday_calendar" source="list_calendars">
+    <search/>
+    <columns>
+      <column field="name" label="Name"/>
+      <column field="weekend" label="Days off"/>
+      <column field="is_active" label="Active" fieldType="boolean"/>
+    </columns>
+    <empty title="No calendars yet" description="Add the first one above."/>
+  </view>
+</page>

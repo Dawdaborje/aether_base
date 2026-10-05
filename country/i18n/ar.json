@@ -1,0 +1,21 @@
+{
+  "active": "نشط",
+  "add_country": "إضافة بلد",
+  "code": "الرمز",
+  "code_2_letters": "الرمز (حرفان)",
+  "code_3_letters": "الرمز (3 أحرف)",
+  "countries": "البلدان",
+  "country": "البلد",
+  "country_added": "تمت إضافة البلد",
+  "currency": "العملة",
+  "currency_code": "رمز العملة",
+  "name": "الاسم",
+  "no_countries_yet": "لا توجد بلدان بعد",
+  "phone": "الهاتف",
+  "phone_prefix": "مفتاح الهاتف",
+  "region": "المنطقة",
+  "regions": "المناطق",
+  "seed_hint.country": "نفّذ: aether --command country.seed --org <organization>",
+  "save": "حفظ",
+  "saved": "تم الحفظ"
+}

@@ -1,0 +1,20 @@
+{
+  "active": "सक्रिय",
+  "add_currency": "मुद्रा जोड़ें",
+  "seed_hint.currency": "ऊपर एक जोड़ें, या चलाएँ: aether --command currency.seed --org <organization>",
+  "base": "आधार",
+  "base_currency": "आधार मुद्रा",
+  "code": "कोड",
+  "currencies": "मुद्राएँ",
+  "currency": "मुद्रा",
+  "currency_added": "मुद्रा जोड़ दी गई",
+  "date": "तारीख",
+  "decimal_places": "दशमलव स्थान",
+  "name": "नाम",
+  "no_currencies_yet": "अभी कोई मुद्रा नहीं",
+  "rate": "दर",
+  "rates": "दरें",
+  "save": "सहेजें",
+  "saved": "सहेजा गया",
+  "symbol": "प्रतीक"
+}

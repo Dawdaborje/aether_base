@@ -1,0 +1,17 @@
+<page route="/base/parties/{id}" title="%party%" model="party">
+  <view type="form" source="get_party" function="update_party" submit="%save%" success="%saved%">
+    <field name="name" label="%name%" required="true"/>
+    <field name="email" label="%email%"/>
+    <field name="phone" label="%phone%"/>
+    <field name="mobile" label="%mobile%"/>
+    <field name="website" label="%website%"/>
+    <field name="tax_id" label="%tax_or_registration_number%"/>
+    <field name="job_title" label="%job_title%"/>
+    <field name="language" label="%language%"/>
+    <field name="is_customer" label="%customer%" fieldType="boolean"/>
+    <field name="is_supplier" label="%supplier%" fieldType="boolean"/>
+    <field name="is_employee" label="%employee%" fieldType="boolean"/>
+    <field name="is_bank" label="%bank%" fieldType="boolean"/>
+    <field name="notes" label="%notes%" fieldType="text"/>
+  </view>
+</page>

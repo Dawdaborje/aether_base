@@ -1,0 +1,24 @@
+<page route="/base/parties" title="%parties%" model="party">
+  <view type="form" function="create_person" submit="%add_person%" success="%person_added%">
+    <field name="name" label="%name%" required="true"/>
+    <field name="email" label="%email%"/>
+    <field name="phone" label="%phone%"/>
+    <field name="is_customer" label="%customer%" fieldType="boolean"/>
+    <field name="is_supplier" label="%supplier%" fieldType="boolean"/>
+  </view>
+  <view type="list" model="party" source="list_parties" open="/base/parties/{id}">
+    <search/>
+    <columns>
+      <column field="display_name" label="%name%"/>
+      <column field="kind" label="%kind%" fieldType="badge"/>
+      <column field="email" label="%email%"/>
+      <column field="phone" label="%phone%"/>
+      <column field="is_customer" label="%customer%" fieldType="boolean"/>
+      <column field="is_supplier" label="%supplier%" fieldType="boolean"/>
+    </columns>
+    <actions>
+      <action name="archive" label="%archive%" function="archive" confirm="%archive_this_party%" danger="true"/>
+    </actions>
+    <empty title="%no_parties_yet%" description="%add_the_first_person_above%"/>
+  </view>
+</page>

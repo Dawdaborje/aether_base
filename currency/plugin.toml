@@ -1,0 +1,39 @@
+[plugin]
+name = "currency"
+label = "Currencies"
+version = "0.3.0"
+description = "Currencies and exchange rates for business documents."
+long_description = """
+Currencies with their rates against one base currency, and conversion between any two of them at a
+given date. Written in Rhai: the plugin is the single file `main.rhai`.
+"""
+authors = [{ name = "Aether", email = "hello@aether.local" }]
+dependencies = []
+capabilities = ["db::query", "db::mutate", "db::transaction", "events::emit"]
+access_models = [
+  { name = "currency", permissions = ["read", "write"] },
+  { name = "currency_rate", permissions = ["read", "write"] },
+]
+is_builtin = true
+script = "main.rhai"
+
+# Announced to plugins that depend on this one and listen (see docs/architecture/events.md).
+[[events]]
+name = "rate_changed"
+
+[[command]]
+name = "seed"
+function = "seed_currencies"
+help = "Create the currencies in common use (idempotent); the first run also makes USD the base currency"
+
+[app]
+icon = "banknote"
+route = "/base/currencies"
+description = "Currencies and exchange rates"
+
+[plugin.api]
+version = "0.1"
+
+[plugin.meta]
+kind = "addon"
+workspace = "base"

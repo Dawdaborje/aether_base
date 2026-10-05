@@ -1,0 +1,48 @@
+{
+  "model_id": "mdl_jhguu65nhn",
+  "name": "currency_rate",
+  "label": "%rate%",
+  "plural_label": "%rates%",
+  "icon": "trending-up",
+  "title_field": "date",
+  "fields": [
+    {
+      "id": "fld_miw3giitvd",
+      "name": "currency",
+      "label": "%currency%",
+      "type": "link",
+      "required": true,
+      "index": "plain",
+      "target": "currency"
+    },
+    {
+      "id": "fld_it6dlkdliu",
+      "name": "rate",
+      "label": "%rate%",
+      "type": "float",
+      "required": true,
+      "help": "Units of this currency for one unit of the base currency."
+    },
+    {
+      "id": "fld_22eo6zn5tb",
+      "name": "date",
+      "label": "%date%",
+      "type": "date",
+      "required": true,
+      "index": "plain"
+    }
+  ],
+  "view": {
+    "list": [
+      "currency",
+      "rate",
+      "date"
+    ],
+    "sort": [
+      {
+        "field": "date",
+        "dir": null
+      }
+    ]
+  }
+}

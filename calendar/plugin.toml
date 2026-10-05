@@ -1,0 +1,39 @@
+[plugin]
+name = "calendar"
+label = "Holiday calendars"
+version = "0.1.0"
+description = "Weekly days off and holidays, assigned to companies, branches and people over time."
+long_description = """
+A holiday calendar owns its weekly days off and its holidays (public, optional or company; whole or half
+days; one-off or yearly). Calendars are assigned to a company, a branch or a person from a day, and the
+one in force on a day is the latest assigned on or before it, a more specific subject winning over a
+general one. Other plugins (leave, attendance, payroll) ask which calendar applies and what its days off
+are. Written in Rust.
+"""
+authors = [{ name = "Aether", email = "hello@aether.local" }]
+dependencies = ["country", "company"]
+capabilities = ["db::query", "db::mutate"]
+access_models = [
+  { name = "holiday_calendar", permissions = ["read", "write"] },
+  { name = "holiday", permissions = ["read", "write"] },
+  { name = "calendar_assignment", permissions = ["read", "write"] },
+]
+is_builtin = true
+wasm_file = "out/plugin.wasm"
+
+[[roles]]
+name = "calendar_manager"
+label = "Calendar manager"
+description = "Creates calendars, holidays and assignments"
+
+[app]
+icon = "calendar-days"
+route = "/base/calendars"
+description = "Holiday calendars"
+
+[plugin.api]
+version = "0.1"
+
+[plugin.meta]
+kind = "addon"
+workspace = "base"

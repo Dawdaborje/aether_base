@@ -2,17 +2,24 @@
 name = "base"
 label = "Aether Base"
 version = "0.2.0"
-description = "Business/UI foundation for Aether plugins — shared XML, themes, and core business addons."
+description = "Business foundation for Aether plugins: currencies, countries, parties and companies."
 long_description = """
 Always-installed foundation workspace. Kernel facets own identity, tenancy, and RBAC;
-this workspace owns shared page XML, themes, and business primitives (partner, sequence,
-uom, currency, mail, product, …) that ERP/CRM/HRMS/LMS depend on.
+this workspace owns the business primitives (currency, country, party, company, …) that
+ERP/CRM/HRMS/LMS depend on.
 
-Plugin API contract: see docs/PLUGIN_API.md (v0.1, evolving).
+Load order matters (a plugin must be loaded after the ones it links to): currency, country, party, company, calendar.
 """
 authors = [{ name = "Aether", email = "hello@aether.local" }]
 website = "https://github.com/Dawdaborje"
-categories = ["base", "themes", "ui"]
+categories = ["base"]
 group_label = "Base"
 group_icon = "./assets/base.svg"
 dependencies = []
+
+[workspace.plugins]
+currency = { path = "./currency" }
+country = { path = "./country" }
+party = { path = "./party" }
+company = { path = "./company" }
+calendar = { path = "./calendar" }

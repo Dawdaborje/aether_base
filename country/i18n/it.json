@@ -1,0 +1,21 @@
+{
+  "active": "Attivo",
+  "add_country": "Aggiungi paese",
+  "code": "Codice",
+  "code_2_letters": "Codice (2 lettere)",
+  "code_3_letters": "Codice (3 lettere)",
+  "countries": "Paesi",
+  "country": "Paese",
+  "country_added": "Paese aggiunto",
+  "currency": "Valuta",
+  "currency_code": "Codice valuta",
+  "name": "Nome",
+  "no_countries_yet": "Nessun paese finora",
+  "phone": "Telefono",
+  "phone_prefix": "Prefisso telefonico",
+  "region": "Regione",
+  "regions": "Regioni",
+  "seed_hint.country": "Esegui: aether --command country.seed --org <organization>",
+  "save": "Salva",
+  "saved": "Salvato"
+}

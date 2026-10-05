@@ -1,0 +1,7 @@
+<page route="/base/currencies/{id}" title="%currency%" model="currency">
+  <view type="form" source="get_currency" function="update_currency" submit="%save%" success="%saved%">
+    <field name="name" label="%name%" required="true"/>
+    <field name="symbol" label="%symbol%"/>
+    <field name="decimal_places" label="%decimal_places%" fieldType="integer"/>
+  </view>
+</page>

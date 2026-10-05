@@ -1,0 +1,75 @@
+{
+  "model_id": "mdl_dmwfn6k2au",
+  "name": "country",
+  "label": "%country%",
+  "plural_label": "%countries%",
+  "icon": "globe",
+  "title_field": "name",
+  "fields": [
+    {
+      "id": "fld_3npcl3yxk3",
+      "name": "code",
+      "label": "%code%",
+      "type": "string",
+      "required": true,
+      "max_length": 2,
+      "index": "unique",
+      "help": "ISO 3166-1 alpha-2, such as NG."
+    },
+    {
+      "id": "fld_ymnzg5on6r",
+      "name": "code3",
+      "label": "%code_3_letters%",
+      "type": "string",
+      "max_length": 3,
+      "help": "ISO 3166-1 alpha-3, such as NGA."
+    },
+    {
+      "id": "fld_gwmnh4y5at",
+      "name": "name",
+      "label": "%name%",
+      "type": "string",
+      "required": true,
+      "max_length": 100,
+      "index": "plain"
+    },
+    {
+      "id": "fld_lr4r3rauwn",
+      "name": "phone_prefix",
+      "label": "%phone_prefix%",
+      "type": "string",
+      "max_length": 8,
+      "help": "International dialling code, such as +234."
+    },
+    {
+      "id": "fld_fetlchke7j",
+      "name": "currency",
+      "label": "%currency%",
+      "type": "link",
+      "target": "currency.currency",
+      "target_id": "mdl_khholv2eis",
+      "help": "The country's usual currency."
+    },
+    {
+      "id": "fld_5xoqka4tuf",
+      "name": "active",
+      "label": "%active%",
+      "type": "bool",
+      "default": true
+    }
+  ],
+  "view": {
+    "list": [
+      "code",
+      "name",
+      "phone_prefix",
+      "active"
+    ],
+    "sort": [
+      {
+        "field": "name",
+        "dir": null
+      }
+    ]
+  }
+}

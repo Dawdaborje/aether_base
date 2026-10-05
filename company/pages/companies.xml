@@ -1,0 +1,23 @@
+<page route="/base/companies" title="%companies%" model="company">
+  <view type="form" function="create_company" submit="%add_company%" success="%company_added%">
+    <field name="name" label="%legal_name%" required="true"/>
+    <field name="tax_id" label="%tax_or_registration_number%"/>
+    <field name="email" label="%email%"/>
+    <field name="phone" label="%phone%"/>
+    <field name="currency_code" label="%currency_code%"/>
+    <field name="fiscal_year_start_month" label="%fiscal_year_starts_in_month%" fieldType="integer"/>
+  </view>
+  <view type="list" model="company" source="list_companies" open="/base/companies/{id}">
+    <search/>
+    <columns>
+      <column field="name" label="%name%"/>
+      <column field="is_default" label="%default%" fieldType="boolean"/>
+      <column field="is_active" label="%active%" fieldType="boolean"/>
+    </columns>
+    <actions>
+      <action name="default" label="%make_default%" function="set_default_company"/>
+      <action name="archive" label="%archive%" function="archive_company" confirm="%archive_this_company%" danger="true"/>
+    </actions>
+    <empty title="%no_company_yet%" description="%add_the_first_one_above%"/>
+  </view>
+</page>

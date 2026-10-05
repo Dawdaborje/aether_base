@@ -1,0 +1,21 @@
+{
+  "active": "Inatumika",
+  "add_country": "Ongeza nchi",
+  "code": "Msimbo",
+  "code_2_letters": "Msimbo (herufi 2)",
+  "code_3_letters": "Msimbo (herufi 3)",
+  "countries": "Nchi",
+  "country": "Nchi",
+  "country_added": "Nchi imeongezwa",
+  "currency": "Sarafu",
+  "currency_code": "Msimbo wa sarafu",
+  "name": "Jina",
+  "no_countries_yet": "Bado hakuna nchi",
+  "phone": "Simu",
+  "phone_prefix": "Msimbo wa simu",
+  "region": "Eneo",
+  "regions": "Maeneo",
+  "seed_hint.country": "Endesha: aether --command country.seed --org <organization>",
+  "save": "Hifadhi",
+  "saved": "Imehifadhiwa"
+}

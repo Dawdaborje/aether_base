@@ -1,0 +1,100 @@
+{
+  "model_id": "mdl_d7q6tyyshp",
+  "name": "company",
+  "label": "%company%",
+  "plural_label": "%companies%",
+  "icon": "building-2",
+  "title_field": "name",
+  "fields": [
+    {
+      "id": "fld_dqtoixcpo4",
+      "name": "name",
+      "label": "%name%",
+      "type": "string",
+      "required": true,
+      "max_length": 200,
+      "index": "plain",
+      "track": true
+    },
+    {
+      "id": "fld_dng5weos72",
+      "name": "party",
+      "label": "%legal_entity%",
+      "type": "link",
+      "required": true,
+      "index": "plain",
+      "target": "party.party",
+      "target_id": "mdl_mr76tss5ic",
+      "help": "The party record that holds the company's legal name, tax number, addresses and bank accounts."
+    },
+    {
+      "id": "fld_roweejdvkn",
+      "name": "currency",
+      "label": "%currency%",
+      "type": "link",
+      "target": "currency.currency",
+      "target_id": "mdl_khholv2eis",
+      "help": "The company's own currency, used on its documents."
+    },
+    {
+      "id": "fld_4dhjk3uc4d",
+      "name": "fiscal_year_start_month",
+      "label": "%fiscal_year_starts_in_month%",
+      "type": "int",
+      "default": 1
+    },
+    {
+      "id": "fld_a6akdrfetg",
+      "name": "fiscal_year_start_day",
+      "label": "%fiscal_year_starts_on_day%",
+      "type": "int",
+      "default": 1
+    },
+    {
+      "id": "fld_3bm4u24zyg",
+      "name": "logo_url",
+      "label": "%logo%",
+      "type": "string",
+      "max_length": 300
+    },
+    {
+      "id": "fld_jm345w4tqc",
+      "name": "is_default",
+      "label": "%default_company%",
+      "type": "bool",
+      "default": false,
+      "index": "plain",
+      "track": true
+    },
+    {
+      "id": "fld_46iytzbr4p",
+      "name": "is_active",
+      "label": "%active%",
+      "type": "bool",
+      "default": true,
+      "track": true
+    }
+  ],
+  "view": {
+    "list": [
+      "name",
+      "currency",
+      "is_default",
+      "is_active"
+    ],
+    "sort": [
+      {
+        "field": "name",
+        "dir": null
+      }
+    ]
+  },
+  "chatter": {
+    "enabled": true,
+    "messages": true,
+    "notes": true,
+    "followers": true,
+    "track_changes": true,
+    "visitors": "none"
+  }
+}
