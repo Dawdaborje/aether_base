@@ -233,10 +233,6 @@ fn link_user(input) {
 
 // ---- finding
 
-private fn has_text(value, text) {
-    value != () && value.to_lower().contains(text)
-}
-
 fn search(input) {
     let input = or_empty(input);
     let filter = #{};
@@ -250,27 +246,26 @@ fn search(input) {
         if !(flag in ["is_customer", "is_supplier", "is_employee", "is_bank"]) { fail("role is customer, supplier, employee or bank"); }
         filter[flag] = true;
     }
-    let wanted = ();
     if input.tag != () {
         let tags = db::find("party_tag", #{ filter: #{ name: input.tag }, limit: 1 });
-        wanted = #{};
+        let wanted = [];
         if tags.len() > 0 {
-            for link in db::find("party_tag_link", #{ filter: #{ tag: tags[0].id }, limit: 1000 }) { wanted[link.party] = true; }
+            for link in db::find("party_tag_link", #{ filter: #{ tag: tags[0].id }, limit: 500 }) { wanted.push(link.party); }
         }
+        if wanted.len() == 0 { return []; }
+        filter.id = #{ "in": wanted };
     }
-    let text = if blank(input.text) { "" } else { input.text.to_lower() };
-    text.trim();
+    let text = if blank(input.text) { "" } else { input.text.trim().to_lower() };
     let limit = if input.limit == () { 50 } else { input.limit };
     if type_of(limit) != "i64" || limit < 1 || limit > 500 { fail("limit is 1 to 500"); }
-    let out = [];
-    for r in db::find("party", #{ filter: filter, order: "display_name", limit: 1000 }) {
-        if wanted != () && !(r.id in wanted) { continue; }
-        if text != "" && !(has_text(r.display_name, text) || has_text(r.email, text) || has_text(r.phone, text)
-            || has_text(r.mobile, text) || has_text(r.tax_id, text)) { continue; }
-        out.push(r);
-        if out.len() >= limit { break; }
+    // The database does the matching (`like` is a case-insensitive substring), so the limit counts matches.
+    if text != "" {
+        filter["or"] = [
+            #{ display_name: #{ like: text } }, #{ email: #{ like: text } }, #{ phone: #{ like: text } },
+            #{ mobile: #{ like: text } }, #{ tax_id: #{ like: text } },
+        ];
     }
-    out
+    db::find("party", #{ filter: filter, order: "display_name", limit: limit })
 }
 
 // The same, for a page's list.
