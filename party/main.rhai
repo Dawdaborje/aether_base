@@ -426,3 +426,59 @@ fn untag_party(input) {
     for link in links { db::delete("party_tag_link", link.id); }
     links.len() > 0
 }
+
+// ---- merging duplicates
+//
+// Odoo's partner merge rewrites every foreign key in the database from a wizard that knows all the models, and
+// deletes the losers. Frappe's merge renames the document and runs a link search over every doctype. A plugin here
+// cannot touch another plugin's data, so the merge is split along that line: this plugin moves what it owns
+// (addresses, bank accounts, contacts, tags), fills the blanks of the surviving party from the other one, archives
+// the other one pointing at the survivor, and announces `merged` so each plugin repoints its own links. Nothing is
+// deleted, and running the merge again after a failure carries on where it stopped.
+fn merge(input) {
+    let keep = must_get(input.into);
+    let gone = must_get(input.from);
+    if keep.id == gone.id { fail("a party cannot be merged into itself"); }
+    if keep.kind != gone.kind { fail("a person and an organization cannot be merged"); }
+    if keep.is_active != true { fail("the party to keep is archived; unarchive it first"); }
+
+    let moved = #{ addresses: 0, bank_accounts: 0, contacts: 0, tags: 0 };
+
+    for a in db::find("party_address", #{ filter: #{ party: gone.id }, limit: 1000 }) {
+        db::update("party_address", a.id, #{ party: keep.id, is_default: false });
+        moved.addresses += 1;
+    }
+    for b in db::find("party_bank_account", #{ filter: #{ party: gone.id }, limit: 1000 }) {
+        db::update("party_bank_account", b.id, #{ party: keep.id });
+        moved.bank_accounts += 1;
+    }
+    for c in db::find("party", #{ filter: #{ parent: gone.id }, limit: 1000 }) {
+        db::update("party", c.id, #{ parent: keep.id });
+        moved.contacts += 1;
+    }
+    let have = #{};
+    for l in db::find("party_tag_link", #{ filter: #{ party: keep.id }, limit: 1000 }) { have[l.tag] = true; }
+    for l in db::find("party_tag_link", #{ filter: #{ party: gone.id }, limit: 1000 }) {
+        if have[l.tag] == () { db::update("party_tag_link", l.id, #{ party: keep.id }); moved.tags += 1; }
+        else { db::delete("party_tag_link", l.id); }
+    }
+
+    let fill = #{};
+    for key in ["email", "phone", "mobile", "website", "tax_id", "language", "currency", "job_title"] {
+        if blank(keep[key]) && !blank(gone[key]) { fill[key] = gone[key]; }
+    }
+    for role in ["is_customer", "is_supplier", "is_employee", "is_bank"] {
+        if gone[role] == true && keep[role] != true { fill[role] = true; }
+    }
+    if keep.user == () && gone.user != () { fill.user = gone.user; }
+
+    // The tax number and the login are freed on the old record before the survivor takes them.
+    let release = #{ is_active: false, notes: ((gone.notes ?? "") + "\nMerged into " + keep.display_name + " (" + keep.id + ").").trim() };
+    if fill.tax_id != () { release.tax_id = (); }
+    if fill.user != () { release.user = (); }
+    db::update("party", gone.id, release);
+    if !fill.is_empty() { db::update("party", keep.id, fill); }
+
+    events::emit(#{ event: "merged", payload: #{ from: gone.id, into: keep.id, kind: keep.kind } });
+    #{ into: keep.id, from: gone.id, moved: moved, filled: fill.keys() }
+}

@@ -1,0 +1,28 @@
+{
+  "model_id": "mdl_b3lmycolkp",
+  "name": "uom_group",
+  "label": "%unit_group%",
+  "plural_label": "%unit_groups%",
+  "icon": "ruler",
+  "title_field": "name",
+  "fields": [
+    {
+      "id": "fld_he6f6x2k4r",
+      "name": "code",
+      "label": "%code%",
+      "type": "string",
+      "required": true,
+      "max_length": 30,
+      "index": "unique",
+      "help": "length, mass, volume, time, count ..."
+    },
+    {
+      "id": "fld_t74rfdv31d",
+      "name": "name",
+      "label": "%name%",
+      "type": "string",
+      "required": true,
+      "max_length": 80
+    }
+  ]
+}

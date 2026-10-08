@@ -1,0 +1,17 @@
+{
+  "active": "Active",
+  "add_unit": "Add unit",
+  "code": "Code",
+  "decimals": "Decimals",
+  "factor": "Factor",
+  "group": "Group",
+  "is_reference": "Reference",
+  "name": "Name",
+  "no_unit_yet": "No unit yet",
+  "run_the_seed_command": "Run the uom.seed command to add the common units.",
+  "unit": "Unit",
+  "unit_added": "Unit added",
+  "unit_group": "Unit group",
+  "unit_groups": "Unit groups",
+  "units": "Units"
+}

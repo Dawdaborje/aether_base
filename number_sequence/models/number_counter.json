@@ -1,0 +1,43 @@
+{
+  "model_id": "mdl_6sgjkx1xmz",
+  "name": "number_counter",
+  "label": "%counter%",
+  "plural_label": "%counters%",
+  "icon": "list-ordered",
+  "title_field": "key",
+  "fields": [
+    {
+      "id": "fld_wen46jzt3g",
+      "name": "key",
+      "label": "%key%",
+      "type": "string",
+      "required": true,
+      "max_length": 200,
+      "index": "unique",
+      "help": "sequence key and period; one row per period so a reset never races."
+    },
+    {
+      "id": "fld_a0tlvmk4je",
+      "name": "sequence",
+      "label": "%sequence%",
+      "type": "string",
+      "required": true,
+      "index": "plain"
+    },
+    {
+      "id": "fld_ua0dtdb0ch",
+      "name": "period",
+      "label": "%period%",
+      "type": "string",
+      "required": true,
+      "max_length": 10
+    },
+    {
+      "id": "fld_hzve24zk38",
+      "name": "last",
+      "label": "%last%",
+      "type": "int",
+      "default": 0
+    }
+  ]
+}

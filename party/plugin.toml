@@ -1,7 +1,7 @@
 [plugin]
 name = "party"
 label = "Parties"
-version = "0.1.0"
+version = "0.2.0"
 description = "People and organizations you deal with: customers, suppliers, employees' contacts, banks."
 long_description = """
 One record for every person or organization the business has dealings with, with its addresses, bank accounts,
@@ -31,6 +31,19 @@ name = "updated"
 
 [[events]]
 name = "archived"
+
+# Another party was merged into this one: { from, into, kind }. Plugins that link to a party repoint their links.
+[[events]]
+name = "merged"
+
+[[command]]
+name = "merge"
+function = "merge"
+help = "Merge a duplicate party into the one to keep; nothing is deleted"
+args = [
+  { name = "from", help = "id of the duplicate", required = true },
+  { name = "into", help = "id of the party to keep", required = true },
+]
 
 [[command]]
 name = "find_duplicates"

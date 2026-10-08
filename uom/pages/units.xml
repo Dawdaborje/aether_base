@@ -1,0 +1,18 @@
+<page route="/base/units" title="%units%" model="uom">
+  <view type="form" function="create_unit" submit="%add_unit%" success="%unit_added%">
+    <field name="code" label="%code%" required="true"/>
+    <field name="name" label="%name%" required="true"/>
+    <field name="group" label="%group%" required="true"/>
+    <field name="factor" label="%factor%" fieldType="number"/>
+    <field name="decimals" label="%decimals%" fieldType="integer"/>
+  </view>
+  <view type="list" model="uom" source="list_units">
+    <columns>
+      <column field="code" label="%code%"/>
+      <column field="name" label="%name%"/>
+      <column field="factor" label="%factor%"/>
+      <column field="is_reference" label="%is_reference%" fieldType="boolean"/>
+    </columns>
+    <empty title="%no_unit_yet%" description="%run_the_seed_command%"/>
+  </view>
+</page>

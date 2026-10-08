@@ -1,0 +1,65 @@
+[plugin]
+name = "number_sequence"
+label = "Number sequences"
+version = "0.1.0"
+description = "Document numbers with prefixes, per-period counters and an audit of gaps."
+long_description = """
+Numbers for invoices, employees, journals and anything else that needs one. A prefix may carry the year or month of the
+document, a counter can start again each year or month, and a gapless sequence records every number it hands out so a
+missing one can be found and explained. Other plugins call `next_number`. Written in Rhai.
+"""
+authors = [{ name = "Aether", email = "hello@aether.local" }]
+dependencies = []
+capabilities = ["db::query", "db::mutate"]
+access_models = [
+  { name = "number_sequence", permissions = ["read", "write"] },
+  { name = "number_counter", permissions = ["read", "write"] },
+  { name = "number_issue", permissions = ["read", "write"] },
+]
+is_builtin = true
+script = "main.rhai"
+
+[[command]]
+name = "create"
+function = "create_sequence"
+help = "Create a number sequence"
+args = [
+  { name = "code", help = "such as invoice", required = true },
+  { name = "label", required = true },
+  { name = "prefix", help = "may use {YYYY} {YY} {MM} {DD}" },
+  { name = "suffix" },
+  { name = "padding", type = "int", default = 5 },
+  { name = "reset", help = "never, year or month", default = "never" },
+  { name = "gapless", type = "bool", default = false },
+]
+
+[[command]]
+name = "next"
+function = "next_number"
+help = "Take the next number of a sequence"
+args = [
+  { name = "code", required = true },
+  { name = "date", help = "document date, 2026-10-05; today when left out" },
+  { name = "reference" },
+]
+
+[[command]]
+name = "audit"
+function = "audit_gaps"
+help = "List numbers of a gapless sequence that were taken and never recorded"
+args = [
+  { name = "code", required = true },
+  { name = "period" },
+]
+
+[app]
+icon = "hash"
+route = "/base/sequences"
+description = "Document numbering"
+
+[plugin.api]
+version = "0.1"
+
+[plugin.meta]
+kind = "addon"
+workspace = "base"

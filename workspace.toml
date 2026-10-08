@@ -8,7 +8,7 @@ Always-installed foundation workspace. Kernel facets own identity, tenancy, and 
 this workspace owns the business primitives (currency, country, party, company, …) that
 ERP/CRM/HRMS/LMS depend on.
 
-Load order matters (a plugin must be loaded after the ones it links to): currency, country, party, company, calendar.
+Load order matters (a plugin must be loaded after the ones it links to): currency, country, party, company, calendar, number_sequence (no dependencies; load it any time).
 """
 authors = [{ name = "Aether", email = "hello@aether.local" }]
 website = "https://github.com/Dawdaborje"
@@ -23,3 +23,5 @@ country = { path = "./country" }
 party = { path = "./party" }
 company = { path = "./company" }
 calendar = { path = "./calendar" }
+number_sequence = { path = "./number_sequence" }
+uom = { path = "./uom" }

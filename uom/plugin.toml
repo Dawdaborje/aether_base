@@ -1,0 +1,45 @@
+[plugin]
+name = "uom"
+label = "Units of measure"
+version = "0.1.0"
+description = "Units grouped by what they measure, with conversion and per-unit rounding."
+long_description = """
+Units belong to a group (length, mass, count, ...). Each has one factor to the group's reference unit and its own
+rounding, so conversion only works inside a group and every unit is defined by a single number. Written in Rhai.
+"""
+authors = [{ name = "Aether", email = "hello@aether.local" }]
+dependencies = []
+capabilities = ["db::query", "db::mutate"]
+access_models = [
+  { name = "uom_group", permissions = ["read", "write"] },
+  { name = "uom", permissions = ["read", "write"] },
+]
+is_builtin = true
+script = "main.rhai"
+
+[[command]]
+name = "seed"
+function = "seed_units"
+help = "Create the common units of count, mass, length, volume and time (idempotent)"
+
+[[command]]
+name = "convert"
+function = "convert"
+help = "Convert a quantity between two units of one group"
+args = [
+  { name = "quantity", type = "float", required = true },
+  { name = "from", required = true },
+  { name = "to", required = true },
+]
+
+[app]
+icon = "scale"
+route = "/base/units"
+description = "Units of measure"
+
+[plugin.api]
+version = "0.1"
+
+[plugin.meta]
+kind = "addon"
+workspace = "base"

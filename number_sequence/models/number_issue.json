@@ -1,0 +1,82 @@
+{
+  "model_id": "mdl_x4h8so9mjg",
+  "name": "number_issue",
+  "label": "%issue%",
+  "plural_label": "%issues%",
+  "icon": "receipt",
+  "title_field": "number",
+  "fields": [
+    {
+      "id": "fld_7y952992er",
+      "name": "key",
+      "label": "%key%",
+      "type": "string",
+      "required": true,
+      "max_length": 260,
+      "index": "unique",
+      "help": "counter key and value: a number can be issued once."
+    },
+    {
+      "id": "fld_9yd6dltmsl",
+      "name": "sequence",
+      "label": "%sequence%",
+      "type": "string",
+      "required": true,
+      "index": "plain"
+    },
+    {
+      "id": "fld_xbw794dfmh",
+      "name": "period",
+      "label": "%period%",
+      "type": "string",
+      "required": true,
+      "max_length": 10
+    },
+    {
+      "id": "fld_qehef301z9",
+      "name": "value",
+      "label": "%value%",
+      "type": "int",
+      "required": true
+    },
+    {
+      "id": "fld_932ap3n0to",
+      "name": "number",
+      "label": "%number%",
+      "type": "string",
+      "required": true,
+      "max_length": 120
+    },
+    {
+      "id": "fld_vrnurwjy2m",
+      "name": "reference",
+      "label": "%reference%",
+      "type": "string",
+      "max_length": 200,
+      "help": "What the number was issued for."
+    },
+    {
+      "id": "fld_5lin9mcqjg",
+      "name": "state",
+      "label": "%state%",
+      "type": "string",
+      "default": "issued",
+      "help": "issued or void"
+    },
+    {
+      "id": "fld_vdqawna7xz",
+      "name": "void_reason",
+      "label": "%void_reason%",
+      "type": "string",
+      "max_length": 300
+    }
+  ],
+  "view": {
+    "list": [
+      "number",
+      "sequence",
+      "state",
+      "reference"
+    ]
+  }
+}

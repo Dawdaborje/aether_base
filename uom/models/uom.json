@@ -1,0 +1,77 @@
+{
+  "model_id": "mdl_gidmmkjdj5",
+  "name": "uom",
+  "label": "%unit%",
+  "plural_label": "%units%",
+  "icon": "scale",
+  "title_field": "code",
+  "fields": [
+    {
+      "id": "fld_xku3u72li2",
+      "name": "code",
+      "label": "%code%",
+      "type": "string",
+      "required": true,
+      "max_length": 20,
+      "index": "unique",
+      "help": "kg, m, dozen"
+    },
+    {
+      "id": "fld_6pibjpm5bu",
+      "name": "name",
+      "label": "%name%",
+      "type": "string",
+      "required": true,
+      "max_length": 80
+    },
+    {
+      "id": "fld_8cdzieizc7",
+      "name": "group",
+      "label": "%group%",
+      "type": "link",
+      "required": true,
+      "index": "plain",
+      "target": "uom_group",
+      "help": "Only units of one group convert into each other."
+    },
+    {
+      "id": "fld_waw4psrfia",
+      "name": "factor",
+      "label": "%factor%",
+      "type": "float",
+      "required": true,
+      "help": "How many of the group's reference unit one of these is. The reference unit has 1."
+    },
+    {
+      "id": "fld_6cqm6x7s2c",
+      "name": "decimals",
+      "label": "%decimals%",
+      "type": "int",
+      "default": 3,
+      "help": "Quantities in this unit are rounded to this many decimals."
+    },
+    {
+      "id": "fld_x243dzxds8",
+      "name": "is_reference",
+      "label": "%is_reference%",
+      "type": "bool",
+      "default": false
+    },
+    {
+      "id": "fld_ktwq1kdrt6",
+      "name": "active",
+      "label": "%active%",
+      "type": "bool",
+      "default": true
+    }
+  ],
+  "view": {
+    "list": [
+      "code",
+      "name",
+      "factor",
+      "is_reference",
+      "active"
+    ]
+  }
+}
