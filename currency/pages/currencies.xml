@@ -1,11 +1,5 @@
 <page route="/base/currencies" title="%currencies%" model="currency">
-  <view type="form" function="create_currency" submit="%add_currency%" success="%currency_added%">
-    <field name="code" label="%code%" required="true"/>
-    <field name="name" label="%name%" required="true"/>
-    <field name="symbol" label="%symbol%"/>
-    <field name="decimal_places" label="%decimal_places%" fieldType="integer"/>
-  </view>
-  <view type="list" model="currency" source="list_currencies" open="/base/currencies/{id}">
+  <view type="list" model="currency" source="list_currencies" open="/base/currencies/{id}" create="/base/currencies/new" create_label="%add_currency%">
     <search/>
     <columns>
       <column field="code" label="%code%"/>
@@ -14,6 +8,6 @@
       <column field="is_base" label="%base%" fieldType="boolean"/>
       <column field="active" label="%active%" fieldType="boolean"/>
     </columns>
-    <empty title="%no_currencies_yet%" description="%seed_hint.currency%"/>
+    <empty title="%no_currencies_yet%" description="%use_new_to_add%"/>
   </view>
 </page>

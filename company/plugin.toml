@@ -1,5 +1,6 @@
 [plugin]
 name = "company"
+icon_path = "assets/logo.svg"
 label = "Companies"
 version = "0.1.0"
 description = "The legal entities that keep the books: their party record, currency and fiscal year."

@@ -15,7 +15,8 @@
   "phone_prefix": "फ़ोन कोड",
   "region": "क्षेत्र",
   "regions": "क्षेत्र",
-  "seed_hint.country": "चलाएँ: aether --command country.seed --org <organization>",
   "save": "सहेजें",
-  "saved": "सहेजा गया"
+  "saved": "सहेजा गया",
+  "seed_hint.country": "चलाएँ: aether --command country.seed --org <organization>",
+  "use_new_to_add": "जोड़ने के लिए नया उपयोग करें।"
 }

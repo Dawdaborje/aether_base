@@ -1,0 +1,9 @@
+<page route="/base/countries/new" title="%add_country%" model="country">
+  <view type="form" function="create_country" submit="%add_country%" success="%country_added%" redirect="/base/countries">
+    <field name="code" label="%code_2_letters%" required="true"/>
+    <field name="name" label="%name%" required="true"/>
+    <field name="code3" label="%code_3_letters%"/>
+    <field name="phone_prefix" label="%phone_prefix%"/>
+    <field name="currency_code" label="%currency_code%"/>
+  </view>
+</page>

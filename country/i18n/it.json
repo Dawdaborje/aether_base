@@ -15,7 +15,8 @@
   "phone_prefix": "Prefisso telefonico",
   "region": "Regione",
   "regions": "Regioni",
-  "seed_hint.country": "Esegui: aether --command country.seed --org <organization>",
   "save": "Salva",
-  "saved": "Salvato"
+  "saved": "Salvato",
+  "seed_hint.country": "Esegui: aether --command country.seed --org <organization>",
+  "use_new_to_add": "Usa Nuovo per aggiungerne uno."
 }

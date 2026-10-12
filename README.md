@@ -1,24 +1,43 @@
 # Aether Base
 
-The business foundation that CRM, ERP, HR and the rest build on. Six plugins, written in Rhai, each one a
-single `main.rhai` with its models and pages:
+Always-installed foundation workspace for Aether. Kernel facets own identity, tenancy, and RBAC; this workspace owns the business primitives that CRM, ERP, HRMS, and similar domains link to instead of reinventing.
 
-| Plugin | What it is | Depends on |
-|---|---|---|
-| `currency` | currencies, exchange rates against a base currency, conversion | none |
-| `country` | countries (ISO 3166-1), phone prefixes, usual currencies, regions | `currency` |
-| `party` | people and organizations: contacts, addresses, bank accounts, tags, duplicates | `currency`, `country` |
-| `number_sequence` | document numbers: prefixes with year/month, a counter per period, gapless sequences with an audit of holes | none |
-| `uom` | units grouped by what they measure, one factor each to the group's reference unit, per-unit rounding, conversion | none |
-| `company` | the legal entities that keep the books: their party record, currency, fiscal year | `party`, `currency` |
+## Features
 
-How `party` and `company` fit together, what each function does and what is not built yet:
-`aether/docs/architecture/party.md`.
+- Currencies with a single base and dated FX rates
+- ISO countries (and regions) tied to a usual currency
+- Parties as shared people/org identity (contacts, addresses, banks, tags, merge)
+- Companies as legal entities wrapping a party plus fiscal year / default
+- Holiday calendars with time-based assignment and working-day math
+- Document number sequences (per-period counters, optional gapless audit)
+- Units of measure grouped by dimension with conversion and per-unit rounding
 
-## Using them
+## Plugins
 
-Plugins that link to another plugin's model must be loaded after it, and `--sync-models` needs the other plugin
-already in the catalog (it copies the model's id into the link). From the Aether repository:
+| Name | Purpose | Depends on | Design |
+|---|---|---|---|
+| `currency` | Currencies and exchange rates against one base | — | [docs](./currency/docs/design.md) |
+| `country` | Countries (ISO 3166-1), phone prefixes, regions | `currency` | [docs](./country/docs/design.md) |
+| `party` | People and organizations: contacts, addresses, banks, tags, duplicates | `currency`, `country` | [docs](./party/docs/design.md) |
+| `company` | Legal entities: party link, currency, fiscal year, default | `party`, `currency` | [docs](./company/docs/design.md) |
+| `calendar` | Holiday calendars, weekends, assignments, working days | `country`, `company` | [docs](./calendar/docs/design.md) |
+| `number_sequence` | Document numbers with prefixes, resets, gapless audit | — | [docs](./number_sequence/docs/design.md) |
+| `uom` | Units by measure group, factor to reference, conversion | — | [docs](./uom/docs/design.md) |
+
+Declared in `workspace.toml` under `[workspace.plugins]`. Folders such as `attachment` / `base_components` in this tree are not workspace plugins.
+
+## Suggested load / install order
+
+Plugins that link to another plugin’s model must load after it (`--sync-models` needs the target already in the catalog):
+
+1. `currency`
+2. `country`
+3. `party`
+4. `company`
+5. `calendar`
+6. `number_sequence` and `uom` (no dependencies; any time after catalog setup)
+
+Example from the Aether repo:
 
 ```sh
 B=../plugins/base
@@ -26,19 +45,16 @@ aether --load-plugin $B/currency
 aether --sync-models $B/country  && aether --load-plugin $B/country
 aether --sync-models $B/party    && aether --load-plugin $B/party
 aether --sync-models $B/company  && aether --load-plugin $B/company
+aether --sync-models $B/calendar && aether --load-plugin $B/calendar
+aether --load-plugin $B/number_sequence
+aether --load-plugin $B/uom
 
-aether --install-plugin company --org acme        # installs currency, country and party first
-aether --command currency.seed --org acme         # 65 currencies; USD becomes the base
-aether --command country.seed  --org acme         # 84 countries, each linked to its currency
-aether --command company.create --org acme --arg name="Acme Ltd" --arg currency_code=USD
+aether --install-plugin company --org acme   # pulls currency, country, party first
+aether --command currency.seed --org acme
+aether --command country.seed  --org acme
+aether --command uom.seed      --org acme
 ```
 
-After editing a plugin, `aether --load-plugin` it again and `aether --upgrade-plugin <name> --org acme` (or run the
-server with `--watch`, which does both).
+## Relation to CRM / ERP / HRMS
 
-## What is not here
-
-Products and mail were planned for this workspace and are not built.
-The themes and the `attachment` plugin that were in this folder before are no longer here.
-
-`number_sequence` is called by other plugins with `plugins::invoke("number_sequence", "next_number", #{ code: "inv", date: "2026-10-05" })`. Every period has its own counter row, so a yearly reset never races the old counter, and a gapless sequence records each number so `audit` can list the ones nobody explained (`void_number` explains one).
+These plugins are foundation only: shared currency, geography, party identity, legal entity, calendars, numbering, and units. Domain workspaces (CRM pipelines, accounting, leave/payroll, inventory) depend on them and must not duplicate those catalogs. Login accounts and RBAC stay in the kernel; a party may optionally link to a user.

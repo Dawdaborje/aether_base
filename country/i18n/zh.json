@@ -15,7 +15,8 @@
   "phone_prefix": "电话区号",
   "region": "地区",
   "regions": "地区",
-  "seed_hint.country": "请运行：aether --command country.seed --org <organization>",
   "save": "保存",
-  "saved": "已保存"
+  "saved": "已保存",
+  "seed_hint.country": "请运行：aether --command country.seed --org <organization>",
+  "use_new_to_add": "使用“新建”添加。"
 }

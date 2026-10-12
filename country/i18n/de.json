@@ -15,7 +15,8 @@
   "phone_prefix": "Vorwahl",
   "region": "Region",
   "regions": "Regionen",
-  "seed_hint.country": "Führen Sie aus: aether --command country.seed --org <organization>",
   "save": "Speichern",
-  "saved": "Gespeichert"
+  "saved": "Gespeichert",
+  "seed_hint.country": "Führen Sie aus: aether --command country.seed --org <organization>",
+  "use_new_to_add": "Nutzen Sie Neu, um einen Eintrag hinzuzufügen."
 }

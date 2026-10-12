@@ -1,11 +1,10 @@
 //! Holiday calendars: which days an organization, a branch or a person does not work.
 //!
-//! Following what Frappe and ERPNext do well: a calendar owns its weekly days off, holidays have a
-//! kind (public, optional, company) and may be half days, and calendars are **assigned over time**
-//! (the one in force on a day is the latest assigned on or before it), with a more specific subject
-//! (a person) winning over a general one (their company). Following Odoo: a calendar can belong to a
-//! country. Other plugins ask `resolve_calendar` which calendar applies to someone, and
-//! `calendar_span` what its days off are; they do the counting.
+//! A calendar owns its weekly days off; holidays have a kind (public, optional, company) and may be
+//! half days. Calendars are **assigned over time** (the one in force on a day is the latest assigned
+//! on or before it), with a more specific subject (a person) winning over a general one (their
+//! company). A calendar can belong to a country. Other plugins ask `resolve_calendar` which calendar
+//! applies to someone, and `calendar_span` what its days off are; they do the counting.
 
 use aether_sdk::dates::{self, format_date, holiday_dates, parse_date, Calendar, Datelike, HolidayRow, NaiveDate};
 use aether_sdk::db::Filter;
@@ -145,7 +144,7 @@ fn assign(input: Assign) -> Result<Record> {
 
 /// The calendar in force for the first subject that has one. Within a subject, the latest
 /// assignment starting on or before the day; a day before the first assignment uses the earliest
-/// (Frappe does the same, so nobody is left without a calendar by an assignment dated too late).
+/// (so nobody is left without a calendar by an assignment dated too late).
 fn resolve(input: Resolve) -> Result<Value> {
     let on = match &input.on {
         Some(day) => format_date(parse_date(day)?),

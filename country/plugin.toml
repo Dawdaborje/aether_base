@@ -1,5 +1,6 @@
 [plugin]
 name = "country"
+icon_path = "assets/logo.svg"
 label = "Countries"
 version = "0.1.0"
 description = "Countries (ISO 3166-1), their phone prefixes, usual currencies and regions."

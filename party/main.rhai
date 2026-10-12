@@ -1,8 +1,8 @@
 // Parties: the people and organizations the business deals with.
 //
 // A party is a person or an organization. A person may belong to an organization (`parent`), which is
-// how an organization's contacts are kept. Roles (customer, supplier, employee, bank) are flags so
-// that lists can be filtered by them; other plugins add what they need by linking to a party.
+// How an organization's contacts are kept. Roles (customer, supplier, employee, bank) are flags so
+// That lists can be filtered by them; other plugins add what they need by linking to a party.
 //
 // Records are never deleted, only archived, because other records point at them.
 
@@ -429,8 +429,7 @@ fn untag_party(input) {
 
 // ---- merging duplicates
 //
-// Odoo's partner merge rewrites every foreign key in the database from a wizard that knows all the models, and
-// deletes the losers. Frappe's merge renames the document and runs a link search over every doctype. A plugin here
+// deletes the losers. A plugin here
 // cannot touch another plugin's data, so the merge is split along that line: this plugin moves what it owns
 // (addresses, bank accounts, contacts, tags), fills the blanks of the surviving party from the other one, archives
 // the other one pointing at the survivor, and announces `merged` so each plugin repoints its own links. Nothing is

@@ -1,7 +1,6 @@
 {
   "active": "Inatumika",
   "add_currency": "Ongeza sarafu",
-  "seed_hint.currency": "Ongeza moja hapo juu, au endesha: aether --command currency.seed --org <organization>",
   "base": "Msingi",
   "base_currency": "Sarafu ya msingi",
   "code": "Msimbo",
@@ -16,5 +15,7 @@
   "rates": "Viwango",
   "save": "Hifadhi",
   "saved": "Imehifadhiwa",
-  "symbol": "Alama"
+  "seed_hint.currency": "Ongeza moja hapo juu, au endesha: aether --command currency.seed --org <organization>",
+  "symbol": "Alama",
+  "use_new_to_add": "Tumia Mpya kuongeza moja."
 }

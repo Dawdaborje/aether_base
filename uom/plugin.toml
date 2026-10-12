@@ -1,5 +1,6 @@
 [plugin]
 name = "uom"
+icon_path = "assets/logo.svg"
 label = "Units of measure"
 version = "0.1.0"
 description = "Units grouped by what they measure, with conversion and per-unit rounding."

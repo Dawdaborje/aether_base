@@ -1,13 +1,9 @@
 // Document numbers.
 //
-// What the sources do and what is different here:
-//  * Odoo's ir.sequence keeps one counter on the sequence row plus date ranges as sub-rows created on demand, and
-//    its "no gap" mode takes a row lock; the standard mode silently skips numbers.
-//  * Frappe's naming series is a counter row per prefix, and a failed insert still burns the number.
-// Here every period has its own counter row, so a yearly or monthly reset is a new row and never a race with the
-// old one, and the increment is the kernel's atomic one. A sequence marked gapless also records each number it
-// issues; a number whose document failed is voided with a reason instead of vanishing, and `audit_gaps` lists every
-// hole that nobody explained.
+// Every period has its own counter row, so a yearly or monthly reset is a new row and never a race
+// with the old one, and the increment is the kernel's atomic one. A sequence marked gapless also
+// records each number it issues; a number whose document failed is voided with a reason instead of
+// vanishing, and `audit_gaps` lists every hole that nobody explained.
 
 private fn blank(v) { v == () || v == "" }
 

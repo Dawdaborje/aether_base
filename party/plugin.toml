@@ -1,12 +1,13 @@
 [plugin]
 name = "party"
+icon_path = "assets/logo.svg"
 label = "Parties"
 version = "0.2.0"
 description = "People and organizations you deal with: customers, suppliers, employees' contacts, banks."
 long_description = """
 One record for every person or organization the business has dealings with, with its addresses, bank accounts,
 contacts and tags. Other plugins (CRM, accounting, HR) link to a party instead of keeping their own copy of a name
-and an email. The equivalent of Odoo's res.partner, kept out of the kernel: the kernel knows login accounts, a party is
+and an email. Parties are kept out of the kernel: the kernel knows login accounts, a party is
 business data. Written in Rhai.
 """
 authors = [{ name = "Aether", email = "hello@aether.local" }]

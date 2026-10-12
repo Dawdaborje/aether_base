@@ -1,7 +1,6 @@
 {
   "active": "启用",
   "add_currency": "添加货币",
-  "seed_hint.currency": "请在上方添加，或运行：aether --command currency.seed --org <organization>",
   "base": "基准",
   "base_currency": "基准货币",
   "code": "代码",
@@ -16,5 +15,7 @@
   "rates": "汇率",
   "save": "保存",
   "saved": "已保存",
-  "symbol": "符号"
+  "seed_hint.currency": "请在上方添加，或运行：aether --command currency.seed --org <organization>",
+  "symbol": "符号",
+  "use_new_to_add": "使用“新建”添加。"
 }

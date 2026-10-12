@@ -1,5 +1,6 @@
 [plugin]
 name = "calendar"
+icon_path = "assets/logo.svg"
 label = "Holiday calendars"
 version = "0.1.0"
 description = "Weekly days off and holidays, assigned to companies, branches and people over time."

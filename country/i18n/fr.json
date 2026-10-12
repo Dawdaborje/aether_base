@@ -15,7 +15,8 @@
   "phone_prefix": "Indicatif téléphonique",
   "region": "Région",
   "regions": "Régions",
-  "seed_hint.country": "Exécutez : aether --command country.seed --org <organization>",
   "save": "Enregistrer",
-  "saved": "Enregistré"
+  "saved": "Enregistré",
+  "seed_hint.country": "Exécutez : aether --command country.seed --org <organization>",
+  "use_new_to_add": "Utilisez Nouveau pour en ajouter un."
 }

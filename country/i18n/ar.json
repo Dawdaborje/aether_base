@@ -15,7 +15,8 @@
   "phone_prefix": "مفتاح الهاتف",
   "region": "المنطقة",
   "regions": "المناطق",
-  "seed_hint.country": "نفّذ: aether --command country.seed --org <organization>",
   "save": "حفظ",
-  "saved": "تم الحفظ"
+  "saved": "تم الحفظ",
+  "seed_hint.country": "نفّذ: aether --command country.seed --org <organization>",
+  "use_new_to_add": "استخدم جديد لإضافة واحد."
 }

@@ -1,7 +1,6 @@
 {
   "active": "نشط",
   "add_currency": "إضافة عملة",
-  "seed_hint.currency": "أضف واحدة أعلاه، أو نفّذ: aether --command currency.seed --org <organization>",
   "base": "الأساس",
   "base_currency": "العملة الأساسية",
   "code": "الرمز",
@@ -16,5 +15,7 @@
   "rates": "الأسعار",
   "save": "حفظ",
   "saved": "تم الحفظ",
-  "symbol": "الرمز"
+  "seed_hint.currency": "أضف واحدة أعلاه، أو نفّذ: aether --command currency.seed --org <organization>",
+  "symbol": "الرمز",
+  "use_new_to_add": "استخدم جديد لإضافة واحد."
 }

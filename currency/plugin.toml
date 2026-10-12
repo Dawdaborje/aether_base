@@ -1,5 +1,6 @@
 [plugin]
 name = "currency"
+icon_path = "assets/logo.svg"
 label = "Currencies"
 version = "0.3.0"
 description = "Currencies and exchange rates for business documents."

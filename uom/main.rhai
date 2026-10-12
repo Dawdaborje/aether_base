@@ -1,10 +1,8 @@
 // Units of measure.
 //
-// Odoo 19 chains each unit to another unit with a relative factor, so a conversion walks a tree and the precision
-// is one setting for every unit. Frappe stores a loose pair table (from, to, value) that has to be filled for each
-// combination and has no notion of a family of units. Here a unit belongs to a group (length, mass, ...), holds one
-// factor to that group's reference unit, and carries its own rounding. Two units convert only when they share a
-// group, through the reference unit, so a group of n units needs n numbers and not n * (n - 1).
+// A unit belongs to a group (length, mass, ...), holds one factor to that group's reference unit,
+// and carries its own rounding. Two units convert only when they share a group, through the
+// reference unit, so a group of n units needs n numbers and not n * (n - 1).
 
 private fn blank(v) { v == () || v == "" }
 

@@ -1,7 +1,6 @@
 {
   "active": "Activo",
   "add_currency": "Añadir moneda",
-  "seed_hint.currency": "Añada una arriba, o ejecute: aether --command currency.seed --org <organization>",
   "base": "Base",
   "base_currency": "Moneda base",
   "code": "Código",
@@ -16,5 +15,7 @@
   "rates": "Tasas",
   "save": "Guardar",
   "saved": "Guardado",
-  "symbol": "Símbolo"
+  "seed_hint.currency": "Añada una arriba, o ejecute: aether --command currency.seed --org <organization>",
+  "symbol": "Símbolo",
+  "use_new_to_add": "Use Nuevo para añadir uno."
 }

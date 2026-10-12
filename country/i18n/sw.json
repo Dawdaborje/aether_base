@@ -15,7 +15,8 @@
   "phone_prefix": "Msimbo wa simu",
   "region": "Eneo",
   "regions": "Maeneo",
-  "seed_hint.country": "Endesha: aether --command country.seed --org <organization>",
   "save": "Hifadhi",
-  "saved": "Imehifadhiwa"
+  "saved": "Imehifadhiwa",
+  "seed_hint.country": "Endesha: aether --command country.seed --org <organization>",
+  "use_new_to_add": "Tumia Mpya kuongeza moja."
 }

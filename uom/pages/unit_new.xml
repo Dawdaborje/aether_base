@@ -1,0 +1,9 @@
+<page route="/base/units/new" title="%add_unit%" model="uom">
+  <view type="form" function="create_unit" submit="%add_unit%" success="%unit_added%" redirect="/base/units">
+    <field name="code" label="%code%" required="true"/>
+    <field name="name" label="%name%" required="true"/>
+    <field name="group" label="%group%" required="true"/>
+    <field name="factor" label="%factor%" fieldType="number"/>
+    <field name="decimals" label="%decimals%" fieldType="integer"/>
+  </view>
+</page>

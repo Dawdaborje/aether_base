@@ -1,5 +1,6 @@
 [plugin]
 name = "number_sequence"
+icon_path = "assets/logo.svg"
 label = "Number sequences"
 version = "0.1.0"
 description = "Document numbers with prefixes, per-period counters and an audit of gaps."

@@ -15,7 +15,8 @@
   "phone_prefix": "Phone prefix",
   "region": "Region",
   "regions": "Regions",
-  "seed_hint.country": "Run: aether --command country.seed --org <organization>",
   "save": "Save",
-  "saved": "Saved"
+  "saved": "Saved",
+  "seed_hint.country": "Run: aether --command country.seed --org <organization>",
+  "use_new_to_add": "Use New to add one."
 }

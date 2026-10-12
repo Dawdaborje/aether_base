@@ -1,12 +1,5 @@
 <page route="/base/countries" title="%countries%" model="country">
-  <view type="form" function="create_country" submit="%add_country%" success="%country_added%">
-    <field name="code" label="%code_2_letters%" required="true"/>
-    <field name="name" label="%name%" required="true"/>
-    <field name="code3" label="%code_3_letters%"/>
-    <field name="phone_prefix" label="%phone_prefix%"/>
-    <field name="currency_code" label="%currency_code%"/>
-  </view>
-  <view type="list" model="country" source="list_countries" open="/base/countries/{id}">
+  <view type="list" model="country" source="list_countries" open="/base/countries/{id}" create="/base/countries/new" create_label="%add_country%">
     <search/>
     <columns>
       <column field="code" label="%code%"/>
@@ -14,6 +7,6 @@
       <column field="phone_prefix" label="%phone%"/>
       <column field="active" label="%active%" fieldType="boolean"/>
     </columns>
-    <empty title="%no_countries_yet%" description="%seed_hint.country%"/>
+    <empty title="%no_countries_yet%" description="%use_new_to_add%"/>
   </view>
 </page>

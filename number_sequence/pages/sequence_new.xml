@@ -1,0 +1,11 @@
+<page route="/base/sequences/new" title="%add_sequence%" model="number_sequence">
+  <view type="form" function="create_sequence" submit="%add_sequence%" success="%sequence_added%" redirect="/base/sequences">
+    <field name="code" label="%code%" required="true"/>
+    <field name="label" label="%label%" required="true"/>
+    <field name="prefix" label="%prefix%"/>
+    <field name="suffix" label="%suffix%"/>
+    <field name="padding" label="%padding%" fieldType="integer"/>
+    <field name="reset" label="%reset%"/>
+    <field name="gapless" label="%gapless%" fieldType="boolean"/>
+  </view>
+</page>

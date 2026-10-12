@@ -1,12 +1,5 @@
 <page route="/base/parties" title="%parties%" model="party">
-  <view type="form" function="create_person" submit="%add_person%" success="%person_added%">
-    <field name="name" label="%name%" required="true"/>
-    <field name="email" label="%email%"/>
-    <field name="phone" label="%phone%"/>
-    <field name="is_customer" label="%customer%" fieldType="boolean"/>
-    <field name="is_supplier" label="%supplier%" fieldType="boolean"/>
-  </view>
-  <view type="list" model="party" source="list_parties" open="/base/parties/{id}">
+  <view type="list" model="party" source="list_parties" open="/base/parties/{id}" create="/base/parties/new" create_label="%add_person%">
     <search/>
     <columns>
       <column field="display_name" label="%name%"/>
@@ -19,6 +12,6 @@
     <actions>
       <action name="archive" label="%archive%" function="archive" confirm="%archive_this_party%" danger="true"/>
     </actions>
-    <empty title="%no_parties_yet%" description="%add_the_first_person_above%"/>
+    <empty title="%no_parties_yet%" description="%use_new_to_add%"/>
   </view>
 </page>
