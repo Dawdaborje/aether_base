@@ -63,9 +63,18 @@ fn create_unit(input) {
 }
 
 fn list_units(input) {
+    let input = if input == () { #{} } else { input };
     let filter = #{ active: true };
-    if input != () && !blank(input.group) { filter.group = group_by_code(input.group).id; }
-    db::find("uom", #{ filter: filter, order: "code", limit: 500 })
+    if !blank(input.group) { filter.group = group_by_code(input.group).id; }
+    if input.filter != () && type_of(input.filter) == "map" && input.filter.keys().len() > 0 {
+        filter = #{ "and": [filter, input.filter] };
+    }
+    let q = if !blank(input.q) { input.q } else if !blank(input.text) { input.text } else { "" };
+    let fields = if input.search_fields != () { input.search_fields } else if input.fields != () { input.fields } else { ["code", "name"] };
+    let limit = if input.limit == () { 10 } else { input.limit };
+    let offset = if input.offset == () { 0 } else { input.offset };
+    let order = if blank(input.order) { "code" } else { input.order };
+    db::search("uom", #{ q: q, fields: fields, filter: filter, limit: limit, offset: offset, order: order })
 }
 
 fn list_groups(input) { db::find("uom_group", #{ order: "code", limit: 100 }) }

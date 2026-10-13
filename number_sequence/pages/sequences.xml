@@ -1,6 +1,6 @@
 <page route="/base/sequences" title="%sequences%" model="number_sequence">
   <view type="list" model="number_sequence" source="list_sequences" create="/base/sequences/new" create_label="%add_sequence%">
-    <search/>
+    <search fields="code,name,prefix"/>
     <columns>
       <column field="code" label="%code%"/>
       <column field="label" label="%label%"/>

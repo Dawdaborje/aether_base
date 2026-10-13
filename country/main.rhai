@@ -8,6 +8,16 @@ private fn or_empty(input) {
     if input == () { #{} } else { input }
 }
 
+private fn blank(value) {
+    value == () || value == ""
+}
+
+private fn map_has(m, key) {
+    if m == () || type_of(m) != "map" { return false; }
+    for k in m.keys() { if k == key { return true; } }
+    false
+}
+
 private fn letters(text, count, name) {
     if type_of(text) != "string" { fail(name + " is required"); }
     let t = text.to_upper();
@@ -76,8 +86,17 @@ fn get_country(input) {
 fn list_countries(input) {
     let input = or_empty(input);
     let filter = #{};
-    if input.all != true { filter.active = true; }
-    db::find("country", #{ filter: filter, order: "name", limit: 400 })
+    // Default to active only when the Filters menu did not pick Active/Inactive.
+    if input.all != true && !map_has(input.filter, "active") { filter.active = true; }
+    if input.filter != () && type_of(input.filter) == "map" && input.filter.keys().len() > 0 {
+        if filter.keys().len() == 0 { filter = input.filter; } else { filter = #{ "and": [filter, input.filter] }; }
+    }
+    let q = if !blank(input.q) { input.q } else if !blank(input.text) { input.text } else { "" };
+    let fields = if input.search_fields != () { input.search_fields } else if input.fields != () { input.fields } else { ["code", "name", "code3"] };
+    let limit = if input.limit == () { 10 } else { input.limit };
+    let offset = if input.offset == () { 0 } else { input.offset };
+    let order = if blank(input.order) { "name" } else { input.order };
+    db::search("country", #{ q: q, fields: fields, filter: filter, limit: limit, offset: offset, order: order })
 }
 
 // ---- regions (states, provinces, ...)

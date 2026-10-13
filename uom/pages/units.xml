@@ -1,6 +1,6 @@
 <page route="/base/units" title="%units%" model="uom">
   <view type="list" model="uom" source="list_units" create="/base/units/new" create_label="%add_unit%">
-    <search/>
+    <search fields="code,name"/>
     <columns>
       <column field="code" label="%code%"/>
       <column field="name" label="%name%"/>

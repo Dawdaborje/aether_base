@@ -4,7 +4,7 @@
     <field name="tax_id" label="%tax_or_registration_number%"/>
     <field name="email" label="%email%"/>
     <field name="phone" label="%phone%"/>
-    <field name="currency_code" label="%currency_code%"/>
+    <field name="currency_code" label="%currency_code%" fieldType="link" source="list_currency_codes" optionLabel="display_name" entity="currencies"/>
     <field name="fiscal_year_start_month" label="%fiscal_year_starts_in_month%" fieldType="integer"/>
   </view>
 </page>

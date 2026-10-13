@@ -81,6 +81,16 @@ private fn or_empty(input) {
     if input == () { #{} } else { input }
 }
 
+private fn blank(value) {
+    value == () || value == ""
+}
+
+private fn map_has(m, key) {
+    if m == () || type_of(m) != "map" { return false; }
+    for k in m.keys() { if k == key { return true; } }
+    false
+}
+
 // ---- currencies
 
 fn create_currency(input) {
@@ -119,8 +129,16 @@ fn get_currency(input) {
 fn list_currencies(input) {
     let input = or_empty(input);
     let filter = #{};
-    if input.all != true { filter.active = true; }
-    db::find("currency", #{ filter: filter, order: "code", limit: 500 })
+    if input.all != true && !map_has(input.filter, "active") { filter.active = true; }
+    if input.filter != () && type_of(input.filter) == "map" && input.filter.keys().len() > 0 {
+        if filter.keys().len() == 0 { filter = input.filter; } else { filter = #{ "and": [filter, input.filter] }; }
+    }
+    let q = if !blank(input.q) { input.q } else if !blank(input.text) { input.text } else { "" };
+    let fields = if input.search_fields != () { input.search_fields } else if input.fields != () { input.fields } else { ["code", "name", "symbol"] };
+    let limit = if input.limit == () { 10 } else { input.limit };
+    let offset = if input.offset == () { 0 } else { input.offset };
+    let order = if blank(input.order) { "code" } else { input.order };
+    db::search("currency", #{ q: q, fields: fields, filter: filter, limit: limit, offset: offset, order: order })
 }
 
 fn set_active(input) {
@@ -232,4 +250,40 @@ fn seed_currencies(input) {
     let base = get_base(#{});
     let base_code = if base == () { set_base(#{ code: "USD" }) } else { base.code };
     #{ created: created, already_there: had, base: base_code }
+}
+
+// ---- Desk demo data
+
+private fn demo_count(input) {
+    let n = if input.count == () { 10 } else { input.count };
+    if type_of(n) == "f64" { n = n.to_int(); }
+    if n < 1 { n = 1; }
+    if n > 10000 { n = 10000; }
+    n
+}
+
+fn generate_demo_currency_rate(input) {
+    let input = or_empty(input);
+    let n = demo_count(input);
+    // Prefer seeded non-base currencies; create a few fake ones if the catalog is empty.
+    seed_currencies(#{});
+    let all = db::find("currency", #{ filter: #{ active: true }, limit: 200 });
+    let codes = [];
+    for c in all {
+        if c.is_base != true { codes.push(c.code); }
+    }
+    if codes.len() == 0 { fail("seed currencies first so there are rates to set"); }
+    let ids = [];
+    let i = 0;
+    while i < n {
+        let code = codes[i % codes.len()];
+        // Spread dates backwards from today so each count is a distinct day when possible.
+        let day = today();
+        // Use a synthetic day offset via string suffix only when repeating the same code.
+        let rate = 1.05 + (i % 50).to_float() * 0.01;
+        let row = set_rate(#{ code: code, rate: rate, date: day });
+        ids.push(row.id);
+        i += 1;
+    }
+    #{ created: ids.len(), ids: ids, note: "rates for today; repeating count updates the same day per currency" }
 }

@@ -1,6 +1,7 @@
 <page route="/base/companies" title="%companies%" model="company">
   <view type="list" model="company" source="list_companies" open="/base/companies/{id}" create="/base/companies/new" create_label="%add_company%">
-    <search/>
+    <search fields="name"/>
+    <filter field="is_active" label="%active%" options="Active=true,Inactive=false"/>
     <columns>
       <column field="name" label="%name%"/>
       <column field="is_default" label="%default%" fieldType="boolean"/>

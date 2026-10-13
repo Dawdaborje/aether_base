@@ -2,11 +2,12 @@
 name = "currency"
 icon_path = "assets/logo.svg"
 label = "Currencies"
-version = "0.3.0"
+version = "0.3.2"
 description = "Currencies and exchange rates for business documents."
 long_description = """
 Currencies with their rates against one base currency, and conversion between any two of them at a
-given date. Written in Rhai: the plugin is the single file `main.rhai`.
+given date. Install/upgrade seeds ~65 currencies in common use (USD as base). Written in Rhai:
+the plugin is the single file `main.rhai`.
 """
 authors = [{ name = "Aether", email = "hello@aether.local" }]
 dependencies = []
@@ -26,6 +27,15 @@ name = "rate_changed"
 name = "seed"
 function = "seed_currencies"
 help = "Create the currencies in common use (idempotent); the first run also makes USD the base currency"
+on_install = true
+on_upgrade = true
+
+[[command]]
+name = "demo_currency_rate"
+function = "generate_demo_currency_rate"
+help = "Generate demo exchange rates for non-base currencies"
+demo_model = "currency_rate"
+args = [{ name = "count", type = "int", default = 10 }]
 
 [app]
 icon = "banknote"

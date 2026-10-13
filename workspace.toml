@@ -15,6 +15,8 @@ website = "https://github.com/Dawdaborje"
 categories = ["base"]
 group_label = "Base"
 group_icon = "./assets/base.svg"
+# Foundation modules are first-class tiles on Apps home (not one Base folder).
+launcher = "flat"
 dependencies = []
 
 [workspace.plugins]

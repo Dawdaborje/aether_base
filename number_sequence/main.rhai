@@ -123,7 +123,16 @@ fn create_sequence(input) {
 
 fn get_sequence(input) { must_sequence(clean_code(input.code), scope_of(input)) }
 
-fn list_sequences(input) { db::find("number_sequence", #{ order: "code", limit: 500 }) }
+fn list_sequences(input) {
+    let input = if input == () { #{} } else { input };
+    let filter = if input.filter != () && type_of(input.filter) == "map" { input.filter } else { #{} };
+    let q = if !blank(input.q) { input.q } else if !blank(input.text) { input.text } else { "" };
+    let fields = if input.search_fields != () { input.search_fields } else if input.fields != () { input.fields } else { ["code", "name", "prefix"] };
+    let limit = if input.limit == () { 10 } else { input.limit };
+    let offset = if input.offset == () { 0 } else { input.offset };
+    let order = if blank(input.order) { "code" } else { input.order };
+    db::search("number_sequence", #{ q: q, fields: fields, filter: filter, limit: limit, offset: offset, order: order })
+}
 
 // ---- numbers
 

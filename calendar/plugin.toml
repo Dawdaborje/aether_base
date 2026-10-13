@@ -2,18 +2,19 @@
 name = "calendar"
 icon_path = "assets/logo.svg"
 label = "Holiday calendars"
-version = "0.1.0"
+version = "0.1.1"
 description = "Weekly days off and holidays, assigned to companies, branches and people over time."
 long_description = """
 A holiday calendar owns its weekly days off and its holidays (public, optional or company; whole or half
 days; one-off or yearly). Calendars are assigned to a company, a branch or a person from a day, and the
 one in force on a day is the latest assigned on or before it, a more specific subject winning over a
 general one. Other plugins (leave, attendance, payroll) ask which calendar applies and what its days off
-are. Written in Rust.
+are. Install/upgrade seeds a standard weekend calendar and common public holidays for several countries.
+Written in Rust.
 """
 authors = [{ name = "Aether", email = "hello@aether.local" }]
 dependencies = ["country", "company"]
-capabilities = ["db::query", "db::mutate"]
+capabilities = ["db::query", "db::mutate", "plugins::call"]
 access_models = [
   { name = "holiday_calendar", permissions = ["read", "write"] },
   { name = "holiday", permissions = ["read", "write"] },
@@ -21,6 +22,13 @@ access_models = [
 ]
 is_builtin = true
 wasm_file = "out/plugin.wasm"
+
+[[command]]
+name = "seed"
+function = "seed_calendars"
+help = "Create standard and country holiday calendars with common public holidays (idempotent)"
+on_install = true
+on_upgrade = true
 
 [[roles]]
 name = "calendar_manager"

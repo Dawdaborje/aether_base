@@ -12,6 +12,12 @@ private fn blank(value) {
     value == () || value == ""
 }
 
+private fn map_has(m, key) {
+    if m == () || type_of(m) != "map" { return false; }
+    for k in m.keys() { if k == key { return true; } }
+    false
+}
+
 private fn leap(year) {
     year % 4 == 0 && (year % 100 != 0 || year % 400 == 0)
 }
@@ -122,14 +128,44 @@ fn update_company(input) {
 }
 
 fn get_company(input) {
-    must_get(input.id)
+    let c = must_get(input.id);
+    // Forms edit `currency_code`; the store keeps a link.
+    if c.currency != () {
+        let cur = through("currency", "get_currency", #{ id: c.currency });
+        if cur != () { c.currency_code = cur.code; }
+    }
+    c
+}
+
+// Rows for SearchPicker: `id` is the ISO code so create/update receive `currency_code`.
+fn list_currency_codes(input) {
+    let answer = through("currency", "list_currencies", or_empty(input));
+    let rows = if type_of(answer) == "map" && answer.rows != () { answer.rows } else { answer };
+    let out = [];
+    for r in rows {
+        out.push(#{
+            id: r.code,
+            code: r.code,
+            name: r.name,
+            display_name: r.code + " — " + r.name
+        });
+    }
+    out
 }
 
 fn list_companies(input) {
     let input = or_empty(input);
     let filter = #{};
-    if input.all != true { filter.is_active = true; }
-    db::find("company", #{ filter: filter, order: "name", limit: 200 })
+    if input.all != true && !map_has(input.filter, "is_active") { filter.is_active = true; }
+    if input.filter != () && type_of(input.filter) == "map" && input.filter.keys().len() > 0 {
+        if filter.keys().len() == 0 { filter = input.filter; } else { filter = #{ "and": [filter, input.filter] }; }
+    }
+    let q = if !blank(input.q) { input.q } else if !blank(input.text) { input.text } else { "" };
+    let fields = if input.search_fields != () { input.search_fields } else if input.fields != () { input.fields } else { ["name"] };
+    let limit = if input.limit == () { 10 } else { input.limit };
+    let offset = if input.offset == () { 0 } else { input.offset };
+    let order = if blank(input.order) { "name" } else { input.order };
+    db::search("company", #{ q: q, fields: fields, filter: filter, limit: limit, offset: offset, order: order })
 }
 
 fn get_default_company(input) {
@@ -189,4 +225,33 @@ fn fiscal_year(input) {
         start: start_year.to_string() + "-" + two(sm) + "-" + two(start_day),
         end: end_year.to_string() + "-" + two(end_month) + "-" + two(end_day)
     }
+}
+
+// ---- Desk demo data
+
+private fn demo_count(input) {
+    let n = if input.count == () { 10 } else { input.count };
+    if type_of(n) == "f64" { n = n.to_int(); }
+    if n < 1 { n = 1; }
+    if n > 10000 { n = 10000; }
+    n
+}
+
+fn generate_demo_company(input) {
+    let input = or_empty(input);
+    let n = demo_count(input);
+    let names = ["Northwind Trading", "Acme Holdings", "Sunrise Retail", "Harbor Logistics", "Cedar Health", "Atlas Manufacturing", "Riverbank Finance", "Summit Media", "Lakeside Foods", "Pioneer Energy"];
+    let ids = [];
+    let i = 0;
+    while i < n {
+        let name = names[i % names.len()];
+        if i >= names.len() { name = name + " " + (i + 1).to_string(); }
+        // Unique name: create_company refuses duplicates.
+        let stamp = context::get().now.sub_string(0, 4) + context::get().now.sub_string(5, 2) + context::get().now.sub_string(8, 2);
+        let unique = name + " (" + stamp + "-" + (i + 1).to_string() + ")";
+        let created = create_company(#{ name: unique, currency_code: "USD" });
+        ids.push(created.id);
+        i += 1;
+    }
+    #{ created: ids.len(), ids: ids }
 }

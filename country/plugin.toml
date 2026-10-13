@@ -2,12 +2,12 @@
 name = "country"
 icon_path = "assets/logo.svg"
 label = "Countries"
-version = "0.1.0"
+version = "0.1.1"
 description = "Countries (ISO 3166-1), their phone prefixes, usual currencies and regions."
 long_description = """
 The list of countries addresses, taxes and shipping refer to, with each country's usual currency (a link to
-the `currency` plugin). Run `aether --command country.seed --org <organization>` to create the 54 African
-countries and the main economies of the rest of the world. Written in Rhai.
+the `currency` plugin). Install/upgrade runs `seed` automatically (54 African countries and the main
+economies elsewhere); you can also run `aether --command country.seed --org <organization>`. Written in Rhai.
 """
 authors = [{ name = "Aether", email = "hello@aether.local" }]
 dependencies = ["currency"]
@@ -23,6 +23,8 @@ script = "main.rhai"
 name = "seed"
 function = "seed_countries"
 help = "Create the African countries and the main economies (idempotent); needs the currencies: run currency.seed first"
+on_install = true
+on_upgrade = true
 
 [app]
 icon = "globe"

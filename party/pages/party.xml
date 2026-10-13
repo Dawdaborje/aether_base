@@ -8,6 +8,7 @@
     <field name="tax_id" label="%tax_or_registration_number%"/>
     <field name="job_title" label="%job_title%"/>
     <field name="language" label="%language%"/>
+    <field name="currency_code" label="%currency_code%" fieldType="link" source="list_currency_codes" optionLabel="display_name" entity="currencies"/>
     <field name="is_customer" label="%customer%" fieldType="boolean"/>
     <field name="is_supplier" label="%supplier%" fieldType="boolean"/>
     <field name="is_employee" label="%employee%" fieldType="boolean"/>

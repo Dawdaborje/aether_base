@@ -2,7 +2,7 @@
 name = "party"
 icon_path = "assets/logo.svg"
 label = "Parties"
-version = "0.2.0"
+version = "0.2.1"
 description = "People and organizations you deal with: customers, suppliers, employees' contacts, banks."
 long_description = """
 One record for every person or organization the business has dealings with, with its addresses, bank accounts,
@@ -50,6 +50,13 @@ args = [
 name = "find_duplicates"
 function = "find_duplicates"
 help = "Group active parties that share a tax number, an email or a phone number"
+
+[[command]]
+name = "demo_party"
+function = "generate_demo_party"
+help = "Generate demo person parties"
+demo_model = "party"
+args = [{ name = "count", type = "int", default = 10 }]
 
 [app]
 icon = "contact"

@@ -2,7 +2,7 @@
 name = "company"
 icon_path = "assets/logo.svg"
 label = "Companies"
-version = "0.1.0"
+version = "0.1.1"
 description = "The legal entities that keep the books: their party record, currency and fiscal year."
 long_description = """
 A company is the legal entity an organization's documents are issued by. Its name, tax number, addresses and
@@ -30,6 +30,13 @@ args = [
   { name = "fiscal_year_start_month", type = "int", default = 1 },
   { name = "fiscal_year_start_day", type = "int", default = 1 },
 ]
+
+[[command]]
+name = "demo_company"
+function = "generate_demo_company"
+help = "Generate demo companies"
+demo_model = "company"
+args = [{ name = "count", type = "int", default = 10 }]
 
 [app]
 icon = "building-2"

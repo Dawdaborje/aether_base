@@ -1,6 +1,9 @@
 <page route="/base/parties" title="%parties%" model="party">
   <view type="list" model="party" source="list_parties" open="/base/parties/{id}" create="/base/parties/new" create_label="%add_person%">
-    <search/>
+    <search fields="display_name,email,phone,mobile,tax_id"/>
+    <filter field="kind" label="%kind%" options="person,organization"/>
+    <filter field="is_customer" label="%customer%" options="Yes=true,No=false"/>
+    <filter field="is_supplier" label="%supplier%" options="Yes=true,No=false"/>
     <columns>
       <column field="display_name" label="%name%"/>
       <column field="kind" label="%kind%" fieldType="badge"/>

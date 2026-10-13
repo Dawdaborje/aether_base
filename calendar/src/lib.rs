@@ -31,6 +31,79 @@ struct Listing {
     year: Option<i32>,
 }
 
+#[derive(Deserialize, Default)]
+struct ListCalendars {
+    #[serde(default)]
+    q: Option<String>,
+    #[serde(default)]
+    text: Option<String>,
+    #[serde(default)]
+    search_fields: Option<Vec<String>>,
+    #[serde(default)]
+    fields: Option<Vec<String>>,
+    #[serde(default)]
+    filter: Option<serde_json::Map<String, Value>>,
+    #[serde(default)]
+    limit: Option<u32>,
+    #[serde(default)]
+    offset: Option<u32>,
+    #[serde(default)]
+    order: Option<String>,
+    #[serde(default)]
+    all: Option<bool>,
+}
+
+fn list_calendars_page(input: ListCalendars) -> Result<Value> {
+    let mut filter = Filter::all();
+    let chip_sets_active = input
+        .filter
+        .as_ref()
+        .map(|m| m.contains_key("is_active"))
+        .unwrap_or(false);
+    if input.all != Some(true) && !chip_sets_active {
+        filter = Filter::eq("is_active", true);
+    }
+    if let Some(extra) = input.filter {
+        let chip = Filter::from_json(Value::Object(extra));
+        if !chip.matches_all() {
+            filter = if filter.matches_all() {
+                chip
+            } else {
+                filter.and(chip)
+            };
+        }
+    }
+    let needle = input
+        .q
+        .as_deref()
+        .or(input.text.as_deref())
+        .map(str::trim)
+        .filter(|s| !s.is_empty());
+    let default_fields = ["name", "weekend"];
+    let owned: Vec<String> = input
+        .search_fields
+        .clone()
+        .or(input.fields.clone())
+        .unwrap_or_default();
+    let field_refs: Vec<&str> = if owned.is_empty() {
+        default_fields.to_vec()
+    } else {
+        owned.iter().map(String::as_str).collect()
+    };
+    let order = input.order.as_deref().filter(|s| !s.is_empty()).unwrap_or("name");
+    let limit = input.limit.unwrap_or(10).clamp(1, 500);
+    let offset = input.offset.unwrap_or(0);
+    db::search(
+        "holiday_calendar",
+        needle,
+        &field_refs,
+        filter,
+        Some(order),
+        Some(limit),
+        Some(offset),
+    )
+}
+
 #[derive(Deserialize)]
 struct Assign {
     subject_kind: String,
@@ -201,6 +274,160 @@ fn span(input: Span) -> Result<Value> {
     Ok(json!({ "weekend": weekend, "holidays": out }))
 }
 
+/// Idempotent master data: a generic weekend calendar plus country calendars with
+/// common public holidays (same idea as Odoo/Frappe holiday lists). Safe to re-run.
+fn run_seed_calendars(_input: Empty) -> Result<Value> {
+    let mut created = 0u32;
+    let mut had = 0u32;
+    let mut holidays_added = 0u32;
+
+    // name, country ISO (optional), weekend, recurring public holidays (MM-DD, label)
+    let specs: &[(&str, Option<&str>, &str, &[(&str, &str)])] = &[
+        (
+            "Standard (Sat/Sun)",
+            None,
+            "sat,sun",
+            &[("01-01", "New Year's Day"), ("12-25", "Christmas Day")],
+        ),
+        (
+            "United States",
+            Some("US"),
+            "sat,sun",
+            &[
+                ("01-01", "New Year's Day"),
+                ("06-19", "Juneteenth"),
+                ("07-04", "Independence Day"),
+                ("11-11", "Veterans Day"),
+                ("12-25", "Christmas Day"),
+            ],
+        ),
+        (
+            "United Kingdom",
+            Some("GB"),
+            "sat,sun",
+            &[
+                ("01-01", "New Year's Day"),
+                ("12-25", "Christmas Day"),
+                ("12-26", "Boxing Day"),
+            ],
+        ),
+        (
+            "Nigeria",
+            Some("NG"),
+            "sat,sun",
+            &[
+                ("01-01", "New Year's Day"),
+                ("05-01", "Workers' Day"),
+                ("06-12", "Democracy Day"),
+                ("10-01", "Independence Day"),
+                ("12-25", "Christmas Day"),
+                ("12-26", "Boxing Day"),
+            ],
+        ),
+        (
+            "South Africa",
+            Some("ZA"),
+            "sat,sun",
+            &[
+                ("01-01", "New Year's Day"),
+                ("03-21", "Human Rights Day"),
+                ("04-27", "Freedom Day"),
+                ("05-01", "Workers' Day"),
+                ("06-16", "Youth Day"),
+                ("08-09", "National Women's Day"),
+                ("09-24", "Heritage Day"),
+                ("12-16", "Day of Reconciliation"),
+                ("12-25", "Christmas Day"),
+                ("12-26", "Day of Goodwill"),
+            ],
+        ),
+        (
+            "Kenya",
+            Some("KE"),
+            "sat,sun",
+            &[
+                ("01-01", "New Year's Day"),
+                ("05-01", "Labour Day"),
+                ("06-01", "Madaraka Day"),
+                ("10-10", "Huduma Day"),
+                ("10-20", "Mashujaa Day"),
+                ("12-12", "Jamhuri Day"),
+                ("12-25", "Christmas Day"),
+                ("12-26", "Boxing Day"),
+            ],
+        ),
+        (
+            "Ghana",
+            Some("GH"),
+            "sat,sun",
+            &[
+                ("01-01", "New Year's Day"),
+                ("03-06", "Independence Day"),
+                ("05-01", "May Day"),
+                ("08-04", "Founders' Day"),
+                ("09-21", "Kwame Nkrumah Memorial Day"),
+                ("12-25", "Christmas Day"),
+                ("12-26", "Boxing Day"),
+            ],
+        ),
+    ];
+
+    let year = parse_date(&today()?)?.year();
+    for (name, country_code, weekend, days) in specs {
+        let existing: Vec<Record> = db::find("holiday_calendar").filter("name", *name).limit(1).all()?;
+        let calendar = if let Some(row) = existing.into_iter().next() {
+            had += 1;
+            row
+        } else {
+            let mut data = json!({
+                "name": name,
+                "weekend": check_weekend(weekend)?.join(","),
+                "is_active": true,
+            });
+            if let Some(code) = country_code {
+                if let Ok(country) = plugins::call::<Record>("country", "get_country", &json!({ "code": code })) {
+                    if let Some(id) = country.get("id") {
+                        data["country"] = id.clone();
+                    }
+                }
+            }
+            let created_row = db::create("holiday_calendar", &data)
+                .map_err(|e| e.or("could not create a seeded calendar"))?;
+            created += 1;
+            created_row
+        };
+        let calendar_id = text(&calendar, "id").ok_or_else(|| Error::msg("calendar id missing"))?;
+        for (md, label) in *days {
+            let date = format!("{year}-{md}");
+            let already: Vec<Record> = db::find("holiday")
+                .filter("calendar", calendar_id)
+                .filter("date", date.as_str())
+                .limit(1)
+                .all()?;
+            if !already.is_empty() {
+                continue;
+            }
+            let data = json!({
+                "calendar": calendar_id,
+                "name": label,
+                "date": date,
+                "kind": "public",
+                "is_half_day": false,
+                "recurring": true,
+            });
+            if db::create::<Record>("holiday", &data).is_ok() {
+                holidays_added += 1;
+            }
+        }
+    }
+
+    Ok(json!({
+        "calendars_created": created,
+        "calendars_already_there": had,
+        "holidays_added": holidays_added,
+    }))
+}
+
 /// Working days in a period by the calendar: weekends and public and company holidays are off;
 /// optional holidays are working days; a half-day holiday counts as half.
 fn working_days(input: Span) -> Result<Value> {
@@ -237,8 +464,8 @@ handler! {
         change_calendar(input)
     }
 
-    fn list_calendars(_: Empty) -> Vec<Record> {
-        db::find("holiday_calendar").order_by("name").limit(200).all()
+    fn list_calendars(input: ListCalendars) -> Value {
+        list_calendars_page(input)
     }
 
     fn create_holiday(input: Record) -> Record {
@@ -274,5 +501,10 @@ handler! {
 
     fn calendar_working_days(input: Span) -> Value {
         working_days(input)
+    }
+
+    /// Master data: standard weekend calendar and country holiday calendars.
+    fn seed_calendars(input: Empty) -> Value {
+        run_seed_calendars(input)
     }
 }

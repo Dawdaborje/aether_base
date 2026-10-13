@@ -12,6 +12,12 @@ private fn blank(value) {
     value == () || value == ""
 }
 
+private fn map_has(m, key) {
+    if m == () || type_of(m) != "map" { return false; }
+    for k in m.keys() { if k == key { return true; } }
+    false
+}
+
 private fn or_empty(input) {
     if input == () { #{} } else { input }
 }
@@ -186,7 +192,29 @@ fn update_party(input) {
 }
 
 fn get_party(input) {
-    must_get(input.id)
+    let p = must_get(input.id);
+    // Forms edit `currency_code`; the store keeps a link.
+    if p.currency != () {
+        let cur = plugins::invoke("currency", "get_currency", #{ id: p.currency });
+        if cur != () { p.currency_code = cur.code; }
+    }
+    p
+}
+
+// Rows for SearchPicker: `id` is the ISO code so create/update receive `currency_code`.
+fn list_currency_codes(input) {
+    let answer = plugins::invoke("currency", "list_currencies", or_empty(input));
+    let rows = if type_of(answer) == "map" && answer.rows != () { answer.rows } else { answer };
+    let out = [];
+    for r in rows {
+        out.push(#{
+            id: r.code,
+            code: r.code,
+            name: r.name,
+            display_name: r.code + " — " + r.name
+        });
+    }
+    out
 }
 
 // The party with what hangs off it, for a detail view. Bank accounts are listed separately.
@@ -236,7 +264,7 @@ fn link_user(input) {
 fn search(input) {
     let input = or_empty(input);
     let filter = #{};
-    if input.include_inactive != true { filter.is_active = true; }
+    if input.include_inactive != true && !map_has(input.filter, "is_active") { filter.is_active = true; }
     if input.kind != () {
         if input.kind != "person" && input.kind != "organization" { fail("kind is person or organization"); }
         filter.kind = input.kind;
@@ -252,20 +280,24 @@ fn search(input) {
         if tags.len() > 0 {
             for link in db::find("party_tag_link", #{ filter: #{ tag: tags[0].id }, limit: 500 }) { wanted.push(link.party); }
         }
-        if wanted.len() == 0 { return []; }
+        if wanted.len() == 0 { return #{ rows: [], total: 0 }; }
         filter.id = #{ "in": wanted };
     }
-    let text = if blank(input.text) { "" } else { input.text.trim().to_lower() };
-    let limit = if input.limit == () { 50 } else { input.limit };
-    if type_of(limit) != "i64" || limit < 1 || limit > 500 { fail("limit is 1 to 500"); }
-    // The database does the matching (`like` is a case-insensitive substring), so the limit counts matches.
-    if text != "" {
-        filter["or"] = [
-            #{ display_name: #{ like: text } }, #{ email: #{ like: text } }, #{ phone: #{ like: text } },
-            #{ mobile: #{ like: text } }, #{ tax_id: #{ like: text } },
-        ];
+    if input.filter != () && type_of(input.filter) == "map" && input.filter.keys().len() > 0 {
+        if filter.keys().len() == 0 {
+            filter = input.filter;
+        } else {
+            filter = #{ "and": [filter, input.filter] };
+        }
     }
-    db::find("party", #{ filter: filter, order: "display_name", limit: limit })
+    let q = if !blank(input.q) { input.q } else if !blank(input.text) { input.text } else { "" };
+    let fields = if input.search_fields != () { input.search_fields } else if input.fields != () { input.fields } else { ["display_name", "email", "phone", "mobile", "tax_id"] };
+    let limit = if input.limit == () { 10 } else { input.limit };
+    if type_of(limit) != "i64" || limit < 1 || limit > 500 { fail("limit is 1 to 500"); }
+    let offset = if input.offset == () { 0 } else { input.offset };
+    if type_of(offset) != "i64" || offset < 0 { fail("offset must be 0 or more"); }
+    let order = if blank(input.order) { "display_name" } else { input.order };
+    db::search("party", #{ q: q, fields: fields, filter: filter, limit: limit, offset: offset, order: order })
 }
 
 // The same, for a page's list.
@@ -480,4 +512,34 @@ fn merge(input) {
 
     events::emit(#{ event: "merged", payload: #{ from: gone.id, into: keep.id, kind: keep.kind } });
     #{ into: keep.id, from: gone.id, moved: moved, filled: fill.keys() }
+}
+
+// ---- Desk demo data
+
+private fn demo_count(input) {
+    let n = if input.count == () { 10 } else { input.count };
+    if type_of(n) == "f64" { n = n.to_int(); }
+    if n < 1 { n = 1; }
+    if n > 10000 { n = 10000; }
+    n
+}
+
+fn generate_demo_party(input) {
+    let input = or_empty(input);
+    let n = demo_count(input);
+    let first = ["Ada", "Ben", "Chi", "Dee", "Eva", "Femi", "Gina", "Hugo", "Ife", "Jade", "Kai", "Lina", "Mo", "Nia", "Omar", "Pia", "Quinn", "Ravi", "Sara", "Tom"];
+    let last = ["Okeke", "Mensah", "Diallo", "Nguyen", "Silva", "Patel", "Kim", "Garcia", "Hassan", "Brown"];
+    let ids = [];
+    let i = 0;
+    while i < n {
+        let f = first[i % first.len()];
+        let l = last[i % last.len()];
+        let name = f + " " + l;
+        if i >= first.len() { name = name + " " + (i + 1).to_string(); }
+        let email = f.to_lower() + "." + l.to_lower() + "." + (i + 1).to_string() + "@demo.aether.local";
+        let created = create_person(#{ name: name, email: email });
+        ids.push(created.id);
+        i += 1;
+    }
+    #{ created: ids.len(), ids: ids }
 }

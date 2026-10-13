@@ -5,7 +5,7 @@
     <field name="email" label="%email%"/>
     <field name="phone" label="%phone%"/>
     <field name="website" label="%website%"/>
-    <field name="currency_code" label="%currency_code%"/>
+    <field name="currency_code" label="%currency_code%" fieldType="link" source="list_currency_codes" optionLabel="display_name" entity="currencies"/>
     <field name="is_customer" label="%customer%" fieldType="boolean"/>
     <field name="is_supplier" label="%supplier%" fieldType="boolean"/>
     <field name="is_bank" label="%bank%" fieldType="boolean"/>

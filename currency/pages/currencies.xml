@@ -1,6 +1,7 @@
 <page route="/base/currencies" title="%currencies%" model="currency">
   <view type="list" model="currency" source="list_currencies" open="/base/currencies/{id}" create="/base/currencies/new" create_label="%add_currency%">
-    <search/>
+    <search fields="code,name,symbol"/>
+    <filter field="active" label="%active%" options="Active=true,Inactive=false"/>
     <columns>
       <column field="code" label="%code%"/>
       <column field="name" label="%name%"/>
