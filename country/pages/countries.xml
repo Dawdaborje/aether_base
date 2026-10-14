@@ -1,4 +1,4 @@
-<page route="/base/countries" title="%countries%" model="country">
+<page route="/base/countries" title="%countries%" model="country" icon="globe">
   <view type="list" model="country" source="list_countries" open="/base/countries/{id}" create="/base/countries/new" create_label="%add_country%">
     <search fields="code,name,code3,phone_prefix"/>
     <filter field="active" label="%active%" options="Active=true,Inactive=false"/>

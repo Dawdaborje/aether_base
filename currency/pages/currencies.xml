@@ -1,4 +1,4 @@
-<page route="/base/currencies" title="%currencies%" model="currency">
+<page route="/base/currencies" title="%currencies%" model="currency" icon="banknote">
   <view type="list" model="currency" source="list_currencies" open="/base/currencies/{id}" create="/base/currencies/new" create_label="%add_currency%">
     <search fields="code,name,symbol"/>
     <filter field="active" label="%active%" options="Active=true,Inactive=false"/>

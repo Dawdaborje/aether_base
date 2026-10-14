@@ -1,4 +1,4 @@
-<page route="/base/parties" title="%parties%" model="party">
+<page route="/base/parties" title="%parties%" model="party" icon="contact">
   <view type="list" model="party" source="list_parties" open="/base/parties/{id}" create="/base/parties/new" create_label="%add_person%">
     <search fields="display_name,email,phone,mobile,tax_id"/>
     <filter field="kind" label="%kind%" options="person,organization"/>

@@ -1,4 +1,4 @@
-<page route="/base/companies" title="%companies%" model="company">
+<page route="/base/companies" title="%companies%" model="company" icon="building-2">
   <view type="list" model="company" source="list_companies" open="/base/companies/{id}" create="/base/companies/new" create_label="%add_company%">
     <search fields="name"/>
     <filter field="is_active" label="%active%" options="Active=true,Inactive=false"/>

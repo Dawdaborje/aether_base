@@ -1,4 +1,4 @@
-<page route="/base/parties/new-organization" title="%new_organization%" model="party">
+<page route="/base/parties/new-organization" title="%new_organization%" model="party" icon="building">
   <view type="form" function="create_organization" submit="%add_organization%" success="%organization_added%" redirect="/base/parties">
     <field name="name" label="%legal_name%" required="true"/>
     <field name="tax_id" label="%tax_or_registration_number%"/>

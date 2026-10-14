@@ -1,4 +1,4 @@
-<page route="/base/calendars" title="Holiday calendars" model="holiday_calendar">
+<page route="/base/calendars" title="Holiday calendars" model="holiday_calendar" icon="calendar-days">
   <view type="list" model="holiday_calendar" source="list_calendars" create="/base/calendars/new" create_label="New">
     <search fields="name,weekend"/>
     <filter field="is_active" label="Active" options="Active=true,Inactive=false"/>
