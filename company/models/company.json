@@ -52,10 +52,9 @@
     },
     {
       "id": "fld_3bm4u24zyg",
-      "name": "logo_url",
+      "name": "logo",
       "label": "%logo%",
-      "type": "string",
-      "max_length": 300
+      "type": "image"
     },
     {
       "id": "fld_jm345w4tqc",

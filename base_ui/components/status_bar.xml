@@ -1,0 +1,19 @@
+<!--
+  The record's state as steps, the current one highlighted.
+
+    <use component="base_ui.status_bar" field="status" function="change_employee_status"/>
+
+  field        the record field that holds the state (default `status`)
+  options      the steps in order, `draft, confirmed, done`; or leave out to use the model field's
+               own selection options
+  source       a function returning the steps as rows, when they live in the database;
+  optionlabel  the label field of those rows (default `name`)
+  sourceparam  a record field whose value is sent as `id` to `source` (a pipeline, say)
+  payload      `record` sends the whole record with a click, for a save function that wants every field
+  function     called when a step is clicked, with `id` and the step as `status` and `<field>`;
+               leave out to only display the state
+-->
+<component name="status_bar">
+  <statusbar field="{{field}}" options="{{options}}" source="{{source}}" optionLabel="{{optionlabel}}"
+             sourceparam="{{sourceparam}}" function="{{function}}" payload="{{payload}}"/>
+</component>

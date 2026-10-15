@@ -27,3 +27,4 @@ company = { path = "./company" }
 calendar = { path = "./calendar" }
 number_sequence = { path = "./number_sequence" }
 uom = { path = "./uom" }
+base_ui = { path = "./base_ui" }

@@ -4,6 +4,6 @@
     <field name="currency_code" label="%currency_code%" fieldType="link" source="list_currency_codes" optionLabel="display_name" entity="currencies"/>
     <field name="fiscal_year_start_month" label="%fiscal_year_starts_in_month%" fieldType="integer"/>
     <field name="fiscal_year_start_day" label="%fiscal_year_starts_on_day%" fieldType="integer"/>
-    <field name="logo_url" label="%logo%"/>
+    <field name="logo" label="%logo%" avatar="true"/>
   </view>
 </page>

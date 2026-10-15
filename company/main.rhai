@@ -90,7 +90,8 @@ fn create_company(input) {
     let entity = through("party", "create_organization", fields);
     let data = #{ name: input.name, party: entity.id, fiscal_year_start_month: month, fiscal_year_start_day: day, is_default: false, is_active: true };
     if currency != () { data.currency = currency; }
-    if !blank(input.logo_url) { data.logo_url = input.logo_url; }
+    // An uploaded picture (what `POST /api/media` returns), or nothing.
+    if input.logo != () { data.logo = input.logo; }
     let created = db::create("company", data);
     // The first company is the default one.
     if db::find("company", #{ filter: #{ is_default: true }, limit: 1 }).len() == 0 || input.is_default == true {
@@ -121,7 +122,8 @@ fn update_company(input) {
         changes.fiscal_year_start_month = month;
         changes.fiscal_year_start_day = day;
     }
-    if input.logo_url != () { changes.logo_url = input.logo_url; }
+    // Present and empty clears the logo.
+    if input.contains("logo") { changes.logo = input.logo; }
     if changes.is_empty() && others.is_empty() { fail("there is nothing to change"); }
     if changes.is_empty() { return c; }
     db::update("company", c.id, changes)

@@ -2,7 +2,7 @@
 name = "company"
 icon_path = "assets/logo.svg"
 label = "Companies"
-version = "0.1.1"
+version = "0.1.2"
 description = "The legal entities that keep the books: their party record, currency and fiscal year."
 long_description = """
 A company is the legal entity an organization's documents are issued by. Its name, tax number, addresses and

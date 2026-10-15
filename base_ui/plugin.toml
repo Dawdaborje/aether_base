@@ -1,0 +1,22 @@
+[plugin]
+name = "base_ui"
+label = "UI components"
+version = "0.1.0"
+description = "Shared page components: the form's state tracker and its action bar."
+long_description = """
+Reusable pieces of page, used with `<use component="base_ui.…"/>` so every form looks and behaves
+the same: `status_bar` (the record's state as steps, clickable) and `form_bar` (the form's own
+buttons next to its state). Save stays the form's own button; the kernel puts all of these in the
+page's title bar. Components only: no code, no models, no pages.
+"""
+authors = [{ name = "Aether", email = "hello@aether.local" }]
+dependencies = []
+capabilities = []
+is_builtin = true
+
+[plugin.api]
+version = "0.1"
+
+[plugin.meta]
+kind = "addon"
+workspace = "base"
