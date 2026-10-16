@@ -209,16 +209,34 @@ fn seed_countries(input) {
         ["BD", "BGD", "Bangladesh", "+880", "BDT", "World"],
         ["LK", "LKA", "Sri Lanka", "+94", "LKR", "World"]
     ];
+    // Read the existing countries and the currencies once, then write in batches. A seed that makes
+    // several calls per country runs past the script time limit on a slow database.
+    let have = #{};
+    for row in db::find("country", #{ limit: 1000 }) { have[row.code] = true; }
+    let listed = plugins::invoke("currency", "list_currencies", #{ all: true, limit: 1000 });
+    let rows = if type_of(listed) == "array" { listed } else if listed != () && listed.rows != () { listed.rows } else { [] };
+    let currency_of = #{};
+    for row in rows { currency_of[row.code] = row.id; }
+
     let created = 0;
     let had = 0;
     let without_currency = [];
+    let ops = [];
     for c in countries {
-        if by_code(c[0]) != () { had += 1; continue; }
+        if have.contains(c[0]) { had += 1; continue; }
         let data = #{ code: c[0], code3: c[1], name: c[2], phone_prefix: c[3], active: true };
-        let currency = currency_id(c[4]);
-        if currency == () { without_currency.push(c[0] + " (" + c[4] + ")"); } else { data.currency = currency; }
-        db::create("country", data);
+        if currency_of.contains(c[4]) {
+            data.currency = currency_of[c[4]];
+        } else {
+            without_currency.push(c[0] + " (" + c[4] + ")");
+        }
+        ops.push(#{ op: "create", model: "country", data: data });
         created += 1;
+        if ops.len() >= 50 {
+            db::transaction(ops);
+            ops = [];
+        }
     }
+    if ops.len() > 0 { db::transaction(ops); }
     #{ created: created, already_there: had, without_currency: without_currency }
 }

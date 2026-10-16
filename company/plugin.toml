@@ -2,7 +2,7 @@
 name = "company"
 icon_path = "assets/logo.svg"
 label = "Companies"
-version = "0.1.2"
+version = "0.1.3"
 description = "The legal entities that keep the books: their party record, currency and fiscal year."
 long_description = """
 A company is the legal entity an organization's documents are issued by. Its name, tax number, addresses and
@@ -16,6 +16,13 @@ capabilities = ["db::query", "db::mutate", "db::transaction", "plugins::call"]
 access_models = [{ name = "company", permissions = ["read", "write"] }]
 is_builtin = true
 script = "main.rhai"
+
+[[command]]
+name = "seed"
+function = "seed_default_company"
+help = "Create the default company named after the organization when it has none (idempotent)"
+on_install = true
+on_upgrade = true
 
 [[command]]
 name = "create"

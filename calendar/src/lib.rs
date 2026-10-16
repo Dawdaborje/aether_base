@@ -275,7 +275,7 @@ fn span(input: Span) -> Result<Value> {
 }
 
 /// Idempotent master data: a generic weekend calendar plus country calendars with
-/// common public holidays (same idea as Odoo/Frappe holiday lists). Safe to re-run.
+/// common public holidays. Safe to re-run.
 fn run_seed_calendars(_input: Empty) -> Result<Value> {
     let mut created = 0u32;
     let mut had = 0u32;

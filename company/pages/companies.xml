@@ -3,13 +3,14 @@
     <search fields="name"/>
     <filter field="is_active" label="%active%" options="Active=true,Inactive=false"/>
     <columns>
+      <column field="logo" label="%logo%" fieldType="avatar"/>
       <column field="name" label="%name%"/>
       <column field="is_default" label="%default%" fieldType="boolean"/>
       <column field="is_active" label="%active%" fieldType="boolean"/>
     </columns>
     <actions>
-      <action name="default" label="%make_default%" function="set_default_company"/>
-      <action name="archive" label="%archive%" function="archive_company" confirm="%archive_this_company%" danger="true"/>
+      <action name="default" label="%make_default%" function="set_default_company" disabled_when="is_default,!is_active"/>
+      <action name="archive" label="%archive%" function="archive_company" confirm="%archive_this_company%" danger="true" disabled_when="is_default,!is_active"/>
     </actions>
     <empty title="%no_company_yet%" description="%use_new_to_add%"/>
   </view>

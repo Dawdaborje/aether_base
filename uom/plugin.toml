@@ -22,6 +22,8 @@ script = "main.rhai"
 name = "seed"
 function = "seed_units"
 help = "Create the common units of count, mass, length, volume and time (idempotent)"
+on_install = true
+on_upgrade = true
 
 [[command]]
 name = "convert"

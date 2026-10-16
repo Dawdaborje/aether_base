@@ -11,7 +11,7 @@ economies elsewhere); you can also run `aether --command country.seed --org <org
 """
 authors = [{ name = "Aether", email = "hello@aether.local" }]
 dependencies = ["currency"]
-capabilities = ["db::query", "db::mutate", "plugins::call"]
+capabilities = ["db::query", "db::mutate", "db::transaction", "plugins::call"]
 access_models = [
   { name = "country", permissions = ["read", "write"] },
   { name = "country_region", permissions = ["read", "write"] },

@@ -38,3 +38,12 @@ none
 ## Boundaries
 
 Does not own party contact graphs, currencies, holiday calendars, or multi-company document scoping. Branches/sites and accounting charts belong elsewhere. Calendar assignments may target a company id but live in `calendar`.
+
+## Default company (seed)
+
+`seed` (`seed_default_company`, run on install and on upgrade) creates one company named after the
+organization when the organization has none, in the base currency when the currency plugin has one. It
+does nothing when any company exists, so it is safe to repeat and never replaces a company made by hand.
+Legal details (tax number, address, fiscal year) are left for an administrator to complete. The first
+company becomes the default one, as `create_company` already does. Run it again with
+`aether --command company.seed --org <organization>`.

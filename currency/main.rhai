@@ -236,16 +236,26 @@ fn seed_currencies(input) {
         ["HKD", "Hong Kong Dollar", "HK$", 2], ["IDR", "Rupiah", "Rp", 2], ["PKR", "Pakistani Rupee", "Rs", 2],
         ["BDT", "Taka", "৳", 2], ["LKR", "Sri Lanka Rupee", "Rs", 2]
     ];
+    // One read for what exists and a few batched writes: a seed that makes a call per currency runs
+    // past the script time limit on a slow database.
+    let have = #{};
+    for row in db::find("currency", #{ limit: 1000 }) { have[row.code] = true; }
     let created = 0;
     let had = 0;
+    let ops = [];
     for entry in common {
-        if by_code(entry[0]) == () {
-            db::create("currency", #{ code: entry[0], name: entry[1], symbol: entry[2], decimal_places: entry[3], is_base: false, active: true });
-            created += 1;
-        } else {
+        if have.contains(entry[0]) {
             had += 1;
+        } else {
+            ops.push(#{ op: "create", model: "currency", data: #{ code: entry[0], name: entry[1], symbol: entry[2], decimal_places: entry[3], is_base: false, active: true } });
+            created += 1;
+            if ops.len() >= 50 {
+                db::transaction(ops);
+                ops = [];
+            }
         }
     }
+    if ops.len() > 0 { db::transaction(ops); }
     // The first run gives the books a base currency to start from.
     let base = get_base(#{});
     let base_code = if base == () { set_base(#{ code: "USD" }) } else { base.code };

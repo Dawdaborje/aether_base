@@ -187,6 +187,31 @@ fn set_default_company(input) {
     db::get("company", target.id)
 }
 
+// A new organization has no legal entity yet, and documents, ledgers and payroll all need one. Create the
+// default company named after the organization, once: nothing happens when any company exists. The legal
+// details (tax number, address) cannot be guessed and are left for an administrator to complete.
+fn seed_default_company(input) {
+    if db::find("company", #{ limit: 1 }).len() > 0 {
+        return #{ created: false, reason: "a company already exists" };
+    }
+    let org = organization::get();
+    let name = org.name;
+    if blank(name) { name = org.db_name; }
+    let data = #{ name: name };
+    // The organization's own address is the company's contact email.
+    if !blank(org.email) { data.email = org.email; }
+    // The books' base currency, when the currency plugin has one.
+    let base = ();
+    try {
+        base = plugins::invoke("currency", "get_base", #{});
+    } catch {
+        base = ();
+    }
+    if base != () && !blank(base.code) { data.currency_code = base.code; }
+    let created = create_company(data);
+    #{ created: true, company: created.name, currency: data.currency_code }
+}
+
 fn archive_company(input) {
     let c = must_get(input.id);
     if c.is_default == true { fail("make another company the default before archiving this one"); }
