@@ -27,7 +27,7 @@ none
 
 **Commands:** `seed` → `seed_currencies`
 
-**Public functions:** `create_currency`, `update_currency`, `get_currency_by_code`, `get_currency`, `list_currencies`, `set_active`, `get_base`, `set_base`, `set_rate`, `get_rate`, `list_rates`, `convert`, `seed_currencies`
+**Public functions:** `create_currency`, `update_currency`, `get_currency_by_code`, `get_currency`, `list_currencies`, `list_currency_codes`, `set_active`, `get_base`, `set_base`, `set_rate`, `get_rate`, `list_rates`, `convert`, `seed_currencies`
 
 **Events:** `rate_changed`
 

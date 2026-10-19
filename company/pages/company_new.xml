@@ -2,9 +2,9 @@
   <view type="form" function="create_company" submit="%add_company%" success="%company_added%" redirect="/base/companies">
     <field name="name" label="%legal_name%" required="true"/>
     <field name="tax_id" label="%tax_or_registration_number%"/>
-    <field name="email" label="%email%"/>
-    <field name="phone" label="%phone%"/>
-    <field name="currency_code" label="%currency_code%" fieldType="link" source="list_currency_codes" optionLabel="display_name" entity="currencies"/>
+    <use component="base_ui.contact_group" title="%contact%"
+         email="email" email_label="%email%" phone="phone" phone_label="%phone%"/>
+    <use component="base_ui.currency_link" name="currency_code" label="%currency_code%"/>
     <field name="fiscal_year_start_month" label="%fiscal_year_starts_in_month%" fieldType="integer"/>
   </view>
 </page>

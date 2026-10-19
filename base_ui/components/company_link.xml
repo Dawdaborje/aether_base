@@ -1,0 +1,14 @@
+<!--
+  Company (legal entity) picker.
+
+    <use component="base_ui.company_link" required="true"/>
+    <use component="base_ui.company_link" name="company" label="Company" required="true"/>
+
+  name      field name (default `company`)
+  label     field label
+  required  set to true when the field is required
+-->
+<component name="company_link">
+  <field name="{{name}}" label="{{label}}" fieldType="link" required="{{required}}"
+           source="company.list_companies" optionLabel="name" entity="companies"/>
+</component>

@@ -1,0 +1,12 @@
+<!--
+  Active / Inactive list filter.
+
+    <use component="base_ui.active_filter"/>
+    <use component="base_ui.active_filter" field="is_active" label="%active%"/>
+
+  field  the boolean field (default `active`)
+  label  filter label (default `%active%`)
+-->
+<component name="active_filter">
+  <filter field="{{field}}" label="{{label}}" options="Active=true,Inactive=false"/>
+</component>

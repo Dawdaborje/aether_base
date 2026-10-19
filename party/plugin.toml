@@ -11,7 +11,7 @@ and an email. Parties are kept out of the kernel: the kernel knows login account
 business data. Written in Rhai.
 """
 authors = [{ name = "Aether", email = "hello@aether.local" }]
-dependencies = ["currency", "country"]
+dependencies = ["currency", "country", "base_ui"]
 capabilities = ["db::query", "db::mutate", "db::transaction", "events::emit", "plugins::call"]
 access_models = [
   { name = "party", permissions = ["read", "write"] },

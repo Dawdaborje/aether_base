@@ -1,0 +1,14 @@
+<!--
+  Currency code picker (stores the three-letter code).
+
+    <use component="base_ui.currency_link"/>
+    <use component="base_ui.currency_link" name="currency_code" label="%currency_code%" required="true"/>
+
+  name   field name (default `currency_code`)
+  label  field label
+  required  set to true when the field is required
+-->
+<component name="currency_link">
+  <field name="{{name}}" label="{{label}}" fieldType="link" required="{{required}}"
+           source="currency.list_currency_codes" optionLabel="display_name" entity="currencies"/>
+</component>

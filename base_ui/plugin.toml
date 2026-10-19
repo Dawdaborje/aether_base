@@ -1,13 +1,14 @@
 [plugin]
 name = "base_ui"
 label = "UI components"
-version = "0.1.0"
-description = "Shared page components: the form's state tracker and its action bar."
+version = "0.2.0"
+description = "Shared page components for lists, forms, link fields and related panels."
 long_description = """
-Reusable pieces of page, used with `<use component="base_ui.…"/>` so every form looks and behaves
-the same: `status_bar` (the record's state as steps, clickable) and `form_bar` (the form's own
-buttons next to its state). Save stays the form's own button; the kernel puts all of these in the
-page's title bar. Components only: no code, no models, no pages.
+Reusable pieces of page, used with `<use component="base_ui.…"/>` so every plugin looks and behaves
+the same. Form chrome: `status_bar` (record state as steps) and `form_bar` (buttons next to state;
+Save stays the form's own button). List helpers: `empty_state`, `active_filter`. Field blocks:
+`contact_group`, `currency_link`, `party_link`, `company_link`, `date_range`. Panels: `related_list`
+(a titled group around a child list). Components only: no code, no models, no pages.
 """
 authors = [{ name = "Aether", email = "hello@aether.local" }]
 dependencies = []

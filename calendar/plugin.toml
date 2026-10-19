@@ -13,7 +13,7 @@ are. Install/upgrade seeds a standard weekend calendar and common public holiday
 Written in Rust.
 """
 authors = [{ name = "Aether", email = "hello@aether.local" }]
-dependencies = ["country", "company"]
+dependencies = ["country", "company", "base_ui"]
 capabilities = ["db::query", "db::mutate", "plugins::call"]
 access_models = [
   { name = "holiday_calendar", permissions = ["read", "write"] },

@@ -7,6 +7,6 @@
       <column field="factor" label="%factor%"/>
       <column field="is_reference" label="%is_reference%" fieldType="boolean"/>
     </columns>
-    <empty title="%no_unit_yet%" description="%use_new_to_add%"/>
+    <use component="base_ui.empty_state" title="%no_unit_yet%" description="%use_new_to_add%"/>
   </view>
 </page>

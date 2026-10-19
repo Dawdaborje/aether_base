@@ -10,7 +10,7 @@ given date. Install/upgrade seeds ~65 currencies in common use (USD as base). Wr
 the plugin is the single file `main.rhai`.
 """
 authors = [{ name = "Aether", email = "hello@aether.local" }]
-dependencies = []
+dependencies = ["base_ui"]
 capabilities = ["db::query", "db::mutate", "db::transaction", "events::emit"]
 access_models = [
   { name = "currency", permissions = ["read", "write"] },

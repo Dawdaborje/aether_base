@@ -141,6 +141,22 @@ fn list_currencies(input) {
     db::search("currency", #{ q: q, fields: fields, filter: filter, limit: limit, offset: offset, order: order })
 }
 
+// Rows keyed by code for link fields that store a three-letter currency code.
+fn list_currency_codes(input) {
+    let answer = list_currencies(or_empty(input));
+    let rows = if type_of(answer) == "map" && answer.rows != () { answer.rows } else { answer };
+    let out = [];
+    for r in rows {
+        out.push(#{
+            id: r.code,
+            code: r.code,
+            name: r.name,
+            display_name: r.code + " — " + r.name
+        });
+    }
+    out
+}
+
 fn set_active(input) {
     let c = must_find(input.code);
     if c.is_base == true && input.active == false { fail("the base currency cannot be switched off"); }

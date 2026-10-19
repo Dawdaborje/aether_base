@@ -1,8 +1,8 @@
 <page route="/base/parties/new" title="%add_person%" model="party">
   <view type="form" function="create_person" submit="%add_person%" success="%person_added%" redirect="/base/parties">
     <field name="name" label="%name%" required="true"/>
-    <field name="email" label="%email%"/>
-    <field name="phone" label="%phone%"/>
+    <use component="base_ui.contact_group" title="%contact%"
+         email="email" email_label="%email%" phone="phone" phone_label="%phone%"/>
     <field name="is_customer" label="%customer%" fieldType="boolean"/>
     <field name="is_supplier" label="%supplier%" fieldType="boolean"/>
   </view>

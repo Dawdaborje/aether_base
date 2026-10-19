@@ -1,0 +1,18 @@
+<!--
+  Start and end dates in a titled group.
+
+    <use component="base_ui.date_range" title="Dates"
+         start="start_date" start_label="From" end="end_date" end_label="To"/>
+
+  title        group title
+  start        start field name (default `start_date`)
+  start_label  start label (default From)
+  end          end field name (default `end_date`)
+  end_label    end label (default To)
+-->
+<component name="date_range">
+  <group title="{{title}}" cols="2">
+    <field name="{{start}}" label="{{start_label}}" fieldType="date"/>
+    <field name="{{end}}" label="{{end_label}}" fieldType="date"/>
+  </group>
+</component>

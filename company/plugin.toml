@@ -11,7 +11,7 @@ rather than to any party: its currency, its fiscal year and which one is the def
 organization are possible; scoping other plugins' data by company is a separate matter. Written in Rhai.
 """
 authors = [{ name = "Aether", email = "hello@aether.local" }]
-dependencies = ["party", "currency"]
+dependencies = ["party", "currency", "base_ui"]
 capabilities = ["db::query", "db::mutate", "db::transaction", "plugins::call"]
 access_models = [{ name = "company", permissions = ["read", "write"] }]
 is_builtin = true

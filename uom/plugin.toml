@@ -9,7 +9,7 @@ Units belong to a group (length, mass, count, ...). Each has one factor to the g
 rounding, so conversion only works inside a group and every unit is defined by a single number. Written in Rhai.
 """
 authors = [{ name = "Aether", email = "hello@aether.local" }]
-dependencies = []
+dependencies = ["base_ui"]
 capabilities = ["db::query", "db::mutate"]
 access_models = [
   { name = "uom_group", permissions = ["read", "write"] },

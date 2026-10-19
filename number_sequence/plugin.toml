@@ -10,7 +10,7 @@ document, a counter can start again each year or month, and a gapless sequence r
 missing one can be found and explained. Other plugins call `next_number`. Written in Rhai.
 """
 authors = [{ name = "Aether", email = "hello@aether.local" }]
-dependencies = []
+dependencies = ["base_ui"]
 capabilities = ["db::query", "db::mutate"]
 access_models = [
   { name = "number_sequence", permissions = ["read", "write"] },

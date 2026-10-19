@@ -1,7 +1,7 @@
 <page route="/base/companies" title="%companies%" model="company" icon="building-2">
   <view type="list" model="company" source="list_companies" open="/base/companies/{id}" create="/base/companies/new" create_label="%add_company%">
     <search fields="name"/>
-    <filter field="is_active" label="%active%" options="Active=true,Inactive=false"/>
+    <use component="base_ui.active_filter" field="is_active" label="%active%"/>
     <columns>
       <column field="logo" label="%logo%" fieldType="avatar"/>
       <column field="name" label="%name%"/>
@@ -12,6 +12,6 @@
       <action name="default" label="%make_default%" function="set_default_company" disabled_when="is_default,!is_active"/>
       <action name="archive" label="%archive%" function="archive_company" confirm="%archive_this_company%" danger="true" disabled_when="is_default,!is_active"/>
     </actions>
-    <empty title="%no_company_yet%" description="%use_new_to_add%"/>
+    <use component="base_ui.empty_state" title="%no_company_yet%" description="%use_new_to_add%"/>
   </view>
 </page>
