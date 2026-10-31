@@ -36,6 +36,7 @@ label = "Calendar manager"
 description = "Creates calendars, holidays and assignments"
 
 [app]
+nav = true
 icon = "calendar-days"
 route = "/base/calendars"
 description = "Holiday calendars"

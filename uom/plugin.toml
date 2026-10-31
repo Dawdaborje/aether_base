@@ -36,6 +36,7 @@ args = [
 ]
 
 [app]
+nav = true
 icon = "scale"
 route = "/base/units"
 description = "Units of measure"

@@ -28,3 +28,4 @@ calendar = { path = "./calendar" }
 number_sequence = { path = "./number_sequence" }
 uom = { path = "./uom" }
 base_ui = { path = "./base_ui" }
+theme_neutral = { path = "./theme_neutral" }

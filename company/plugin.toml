@@ -46,6 +46,7 @@ demo_model = "company"
 args = [{ name = "count", type = "int", default = 10 }]
 
 [app]
+nav = true
 icon = "building-2"
 route = "/base/companies"
 description = "Legal entities and fiscal years"

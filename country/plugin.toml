@@ -27,6 +27,7 @@ on_install = true
 on_upgrade = true
 
 [app]
+nav = true
 icon = "globe"
 route = "/base/countries"
 description = "Countries and regions"

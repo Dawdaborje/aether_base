@@ -38,6 +38,7 @@ demo_model = "currency_rate"
 args = [{ name = "count", type = "int", default = 10 }]
 
 [app]
+nav = true
 icon = "banknote"
 route = "/base/currencies"
 description = "Currencies and exchange rates"

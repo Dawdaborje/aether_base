@@ -54,6 +54,7 @@ args = [
 ]
 
 [app]
+nav = true
 icon = "hash"
 route = "/base/sequences"
 description = "Document numbering"

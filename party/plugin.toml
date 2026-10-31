@@ -59,6 +59,7 @@ demo_model = "party"
 args = [{ name = "count", type = "int", default = 10 }]
 
 [app]
+nav = true
 icon = "contact"
 route = "/base/parties"
 description = "People and organizations"
