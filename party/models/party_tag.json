@@ -1,0 +1,38 @@
+{
+  "model_id": "mdl_kxv2tewxbn",
+  "name": "party_tag",
+  "label": "%tag%",
+  "plural_label": "%tags%",
+  "icon": "tag",
+  "title_field": "name",
+  "fields": [
+    {
+      "id": "fld_3zbpmndn6d",
+      "name": "name",
+      "label": "%name%",
+      "type": "string",
+      "required": true,
+      "max_length": 60,
+      "index": "unique"
+    },
+    {
+      "id": "fld_e57hi6beus",
+      "name": "color",
+      "label": "%colour%",
+      "type": "string",
+      "max_length": 20
+    }
+  ],
+  "view": {
+    "list": [
+      "name",
+      "color"
+    ],
+    "sort": [
+      {
+        "field": "name",
+        "dir": null
+      }
+    ]
+  }
+}

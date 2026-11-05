@@ -1,0 +1,86 @@
+{
+  "model_id": "mdl_khholv2eis",
+  "name": "currency",
+  "label": "%currency%",
+  "plural_label": "%currencies%",
+  "icon": "banknote",
+  "title_field": "code",
+  "fields": [
+    {
+      "id": "fld_hh45aqtqb4",
+      "name": "code",
+      "label": "%code%",
+      "type": "string",
+      "required": true,
+      "max_length": 3,
+      "index": "unique",
+      "help": "ISO 4217 code, such as USD.",
+      "track": true
+    },
+    {
+      "id": "fld_jcfmhxkeah",
+      "name": "name",
+      "label": "%name%",
+      "type": "string",
+      "required": true,
+      "max_length": 80,
+      "track": true
+    },
+    {
+      "id": "fld_4h7xgd5wxd",
+      "name": "symbol",
+      "label": "%symbol%",
+      "type": "string",
+      "required": true,
+      "max_length": 8
+    },
+    {
+      "id": "fld_cnkmhvkkpx",
+      "name": "decimal_places",
+      "label": "%decimal_places%",
+      "type": "int",
+      "default": 2,
+      "help": "How many decimals amounts in this currency are rounded to."
+    },
+    {
+      "id": "fld_7e554bmq3t",
+      "name": "is_base",
+      "label": "%base_currency%",
+      "type": "bool",
+      "default": false,
+      "help": "Rates are expressed against the base currency. Exactly one currency is the base.",
+      "track": true
+    },
+    {
+      "id": "fld_3hnzy33k4b",
+      "name": "active",
+      "label": "%active%",
+      "type": "bool",
+      "default": true,
+      "track": true
+    }
+  ],
+  "view": {
+    "list": [
+      "code",
+      "name",
+      "symbol",
+      "is_base",
+      "active"
+    ],
+    "sort": [
+      {
+        "field": "code",
+        "dir": null
+      }
+    ]
+  },
+  "chatter": {
+    "enabled": true,
+    "messages": true,
+    "notes": true,
+    "followers": true,
+    "track_changes": true,
+    "visitors": "none"
+  }
+}

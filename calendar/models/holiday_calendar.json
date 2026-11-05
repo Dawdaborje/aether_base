@@ -1,0 +1,61 @@
+{
+  "model_id": "mdl_ubt6z6vnp5",
+  "name": "holiday_calendar",
+  "label": "%holiday_calendar%",
+  "plural_label": "%holiday_calendars%",
+  "icon": "calendar-days",
+  "title_field": "name",
+  "fields": [
+    {
+      "id": "fld_gbvqem6ibc",
+      "name": "name",
+      "label": "%name%",
+      "type": "string",
+      "required": true,
+      "max_length": 120,
+      "index": "unique"
+    },
+    {
+      "id": "fld_u5pkqv62jv",
+      "name": "country",
+      "label": "%country%",
+      "type": "link",
+      "target": "country.country",
+      "index": "plain",
+      "target_id": "mdl_dmwfn6k2au"
+    },
+    {
+      "id": "fld_5otov6z6j2",
+      "name": "company",
+      "label": "%company%",
+      "type": "link",
+      "target": "company.company",
+      "index": "plain",
+      "target_id": "mdl_d7q6tyyshp"
+    },
+    {
+      "id": "fld_k2ffdstsfv",
+      "name": "weekend",
+      "label": "%weekend%",
+      "type": "string",
+      "required": true,
+      "default": "sat,sun",
+      "max_length": 40,
+      "help": "Weekly days off as short names, e.g. sat,sun or fri,sat."
+    },
+    {
+      "id": "fld_b47y5r2bxe",
+      "name": "is_active",
+      "label": "%is_active%",
+      "type": "bool",
+      "default": true
+    }
+  ],
+  "view": {
+    "list": [
+      "name",
+      "country",
+      "weekend"
+    ]
+  }
+}

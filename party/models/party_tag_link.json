@@ -1,0 +1,28 @@
+{
+  "model_id": "mdl_zac42pixig",
+  "name": "party_tag_link",
+  "label": "%tag_assignment%",
+  "plural_label": "%tag_assignments%",
+  "icon": "tags",
+  "title_field": "party",
+  "fields": [
+    {
+      "id": "fld_n5t7jyrrne",
+      "name": "party",
+      "label": "%party%",
+      "type": "link",
+      "required": true,
+      "index": "plain",
+      "target": "party"
+    },
+    {
+      "id": "fld_xojg5lbav5",
+      "name": "tag",
+      "label": "%tag%",
+      "type": "link",
+      "required": true,
+      "index": "plain",
+      "target": "party_tag"
+    }
+  ]
+}

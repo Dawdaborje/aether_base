@@ -1,0 +1,126 @@
+{
+  "model_id": "mdl_ko5c3ls2c3",
+  "name": "party_address",
+  "label": "%address%",
+  "plural_label": "%addresses%",
+  "icon": "map-pin",
+  "title_field": "street",
+  "fields": [
+    {
+      "id": "fld_r2vham6bxx",
+      "name": "party",
+      "label": "%party%",
+      "type": "link",
+      "required": true,
+      "index": "plain",
+      "target": "party"
+    },
+    {
+      "id": "fld_qp4ocoslmh",
+      "name": "type",
+      "label": "%type%",
+      "type": "select",
+      "required": true,
+      "default": "billing",
+      "options": [
+        {
+          "id": "opt_cypevsxt4e",
+          "value": "billing",
+          "label": "%billing%"
+        },
+        {
+          "id": "opt_pbxpaoo7tv",
+          "value": "shipping",
+          "label": "%shipping%"
+        },
+        {
+          "id": "opt_p3aspmyzsp",
+          "value": "home",
+          "label": "%home%"
+        },
+        {
+          "id": "opt_gqtowvedbn",
+          "value": "office",
+          "label": "%office%"
+        },
+        {
+          "id": "opt_expetvfhhd",
+          "value": "other",
+          "label": "%other%"
+        }
+      ]
+    },
+    {
+      "id": "fld_v57niu5n7b",
+      "name": "street",
+      "label": "%street%",
+      "type": "string",
+      "max_length": 200
+    },
+    {
+      "id": "fld_5r6rciexva",
+      "name": "street2",
+      "label": "%street_2%",
+      "type": "string",
+      "max_length": 200
+    },
+    {
+      "id": "fld_2sp6c6ptkx",
+      "name": "city",
+      "label": "%city%",
+      "type": "string",
+      "max_length": 100
+    },
+    {
+      "id": "fld_iepls534um",
+      "name": "region",
+      "label": "%region_or_state%",
+      "type": "string",
+      "max_length": 100
+    },
+    {
+      "id": "fld_mnjsmddrej",
+      "name": "postal_code",
+      "label": "%postal_code%",
+      "type": "string",
+      "max_length": 20
+    },
+    {
+      "id": "fld_jviqmt263a",
+      "name": "country",
+      "label": "%country%",
+      "type": "link",
+      "target": "country.country",
+      "target_id": "mdl_dmwfn6k2au"
+    },
+    {
+      "id": "fld_bb5b4iiomy",
+      "name": "is_default",
+      "label": "%default_for_its_type%",
+      "type": "bool",
+      "default": false
+    },
+    {
+      "id": "fld_i2z7uq6yr7",
+      "name": "latitude",
+      "label": "%latitude%",
+      "type": "float"
+    },
+    {
+      "id": "fld_g4s7p5bdik",
+      "name": "longitude",
+      "label": "%longitude%",
+      "type": "float"
+    }
+  ],
+  "view": {
+    "list": [
+      "party",
+      "type",
+      "street",
+      "city",
+      "country",
+      "is_default"
+    ]
+  }
+}

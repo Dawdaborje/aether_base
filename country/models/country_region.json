@@ -1,0 +1,48 @@
+{
+  "model_id": "mdl_zzjkrts3dp",
+  "name": "country_region",
+  "label": "%region%",
+  "plural_label": "%regions%",
+  "icon": "map",
+  "title_field": "name",
+  "fields": [
+    {
+      "id": "fld_byuyxk5pxe",
+      "name": "country",
+      "label": "%country%",
+      "type": "link",
+      "required": true,
+      "index": "plain",
+      "target": "country"
+    },
+    {
+      "id": "fld_cxpsavunr2",
+      "name": "code",
+      "label": "%code%",
+      "type": "string",
+      "max_length": 16,
+      "help": "The region's own code, such as LA for Lagos."
+    },
+    {
+      "id": "fld_sidcz2x4qb",
+      "name": "name",
+      "label": "%name%",
+      "type": "string",
+      "required": true,
+      "max_length": 100
+    }
+  ],
+  "view": {
+    "list": [
+      "country",
+      "code",
+      "name"
+    ],
+    "sort": [
+      {
+        "field": "name",
+        "dir": null
+      }
+    ]
+  }
+}

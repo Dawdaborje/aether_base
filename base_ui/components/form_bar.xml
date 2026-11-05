@@ -1,0 +1,19 @@
+<!--
+  A form's own buttons and its state, as the kernel puts them in the page's title bar next to Save.
+
+    <use component="base_ui.form_bar" field="stage" source="stages_of" function="set_stage">
+      <button label="Mark won" function="win_deal" confirm="Mark this deal as won?"/>
+      <button label="Back" href="/crm/deals" variant="outline"/>
+    </use>
+
+  Takes the props of `status_bar` and `save_label` (default: the form's own Save text); its content
+  is the buttons. The form's Save button is part of the bar.
+-->
+<component name="form_bar">
+  <header>
+    <slot />
+    <save label="{{save_label}}"/>
+    <statusbar field="{{field}}" options="{{options}}" source="{{source}}" optionLabel="{{optionlabel}}"
+               sourceparam="{{sourceparam}}" function="{{function}}" payload="{{payload}}"/>
+  </header>
+</component>

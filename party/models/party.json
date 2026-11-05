@@ -1,0 +1,207 @@
+{
+  "model_id": "mdl_mr76tss5ic",
+  "name": "party",
+  "label": "%party%",
+  "plural_label": "%parties%",
+  "icon": "contact",
+  "title_field": "display_name",
+  "fields": [
+    {
+      "id": "fld_hpzrlc3rbe",
+      "name": "kind",
+      "label": "%kind%",
+      "type": "select",
+      "required": true,
+      "default": "person",
+      "options": [
+        {
+          "id": "opt_z4er5ra2bh",
+          "value": "person",
+          "label": "%person%"
+        },
+        {
+          "id": "opt_mxv5jru4ur",
+          "value": "organization",
+          "label": "%organization%"
+        }
+      ],
+      "track": true
+    },
+    {
+      "id": "fld_7uh735v7n6",
+      "name": "name",
+      "label": "%name%",
+      "type": "string",
+      "required": true,
+      "max_length": 200,
+      "index": "plain",
+      "help": "The legal name of an organization, or the full name of a person.",
+      "track": true
+    },
+    {
+      "id": "fld_x3rsko3yob",
+      "name": "display_name",
+      "label": "%display_name%",
+      "type": "string",
+      "max_length": 320,
+      "index": "plain",
+      "help": "Kept up to date by the plugin: a person who belongs to an organization shows as \"Ann Okoro (Acme Ltd)\"."
+    },
+    {
+      "id": "fld_tpxem6enyg",
+      "name": "email",
+      "label": "%email%",
+      "type": "string",
+      "max_length": 254,
+      "index": "plain",
+      "track": true
+    },
+    {
+      "id": "fld_dr75q55tlw",
+      "name": "phone",
+      "label": "%phone%",
+      "type": "string",
+      "max_length": 20,
+      "help": "International form, such as +2348012345678.",
+      "track": true
+    },
+    {
+      "id": "fld_xnmgrl2bwx",
+      "name": "mobile",
+      "label": "%mobile%",
+      "type": "string",
+      "max_length": 20
+    },
+    {
+      "id": "fld_yafydk7mjs",
+      "name": "website",
+      "label": "%website%",
+      "type": "string",
+      "max_length": 200
+    },
+    {
+      "id": "fld_2wkrefwswu",
+      "name": "tax_id",
+      "label": "%tax_or_registration_number%",
+      "type": "string",
+      "max_length": 64,
+      "index": "plain",
+      "track": true
+    },
+    {
+      "id": "fld_yzgoaufbw6",
+      "name": "language",
+      "label": "%language%",
+      "type": "string",
+      "max_length": 10
+    },
+    {
+      "id": "fld_yyepbpjwfn",
+      "name": "currency",
+      "label": "%currency%",
+      "type": "link",
+      "target": "currency.currency",
+      "target_id": "mdl_khholv2eis"
+    },
+    {
+      "id": "fld_wvmksod6gm",
+      "name": "parent",
+      "label": "%belongs_to%",
+      "type": "link",
+      "index": "plain",
+      "target": "party",
+      "help": "A person's organization, or a branch's head office."
+    },
+    {
+      "id": "fld_pghminb2an",
+      "name": "job_title",
+      "label": "%job_title%",
+      "type": "string",
+      "max_length": 100
+    },
+    {
+      "id": "fld_nuj32hktvi",
+      "name": "is_customer",
+      "label": "%customer%",
+      "type": "bool",
+      "default": false,
+      "index": "plain",
+      "track": true
+    },
+    {
+      "id": "fld_pgmhug3i6s",
+      "name": "is_supplier",
+      "label": "%supplier%",
+      "type": "bool",
+      "default": false,
+      "index": "plain",
+      "track": true
+    },
+    {
+      "id": "fld_2jq24k2otc",
+      "name": "is_employee",
+      "label": "%employee%",
+      "type": "bool",
+      "default": false,
+      "index": "plain",
+      "track": true
+    },
+    {
+      "id": "fld_kppaakizok",
+      "name": "is_bank",
+      "label": "%bank%",
+      "type": "bool",
+      "default": false,
+      "index": "plain"
+    },
+    {
+      "id": "fld_ijinyc66li",
+      "name": "user",
+      "label": "%login_account%",
+      "type": "string",
+      "max_length": 64,
+      "index": "plain",
+      "help": "The id of the account this party signs in with, if any."
+    },
+    {
+      "id": "fld_7os2uxau2n",
+      "name": "notes",
+      "label": "%notes%",
+      "type": "text"
+    },
+    {
+      "id": "fld_e6etmz6oto",
+      "name": "is_active",
+      "label": "%active%",
+      "type": "bool",
+      "default": true,
+      "index": "plain",
+      "track": true
+    }
+  ],
+  "view": {
+    "list": [
+      "display_name",
+      "kind",
+      "email",
+      "phone",
+      "is_customer",
+      "is_supplier",
+      "is_active"
+    ],
+    "sort": [
+      {
+        "field": "display_name",
+        "dir": null
+      }
+    ]
+  },
+  "chatter": {
+    "enabled": true,
+    "messages": true,
+    "notes": true,
+    "followers": true,
+    "track_changes": true,
+    "visitors": "none"
+  }
+}

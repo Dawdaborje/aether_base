@@ -1,14 +1,14 @@
-<page route="/base/currencies" title="Currencies" model="base.currency">
-  <include src="base_components/components/header.xml" title="Currencies" />
-  <view type="list" model="base.currency">
-    <search placeholder="Search currencies…" />
+<page route="/base/currencies" title="%currencies%" model="currency" icon="banknote">
+  <view type="list" model="currency" source="list_currencies" open="/base/currencies/{id}" create="/base/currencies/new" create_label="%add_currency%">
+    <search fields="code,name,symbol"/>
+    <use component="base_ui.active_filter" field="active" label="%active%"/>
     <columns>
-      <column field="name" label="Name" sortable="true" />
-      <column field="code" label="Code" />
-      <column field="symbol" label="Symbol" />
-      <column field="decimal_places" label="Decimals" fieldType="integer" />
-      <column field="is_base" label="Base" fieldType="boolean" />
+      <column field="code" label="%code%"/>
+      <column field="name" label="%name%"/>
+      <column field="symbol" label="%symbol%"/>
+      <column field="is_base" label="%base%" fieldType="boolean"/>
+      <column field="active" label="%active%" fieldType="boolean"/>
     </columns>
-    <empty title="No currencies" description="Add currencies used on invoices and orders." actionLabel="Create" />
+    <use component="base_ui.empty_state" title="%no_currencies_yet%" description="%use_new_to_add%"/>
   </view>
 </page>

@@ -1,12 +1,47 @@
 [plugin]
 name = "currency"
+icon_path = "assets/logo.svg"
 label = "Currencies"
-version = "0.1.0"
+version = "0.3.2"
 description = "Currencies and exchange rates for business documents."
+long_description = """
+Currencies with their rates against one base currency, and conversion between any two of them at a
+given date. Install/upgrade seeds ~65 currencies in common use (USD as base). Written in Rhai:
+the plugin is the single file `main.rhai`.
+"""
 authors = [{ name = "Aether", email = "hello@aether.local" }]
-dependencies = ["base_components", "security_templates"]
-capabilities = ["db::query", "db::mutate"]
+dependencies = ["base_ui"]
+capabilities = ["db::query", "db::mutate", "db::transaction", "events::emit"]
+access_models = [
+  { name = "currency", permissions = ["read", "write"] },
+  { name = "currency_rate", permissions = ["read", "write"] },
+]
 is_builtin = true
+script = "main.rhai"
+
+# Announced to plugins that depend on this one and listen (see docs/architecture/events.md).
+[[events]]
+name = "rate_changed"
+
+[[command]]
+name = "seed"
+function = "seed_currencies"
+help = "Create the currencies in common use (idempotent); the first run also makes USD the base currency"
+on_install = true
+on_upgrade = true
+
+[[command]]
+name = "demo_currency_rate"
+function = "generate_demo_currency_rate"
+help = "Generate demo exchange rates for non-base currencies"
+demo_model = "currency_rate"
+args = [{ name = "count", type = "int", default = 10 }]
+
+[app]
+nav = true
+icon = "banknote"
+route = "/base/currencies"
+description = "Currencies and exchange rates"
 
 [plugin.api]
 version = "0.1"
@@ -14,47 +49,3 @@ version = "0.1"
 [plugin.meta]
 kind = "addon"
 workspace = "base"
-
-[communication]
-channels = ["events"]
-
-[[models]]
-name = "currency"
-table = "base_currency"
-file = "./models/currency.surql"
-
-[[models]]
-name = "currency_rate"
-table = "base_currency_rate"
-file = "./models/currency.surql"
-
-[[pages]]
-route = "/base/currencies"
-title = "Currencies"
-file = "./pages/currencies.xml"
-model = "base.currency"
-
-[[menus]]
-name = "currencies"
-label = "Currencies"
-icon = "banknote"
-url = "/base/currencies"
-order = 75
-parent = "base_root"
-
-[[hooks]]
-name = "on_install"
-phase = "install"
-handler = "hooks.on_install"
-
-[[events]]
-name = "currency.rate_updated"
-direction = "emit"
-
-[[permissions]]
-key = "currency.read"
-label = "Read currencies"
-
-[[permissions]]
-key = "currency.write"
-label = "Manage currencies"

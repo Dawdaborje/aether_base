@@ -1,7 +1,0 @@
-<statusbar>
-  <badge field="status" />
-  <actions>
-    <action name="action_confirm" label="Confirm" confirm="true" />
-    <action name="action_cancel" label="Cancel" danger="true" confirm="true" />
-  </actions>
-</statusbar>

@@ -1,0 +1,21 @@
+<!--
+  Email and phone in a titled group; put mobile, website, name, etc. in the slot.
+
+    <use component="base_ui.contact_group" title="%contact%">
+      <field name="mobile" label="%mobile%"/>
+      <field name="website" label="%website%"/>
+    </use>
+
+  title        group title (default Contact)
+  email        email field name (default `email`)
+  email_label  email label (default Email)
+  phone        phone field name (default `phone`)
+  phone_label  phone label (default Phone)
+-->
+<component name="contact_group">
+  <group title="{{title}}" cols="2">
+    <field name="{{email}}" label="{{email_label}}"/>
+    <field name="{{phone}}" label="{{phone_label}}"/>
+    <slot />
+  </group>
+</component>

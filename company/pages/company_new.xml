@@ -1,0 +1,10 @@
+<page route="/base/companies/new" title="%add_company%" model="company">
+  <view type="form" function="create_company" submit="%add_company%" success="%company_added%" redirect="/base/companies">
+    <field name="name" label="%legal_name%" required="true"/>
+    <field name="tax_id" label="%tax_or_registration_number%"/>
+    <use component="base_ui.contact_group" title="%contact%"
+         email="email" email_label="%email%" phone="phone" phone_label="%phone%"/>
+    <use component="base_ui.currency_link" name="currency_code" label="%currency_code%"/>
+    <field name="fiscal_year_start_month" label="%fiscal_year_starts_in_month%" fieldType="integer"/>
+  </view>
+</page>

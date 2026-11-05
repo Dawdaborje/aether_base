@@ -1,0 +1,92 @@
+{
+  "model_id": "mdl_fjhfyv3bet",
+  "name": "holiday",
+  "label": "%holiday%",
+  "plural_label": "%holidays%",
+  "icon": "party-popper",
+  "title_field": "name",
+  "fields": [
+    {
+      "id": "fld_ybrt43av3p",
+      "name": "calendar",
+      "label": "%calendar%",
+      "type": "link",
+      "target": "holiday_calendar",
+      "required": true,
+      "index": "plain"
+    },
+    {
+      "id": "fld_mrmp5kj5ga",
+      "name": "date",
+      "label": "%date%",
+      "type": "date",
+      "required": true
+    },
+    {
+      "id": "fld_ictcaoptlz",
+      "name": "name",
+      "label": "%name%",
+      "type": "string",
+      "required": true,
+      "max_length": 120
+    },
+    {
+      "id": "fld_tfdsdxvvay",
+      "name": "kind",
+      "label": "%kind%",
+      "type": "select",
+      "default": "public",
+      "options": [
+        {
+          "id": "opt_aaodpeq3ud",
+          "value": "public",
+          "label": "%public%"
+        },
+        {
+          "id": "opt_nj2vkotyxs",
+          "value": "optional",
+          "label": "%optional%"
+        },
+        {
+          "id": "opt_4c3aiopqw5",
+          "value": "company",
+          "label": "%company%"
+        }
+      ],
+      "help": "Optional holidays are taken from a limited allowance."
+    },
+    {
+      "id": "fld_oadlh4de57",
+      "name": "is_half_day",
+      "label": "%is_half_day%",
+      "type": "bool",
+      "default": false
+    },
+    {
+      "id": "fld_5vlcya76wk",
+      "name": "recurring",
+      "label": "%recurring%",
+      "type": "bool",
+      "default": false,
+      "help": "Falls on the same day every year."
+    }
+  ],
+  "indexes": [
+    {
+      "id": "idx_ctu265u3wy",
+      "fields": [
+        "calendar",
+        "date"
+      ],
+      "unique": true
+    }
+  ],
+  "view": {
+    "list": [
+      "calendar",
+      "date",
+      "name",
+      "kind"
+    ]
+  }
+}

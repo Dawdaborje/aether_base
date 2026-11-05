@@ -1,0 +1,77 @@
+{
+  "model_id": "mdl_c7bm77c6h6",
+  "name": "party_bank_account",
+  "label": "%bank_account%",
+  "plural_label": "%bank_accounts%",
+  "icon": "landmark",
+  "title_field": "account_number",
+  "fields": [
+    {
+      "id": "fld_a5umhx267g",
+      "name": "party",
+      "label": "%party%",
+      "type": "link",
+      "required": true,
+      "index": "plain",
+      "target": "party"
+    },
+    {
+      "id": "fld_5dbzj3qtba",
+      "name": "bank_name",
+      "label": "%bank%",
+      "type": "string",
+      "max_length": 120
+    },
+    {
+      "id": "fld_qoe7c5c4s2",
+      "name": "account_number",
+      "label": "%account_number%",
+      "type": "string",
+      "max_length": 64
+    },
+    {
+      "id": "fld_ocdhfze2yt",
+      "name": "iban",
+      "label": "%iban%",
+      "type": "string",
+      "max_length": 40
+    },
+    {
+      "id": "fld_ifrurr5tfx",
+      "name": "swift",
+      "label": "%swift_or_bic%",
+      "type": "string",
+      "max_length": 16
+    },
+    {
+      "id": "fld_46eleibt5g",
+      "name": "currency",
+      "label": "%currency%",
+      "type": "link",
+      "target": "currency.currency",
+      "target_id": "mdl_khholv2eis"
+    },
+    {
+      "id": "fld_itj5b74ibl",
+      "name": "holder_name",
+      "label": "%account_holder%",
+      "type": "string",
+      "max_length": 200
+    },
+    {
+      "id": "fld_5ni4pti2nh",
+      "name": "is_default",
+      "label": "%default%",
+      "type": "bool",
+      "default": false
+    }
+  ],
+  "view": {
+    "list": [
+      "party",
+      "bank_name",
+      "account_number",
+      "is_default"
+    ]
+  }
+}

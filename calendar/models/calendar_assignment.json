@@ -1,0 +1,63 @@
+{
+  "model_id": "mdl_dahldmkxjh",
+  "name": "calendar_assignment",
+  "label": "%calendar_assignment%",
+  "plural_label": "%calendar_assignments%",
+  "icon": "link",
+  "title_field": "calendar",
+  "fields": [
+    {
+      "id": "fld_6l2rph6r2e",
+      "name": "subject_kind",
+      "label": "%subject_kind%",
+      "type": "string",
+      "required": true,
+      "max_length": 40,
+      "help": "What the calendar is for: company, employee, branch..."
+    },
+    {
+      "id": "fld_im3ua42hyw",
+      "name": "subject",
+      "label": "%subject%",
+      "type": "string",
+      "required": true,
+      "max_length": 120,
+      "help": "The id of that record."
+    },
+    {
+      "id": "fld_hsmzyccl2h",
+      "name": "calendar",
+      "label": "%calendar%",
+      "type": "link",
+      "target": "holiday_calendar",
+      "required": true
+    },
+    {
+      "id": "fld_ccaz5wbyuu",
+      "name": "date_from",
+      "label": "%date_from%",
+      "type": "date",
+      "required": true,
+      "help": "The calendar applies from this day until the next assignment."
+    }
+  ],
+  "indexes": [
+    {
+      "id": "idx_nasg3lr3ny",
+      "fields": [
+        "subject_kind",
+        "subject",
+        "date_from"
+      ],
+      "unique": true
+    }
+  ],
+  "view": {
+    "list": [
+      "subject_kind",
+      "subject",
+      "calendar",
+      "date_from"
+    ]
+  }
+}

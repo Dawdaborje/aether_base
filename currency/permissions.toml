@@ -1,7 +1,0 @@
-[[permission]]
-key = "currency.read"
-label = "Read currencies"
-
-[[permission]]
-key = "currency.write"
-label = "Manage currencies"

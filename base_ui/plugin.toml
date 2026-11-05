@@ -1,0 +1,23 @@
+[plugin]
+name = "base_ui"
+label = "UI components"
+version = "0.2.0"
+description = "Shared page components for lists, forms, link fields and related panels."
+long_description = """
+Reusable pieces of page, used with `<use component="base_ui.…"/>` so every plugin looks and behaves
+the same. Form chrome: `status_bar` (record state as steps) and `form_bar` (buttons next to state;
+Save stays the form's own button). List helpers: `empty_state`, `active_filter`. Field blocks:
+`contact_group`, `currency_link`, `party_link`, `company_link`, `date_range`. Panels: `related_list`
+(a titled group around a child list). Components only: no code, no models, no pages.
+"""
+authors = [{ name = "Aether", email = "hello@aether.local" }]
+dependencies = []
+capabilities = []
+is_builtin = true
+
+[plugin.api]
+version = "0.1"
+
+[plugin.meta]
+kind = "addon"
+workspace = "base"

@@ -1,0 +1,21 @@
+[plugin]
+name = "theme_neutral"
+label = "Neutral theme"
+version = "0.1.0"
+description = "A calm neutral look: soft surfaces, one restrained indigo and Noto Sans. The style used before Carbon became the default."
+authors = [{ name = "Aether", email = "hello@aether.local" }]
+dependencies = []
+capabilities = []
+is_builtin = true
+
+[plugin.api]
+version = "0.1"
+
+[plugin.meta]
+kind = "theme"
+workspace = "base"
+
+[theme]
+name = "neutral"
+label = "Neutral"
+tokens_file = "theme.json"

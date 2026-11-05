@@ -1,0 +1,119 @@
+{
+  "model_id": "mdl_gqe511y877",
+  "name": "number_sequence",
+  "label": "%sequence%",
+  "plural_label": "%sequences%",
+  "icon": "hash",
+  "title_field": "code",
+  "fields": [
+    {
+      "id": "fld_apabvtnnr3",
+      "name": "code",
+      "label": "%code%",
+      "type": "string",
+      "required": true,
+      "max_length": 60,
+      "index": "unique",
+      "help": "Other plugins ask for numbers by this code, such as invoice or hr_employee."
+    },
+    {
+      "id": "fld_s8c82d0gt5",
+      "name": "label",
+      "label": "%label%",
+      "type": "string",
+      "required": true,
+      "max_length": 80
+    },
+    {
+      "id": "fld_is6m88er4b",
+      "name": "prefix",
+      "label": "%prefix%",
+      "type": "string",
+      "max_length": 40,
+      "default": "",
+      "help": "Text before the number. {YYYY} {YY} {MM} {DD} are replaced by the date of the document."
+    },
+    {
+      "id": "fld_zdasxkboml",
+      "name": "suffix",
+      "label": "%suffix%",
+      "type": "string",
+      "max_length": 40,
+      "default": ""
+    },
+    {
+      "id": "fld_i8iajockj7",
+      "name": "padding",
+      "label": "%padding%",
+      "type": "int",
+      "default": 5,
+      "help": "Digits the counter is padded to with zeros (0 to 12)."
+    },
+    {
+      "id": "fld_36iha912k7",
+      "name": "start",
+      "label": "%start%",
+      "type": "int",
+      "default": 1,
+      "help": "First number of every period."
+    },
+    {
+      "id": "fld_46i6bubn4p",
+      "name": "step",
+      "label": "%step%",
+      "type": "int",
+      "default": 1
+    },
+    {
+      "id": "fld_y9i5w2oyxb",
+      "name": "reset",
+      "label": "%reset%",
+      "type": "string",
+      "default": "never",
+      "help": "never, year or month: the counter starts again in each year or month, counted by the document date."
+    },
+    {
+      "id": "fld_zervivtgrg",
+      "name": "scope",
+      "label": "%scope%",
+      "type": "string",
+      "max_length": 60,
+      "help": "Optional owner such as a company id; the same code can be a separate sequence per scope."
+    },
+    {
+      "id": "fld_eoar3i8ghv",
+      "name": "gapless",
+      "label": "%gapless%",
+      "type": "bool",
+      "default": false,
+      "help": "Every number issued is recorded, so a hole can be found and must be explained by voiding it."
+    },
+    {
+      "id": "fld_ueqeet8e4w",
+      "name": "active",
+      "label": "%active%",
+      "type": "bool",
+      "default": true
+    },
+    {
+      "id": "fld_g9ws1pnx7p",
+      "name": "key",
+      "label": "%key%",
+      "type": "string",
+      "required": true,
+      "max_length": 140,
+      "index": "unique",
+      "help": "code and scope together; set by the plugin."
+    }
+  ],
+  "view": {
+    "list": [
+      "code",
+      "label",
+      "prefix",
+      "reset",
+      "gapless",
+      "active"
+    ]
+  }
+}

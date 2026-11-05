@@ -1,0 +1,12 @@
+<page route="/base/units" title="%units%" model="uom" icon="scale">
+  <view type="list" model="uom" source="list_units" create="/base/units/new" create_label="%add_unit%">
+    <search fields="code,name"/>
+    <columns>
+      <column field="code" label="%code%"/>
+      <column field="name" label="%name%"/>
+      <column field="factor" label="%factor%"/>
+      <column field="is_reference" label="%is_reference%" fieldType="boolean"/>
+    </columns>
+    <use component="base_ui.empty_state" title="%no_unit_yet%" description="%use_new_to_add%"/>
+  </view>
+</page>

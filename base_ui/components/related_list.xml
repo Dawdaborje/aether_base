@@ -1,0 +1,20 @@
+<!--
+  Titled panel for a child list under a parent form. Put the `<view type="list">` (and its
+  columns, actions, empty) in the slot — the list model must be declared on the page's plugin,
+  so it cannot be a prop of this shared component.
+
+    <use component="base_ui.related_list" title="Leave">
+      <view type="list" model="leave_request" source="employee_leave_requests">
+        <columns>
+          <column field="start_date" label="From" fieldType="date"/>
+          <column field="state" label="State" fieldType="badge"/>
+        </columns>
+        <empty title="No leave yet" description="Leave requests appear here."/>
+      </view>
+    </use>
+-->
+<component name="related_list">
+  <group title="{{title}}" cols="1">
+    <slot />
+  </group>
+</component>

@@ -1,7 +1,0 @@
-[[permission]]
-key = "attachment.read"
-label = "Read attachments"
-
-[[permission]]
-key = "attachment.write"
-label = "Manage attachments"

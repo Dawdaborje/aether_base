@@ -1,0 +1,15 @@
+<!--
+  Party picker (person or organization).
+
+    <use component="base_ui.party_link" name="customer" label="Customer" required="true"/>
+    <use component="base_ui.party_link" name="contact_party" label="Contact" entity="contacts"/>
+
+  name      field name
+  label     field label
+  entity    plural noun in empty/search hints (default `parties`)
+  required  set to true when the field is required
+-->
+<component name="party_link">
+  <field name="{{name}}" label="{{label}}" fieldType="link" required="{{required}}"
+           source="party.list_parties" optionLabel="display_name" entity="{{entity}}"/>
+</component>

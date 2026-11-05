@@ -1,0 +1,6 @@
+<page route="/base/calendars/new" title="New" model="holiday_calendar">
+  <view type="form" function="create_calendar" submit="Add calendar" success="Calendar added" redirect="/base/calendars">
+    <field name="name" label="Name" required="true"/>
+    <field name="weekend" label="Weekly days off" fieldType="char"/>
+  </view>
+</page>

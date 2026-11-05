@@ -1,0 +1,21 @@
+{
+  "active": "Inatumika",
+  "add_currency": "Ongeza sarafu",
+  "base": "Msingi",
+  "base_currency": "Sarafu ya msingi",
+  "code": "Msimbo",
+  "currencies": "Sarafu",
+  "currency": "Sarafu",
+  "currency_added": "Sarafu imeongezwa",
+  "date": "Tarehe",
+  "decimal_places": "Tarakimu za desimali",
+  "name": "Jina",
+  "no_currencies_yet": "Bado hakuna sarafu",
+  "rate": "Kiwango",
+  "rates": "Viwango",
+  "save": "Hifadhi",
+  "saved": "Imehifadhiwa",
+  "seed_hint.currency": "Ongeza moja hapo juu, au endesha: aether --command currency.seed --org <organization>",
+  "symbol": "Alama",
+  "use_new_to_add": "Tumia Mpya kuongeza moja."
+}
