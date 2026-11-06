@@ -37,6 +37,15 @@
       "help": "The company's own currency, used on its documents."
     },
     {
+      "id": "fld_j2tuum52onlrkzjbtq36",
+      "name": "country",
+      "label": "%country%",
+      "type": "link",
+      "target": "country.country",
+      "target_id": "mdl_dmwfn6k2au",
+      "help": "The country the company is established in. Payroll, taxes and addresses follow it. New companies start with the organization's default country (Settings > Country)."
+    },
+    {
       "id": "fld_4dhjk3uc4d",
       "name": "fiscal_year_start_month",
       "label": "%fiscal_year_starts_in_month%",
@@ -64,6 +73,14 @@
       "default": false,
       "index": "plain",
       "track": true
+    },
+    {
+      "id": "fld_kpv7lsijp6x6ocih2xaz",
+      "name": "setup_done",
+      "label": "Setup confirmed",
+      "type": "bool",
+      "default": false,
+      "help": "An administrator confirmed the company's name and details on the setup page."
     },
     {
       "id": "fld_46iytzbr4p",

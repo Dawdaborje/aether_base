@@ -1,0 +1,11 @@
+<page route="/base/setup/company" title="Set up your company" model="company" roles="org_admin" menu="false"
+      setup_when="needs_company_setup" setup_modal="true"
+      setup_text="Confirm the company's name and the country it is established in. Payroll and taxes follow the company's country.">
+  <view type="form" source="get_company_setup" function="complete_company_setup" submit="Confirm company" success="Company confirmed" redirect="/apps">
+    <group title="Company" cols="2">
+      <field name="name" label="Company name" required="true"/>
+      <field name="country" label="Country" fieldType="many2one" source="list_country_options" fills="currency_code" optionLabel="name" entity="countries" required="true"/>
+      <field name="currency_code" label="Currency" fieldType="many2one" source="list_currency_codes" entity="currencies"/>
+    </group>
+  </view>
+</page>

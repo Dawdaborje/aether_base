@@ -2,7 +2,7 @@
 name = "country"
 icon_path = "assets/logo.svg"
 label = "Countries"
-version = "0.1.1"
+version = "0.1.3"
 description = "Countries (ISO 3166-1), their phone prefixes, usual currencies and regions."
 long_description = """
 The list of countries addresses, taxes and shipping refer to, with each country's usual currency (a link to
@@ -11,13 +11,32 @@ economies elsewhere); you can also run `aether --command country.seed --org <org
 """
 authors = [{ name = "Aether", email = "hello@aether.local" }]
 dependencies = ["currency", "base_ui"]
-capabilities = ["db::query", "db::mutate", "db::transaction", "plugins::call"]
+capabilities = ["db::query", "db::mutate", "db::transaction", "plugins::call", "settings::get"]
 access_models = [
   { name = "country", permissions = ["read", "write"] },
   { name = "country_region", permissions = ["read", "write"] },
 ]
+# The phone field's country picker on public pages (an enrollment link) reads this list: reference data, read only.
+public_functions = ["list_countries"]
+public_capabilities = ["db::query"]
+public_access_models = [{ name = "country", permissions = ["read"] }]
 is_builtin = true
 script = "main.rhai"
+
+# The organization's default country: a new company starts with it. Each company has its own country, which
+# is what country-specific features follow. It holds the ISO 3166-1 alpha-2 code, such as NG.
+[[setting_group]]
+id = "country"
+label = "Country"
+icon = "globe"
+
+[[setting]]
+group = "country"
+key = "country.organization"
+label = "Default country for new companies"
+value = ""
+description = "The country new companies start with, as a two-letter code such as NG or KE. Each company can choose its own."
+long_description = "Only a default: payroll and other country-specific features follow the country of each company. Leave it empty if the organization has companies in several countries."
 
 [[command]]
 name = "seed"
