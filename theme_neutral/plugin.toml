@@ -2,7 +2,7 @@
 name = "theme_neutral"
 label = "Neutral theme"
 version = "0.1.0"
-description = "Calm neutral surfaces with one restrained indigo, set in Noto Sans: the look before Carbon became the default."
+description = "A calm neutral look: soft surfaces, one restrained indigo and Noto Sans. The style used before Carbon became the default."
 authors = [{ name = "Aether", email = "hello@aether.local" }]
 dependencies = []
 capabilities = []
