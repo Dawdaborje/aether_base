@@ -2,7 +2,7 @@
 name = "company"
 icon_path = "assets/logo.svg"
 label = "Companies"
-version = "0.1.3"
+version = "0.1.4"
 description = "The legal entities that keep the books: their party record, currency and fiscal year."
 long_description = """
 A company is the legal entity an organization's documents are issued by. Its name, tax number, addresses and
@@ -11,7 +11,7 @@ rather than to any party: its currency, its fiscal year and which one is the def
 organization are possible; scoping other plugins' data by company is a separate matter. Written in Rhai.
 """
 authors = [{ name = "Aether", email = "hello@aether.local" }]
-dependencies = ["party", "currency", "base_ui"]
+dependencies = ["party", "currency", "country", "base_ui"]
 capabilities = ["db::query", "db::mutate", "db::transaction", "plugins::call"]
 access_models = [{ name = "company", permissions = ["read", "write"] }]
 is_builtin = true

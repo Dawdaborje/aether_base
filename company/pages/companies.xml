@@ -5,6 +5,7 @@
     <columns>
       <column field="logo" label="%logo%" fieldType="avatar"/>
       <column field="name" label="%name%"/>
+      <column field="country" label="%country%"/>
       <column field="is_default" label="%default%" fieldType="boolean"/>
       <column field="is_active" label="%active%" fieldType="boolean"/>
     </columns>

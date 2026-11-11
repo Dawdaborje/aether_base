@@ -5,6 +5,7 @@
     <use component="base_ui.contact_group" title="%contact%"
          email="email" email_label="%email%" phone="phone" phone_label="%phone%"/>
     <use component="base_ui.currency_link" name="currency_code" label="%currency_code%"/>
+    <field name="country" label="%country%" fieldType="many2one" source="list_country_options" fills="currency_code" optionLabel="name" entity="countries"/>
     <field name="fiscal_year_start_month" label="%fiscal_year_starts_in_month%" fieldType="integer"/>
   </view>
 </page>

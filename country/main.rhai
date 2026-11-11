@@ -240,3 +240,23 @@ fn seed_countries(input) {
     if ops.len() > 0 { db::transaction(ops); }
     #{ created: created, already_there: had, without_currency: without_currency }
 }
+
+// ---- the organization's own country
+//
+// The choice is the setting `country.organization` (declared in plugin.toml, shown in Settings), which
+// holds the country's two-letter code. It is only the default: each company has its own `country`, and a new company starts with this one.
+// Plugins that behave differently per country (payroll choosing a tax pack, for one) read the country
+// of the company the record belongs to, and fall back on `get_org_country` when it has none.
+
+private fn chosen_code() {
+    let found = settings::get("country.organization");
+    let code = found["country.organization"];
+    if code == () || code == "" { () } else { code }
+}
+
+// The chosen country (its code, name, currency...), or nothing when none was chosen yet.
+fn get_org_country(input) {
+    let code = chosen_code();
+    if code == () { return (); }
+    by_code(code.to_upper())
+}

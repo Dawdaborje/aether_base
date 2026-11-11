@@ -53,6 +53,16 @@ private fn currency_id(code) {
     currency.id
 }
 
+// The country of a new company when none is named: the organization's default (Settings > Country).
+private fn default_country_id() {
+    try {
+        let found = plugins::invoke("country", "get_org_country", #{});
+        if found == () { () } else { found.id }
+    } catch {
+        ()
+    }
+}
+
 private fn must_get(id) {
     if blank(id) { fail("a company id is required"); }
     let found = db::get("company", id);
@@ -85,11 +95,18 @@ fn create_company(input) {
     // Checked first, so a mistake does not leave a party record behind.
     let currency = if blank(input.currency_code) { () } else { currency_id(input.currency_code) };
     let fields = party_fields(input);
+    let country_pick = if blank(input.country) { default_country_id() } else { input.country };
+    // No currency named: the country's usual one.
+    if currency == () && country_pick != () {
+        let known = through("country", "get_country", #{ id: country_pick });
+        if known != () && known.currency != () { currency = known.currency; }
+    }
     fields.name = input.name;
     fields.is_customer = false;
     let entity = through("party", "create_organization", fields);
     let data = #{ name: input.name, party: entity.id, fiscal_year_start_month: month, fiscal_year_start_day: day, is_default: false, is_active: true };
     if currency != () { data.currency = currency; }
+    if country_pick != () { data.country = country_pick; }
     // An uploaded picture (what `POST /api/media` returns), or nothing.
     if input.logo != () { data.logo = input.logo; }
     let created = db::create("company", data);
@@ -115,6 +132,7 @@ fn update_company(input) {
         through("party", "update_party", others);
     }
     if !blank(input.currency_code) { changes.currency = currency_id(input.currency_code); }
+    if !blank(input.country) { changes.country = input.country; }
     if input.fiscal_year_start_month != () || input.fiscal_year_start_day != () {
         let month = if input.fiscal_year_start_month == () { c.fiscal_year_start_month } else { input.fiscal_year_start_month };
         let day = if input.fiscal_year_start_day == () { c.fiscal_year_start_day } else { input.fiscal_year_start_day };
@@ -140,6 +158,30 @@ fn get_company(input) {
 }
 
 // Rows for SearchPicker: `id` is the ISO code so create/update receive `currency_code`.
+// The country picker's rows: the country plus the code of its usual currency (`currency_code`), so choosing a
+// country can fill in the currency (`fills="currency_code"` on the field).
+fn list_country_options(input) {
+    let answer = through("country", "list_countries", or_empty(input));
+    let rows = if type_of(answer) == "map" && answer.rows != () { answer.rows } else { answer };
+    let listed = through("currency", "list_currencies", #{ limit: 500 });
+    let currencies = if type_of(listed) == "map" && listed.rows != () { listed.rows } else { listed };
+    let codes = #{};
+    for c in currencies {
+        let key = c.id.to_string();
+        let at = key.index_of(":");
+        codes[if at >= 0 { key.sub_string(at + 1) } else { key }] = c.code;
+    }
+    for r in rows {
+        if r.currency != () {
+            let key = r.currency.to_string();
+            let at = key.index_of(":");
+            let bare = if at >= 0 { key.sub_string(at + 1) } else { key };
+            if codes[bare] != () { r.currency_code = codes[bare]; }
+        }
+    }
+    answer
+}
+
 fn list_currency_codes(input) {
     let answer = through("currency", "list_currencies", or_empty(input));
     let rows = if type_of(answer) == "map" && answer.rows != () { answer.rows } else { answer };
@@ -281,4 +323,50 @@ fn generate_demo_company(input) {
         i += 1;
     }
     #{ created: ids.len(), ids: ids }
+}
+
+// ---- first-run confirmation
+//
+// A new organization gets a default company named after it. An administrator confirms the real name
+// and legal details once; until then the Apps page offers the setup step.
+
+private fn admin_here() {
+    let c = context::get();
+    if c.actor.kind == "system" { return true; }
+    for r in c.roles { if r == "org_admin" { return true; } }
+    false
+}
+
+private fn first_company() {
+    let rows = db::find("company", #{ filter: #{ is_default: true, is_active: true }, limit: 1 });
+    if rows.len() == 0 { () } else { rows[0] }
+}
+
+// For the Apps page: true until an administrator confirmed the default company.
+fn needs_company_setup(input) {
+    let c = first_company();
+    c == () || c.setup_done != true || c.country == ()
+}
+
+// The form's data: the default company, as it is now.
+fn get_company_setup(input) {
+    let c = first_company();
+    if c == () { return #{}; }
+    get_company(#{ id: c.id })
+}
+
+fn complete_company_setup(input) {
+    if !admin_here() { fail("only an administrator can set up the company"); }
+    if blank(input.name) { fail("a name is required"); }
+    let c = first_company();
+    if c == () {
+        let made = create_company(#{ name: input.name, currency_code: input.currency_code, country: input.country });
+        return db::update("company", made.id, #{ setup_done: true });
+    }
+    let changes = #{ id: c.id, name: input.name };
+    if !blank(input.currency_code) { changes.currency_code = input.currency_code; }
+    if !blank(input.country) { changes.country = input.country; }
+    if blank(input.country) && c.country == () { fail("choose the country the company is established in"); }
+    update_company(changes);
+    db::update("company", c.id, #{ setup_done: true })
 }
